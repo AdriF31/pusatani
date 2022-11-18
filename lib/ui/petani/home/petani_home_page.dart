@@ -48,38 +48,34 @@ class PetaniHomePage extends StatelessWidget {
                             expandedHeight: 300,
                             flexibleSpace: FlexibleSpaceBar(
                               collapseMode: CollapseMode.pin,
-                              background: Stack(
-                                children: [
-                                  CarouselSlider(
-                                    items: [
-                                      Image.asset(
-                                        'assets/images/img_slider1.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                      Image.asset(
-                                        'assets/images/img_slider2.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                      Image.asset(
-                                        'assets/images/img_slider3.jpg',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ],
-                                    options: CarouselOptions(
-                                        viewportFraction: 1,
-                                        autoPlay: true,
-                                        padEnds: true,
-                                        autoPlayInterval:
-                                            const Duration(seconds: 4),
-                                        height: double.infinity,
-                                        autoPlayCurve: Curves.easeInOut,
-                                        pauseAutoPlayOnTouch: true,
-                                        onPageChanged: ((index, reason) {
-                                          c.currentIndex.value = index;
-                                        })),
-                                    carouselController: c.carouselController,
+                              background: CarouselSlider(
+                                items: [
+                                  Image.asset(
+                                    'assets/images/img_slider1.jpg',
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Image.asset(
+                                    'assets/images/img_slider2.jpg',
+                                    fit: BoxFit.cover,
+                                  ),
+                                  Image.asset(
+                                    'assets/images/img_slider3.jpg',
+                                    fit: BoxFit.cover,
                                   ),
                                 ],
+                                options: CarouselOptions(
+                                    viewportFraction: 1,
+                                    autoPlay: true,
+                                    padEnds: true,
+                                    autoPlayInterval:
+                                        const Duration(seconds: 4),
+                                    height: double.infinity,
+                                    autoPlayCurve: Curves.easeInOut,
+                                    pauseAutoPlayOnTouch: true,
+                                    onPageChanged: ((index, reason) {
+                                      c.currentIndex.value = index;
+                                    })),
+                                carouselController: c.carouselController,
                               ),
                             ),
                           ),

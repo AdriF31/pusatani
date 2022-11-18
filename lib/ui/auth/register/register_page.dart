@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/ui/auth/register/register_controller.dart';
+import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_page.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
@@ -388,10 +389,12 @@ class RegisterPage extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(25))),
                                       onPressed: () {
+                                        Get.to(() => AddTokoPage());
                                         if (c.formKey.currentState
                                                 ?.validate() ==
                                             true) {
-                                          c.register();
+                                          // c.register();
+
                                         }
                                       },
                                       child: Text(

@@ -13,6 +13,7 @@ dependencies:
   carousel_indicator: ^1.0.6
   carousel_slider: ^4.1.1
   cupertino_icons: ^1.0.2
+  custom_line_indicator_bottom_navbar: ^0.0.8
   dio: ^4.0.6
   dotted_border: ^2.0.0+3
   flutter:

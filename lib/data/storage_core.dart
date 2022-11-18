@@ -79,7 +79,7 @@ class StorageCore {
       LoginModel auth = LoginModel.fromJson(data);
       debugPrint(auth.data?.user?.name);
       debugPrint(auth.data?.token);
-      return auth.data?.user?.name.toString();
+      return auth.data?.user?.name;
     } catch (e) {
       debugPrint("Error while load user_name: $e");
       return 'user_name_not_loaded';
