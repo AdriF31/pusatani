@@ -5,6 +5,7 @@ import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/login_model.dart';
 import 'package:pusatani/data/storage_core.dart';
 import 'package:pusatani/ui/petani/home/petani_home_page.dart';
+import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 
 class LoginController extends BaseController {
   var emailController = TextEditingController();
@@ -16,7 +17,6 @@ class LoginController extends BaseController {
   var storage = StorageCore();
   @override
   void onInit() {
-
     super.onInit();
     emailController.text;
     passwordController.text;
@@ -34,7 +34,11 @@ class LoginController extends BaseController {
         isLoading = false;
         Fluttertoast.showToast(msg: res!.meta!.message!);
         update();
-        Get.offAll(() => const PetaniHomePage());
+        if (loginModel?.data?.role?.first == 'Toko') {
+          Get.offAll(() => const MainPage(), arguments: 3);
+        } else if (loginModel?.data?.role?.first == 'Pabrik') {
+          Get.offAll(() => const MainPage(), arguments: 2);
+        }
       } else {
         Fluttertoast.showToast(msg: res!.meta!.message!);
       }

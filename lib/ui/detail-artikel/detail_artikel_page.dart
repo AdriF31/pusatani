@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/app_constant.dart';
 import 'package:pusatani/const/font_weight.dart';
-import 'package:pusatani/ui/detail/detail_controller.dart';
-
+import 'package:pusatani/ui/detail-artikel/detail_artikel_controller.dart';
+import 'package:basic_utils/basic_utils.dart';
 import '../../const/text_style.dart';
 
-class DetailPage extends StatelessWidget {
-  const DetailPage({super.key});
+class DetailArtikelPage extends StatelessWidget {
+  const DetailArtikelPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DetailController>(
-        init: DetailController(),
+    return GetBuilder<DetailArtikelController>(
+        init: DetailArtikelController(),
         builder: (c) => Scaffold(
               floatingActionButton: FloatingActionButton(onPressed: () {
                 if (c.fontSize >= 16 && c.fontSize < 32) {
@@ -20,7 +20,7 @@ class DetailPage extends StatelessWidget {
                   c.update();
                 }
               }),
-              appBar: AppBar(title: const Text('Detail')),
+              appBar: AppBar(title: Text(Get.arguments['title'])),
               body: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -33,7 +33,7 @@ class DetailPage extends StatelessWidget {
                         height: 12,
                       ),
                       Text(
-                        'Ini Judul Berita hehedsdsdsd',
+                        Get.arguments['title'],
                         maxLines: 5,
                         style: blackTextStyle.copyWith(
                             fontSize: 24, fontWeight: semiBold),
@@ -42,7 +42,7 @@ class DetailPage extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        'Fadli-kun',
+                        Get.arguments['author'],
                         style: blackTextStyle.copyWith(
                             fontSize: 16, fontWeight: regular),
                       ),
@@ -50,7 +50,7 @@ class DetailPage extends StatelessWidget {
                         height: 4,
                       ),
                       Text(
-                        '10/12/2022',
+                        Get.arguments['date'].toString().split('T').first,
                         style: blackTextStyle.copyWith(
                             fontSize: 16, fontWeight: regular),
                       ),
@@ -60,7 +60,10 @@ class DetailPage extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10)),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: Image.asset('assets/images/img_slider1.jpg'),
+                          child: Image.network(
+                            Get.arguments['image'],
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -69,7 +72,7 @@ class DetailPage extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: Text(
-                          lorem,
+                          Get.arguments['content'],
                           textAlign: TextAlign.justify,
                           style: blackTextStyle.copyWith(
                               fontSize: c.fontSize, fontWeight: medium),

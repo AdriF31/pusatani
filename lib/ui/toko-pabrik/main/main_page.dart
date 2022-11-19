@@ -2,6 +2,7 @@ import 'package:custom_line_indicator_bottom_navbar/custom_line_indicator_bottom
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
+import 'package:pusatani/ui/add-product/add_product_page.dart';
 import 'package:pusatani/ui/toko-pabrik/home/home_page.dart';
 import 'package:pusatani/ui/toko-pabrik/main/main_controller.dart';
 import 'package:pusatani/ui/toko-pabrik/profile/profile_page.dart';
@@ -22,7 +23,9 @@ class MainPage extends StatelessWidget {
               height: 70,
               width: 70,
               child: FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => AddProductPage());
+                  },
                   backgroundColor: Colors.white,
                   child: Image.asset(
                     'assets/images/ic_add_product.png',

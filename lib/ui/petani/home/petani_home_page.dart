@@ -1,15 +1,26 @@
+import 'dart:io';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
+import 'package:pusatani/reusable/article_card.dart';
+import 'package:pusatani/reusable/toko_card.dart';
+import 'package:pusatani/ui/detail-artikel/detail_artikel_page.dart';
 import 'package:pusatani/ui/petani/home/petani_home_controller.dart';
 import 'package:pusatani/ui/petani/infotani/info_tani_page.dart';
+import 'package:pusatani/ui/petani/tanishop/detail-toko/detail_toko_page.dart';
+import 'package:pusatani/ui/petani/tanishop/detail_shop.dart/detail_pabrik_page.dart';
 import 'package:pusatani/ui/petani/tanishop/list/tani_shop_page.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../reusable/pabrik_card.dart';
 
 class PetaniHomePage extends StatelessWidget {
   const PetaniHomePage({super.key});
@@ -37,7 +48,15 @@ class PetaniHomePage extends StatelessWidget {
                           //   },
                           // ),
                           SliverAppBar(
-                            backgroundColor: Colors.white,
+                            actions: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.more_vert_rounded,
+                                    color: blackColor,
+                                  ))
+                            ],
+                            backgroundColor: secondaryColor,
                             pinned: true,
                             centerTitle: false,
                             title: SvgPicture.asset(
@@ -226,90 +245,14 @@ class PetaniHomePage extends StatelessWidget {
                                   SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
-                                        children: c.pabrikModel!.data!
-                                            .map((e) => Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 8),
-                                                  child: Card(
-                                                    elevation: 3,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10)),
-                                                    child: SizedBox(
-                                                      width: 140,
-                                                      height: 180,
-                                                      child: Column(
-                                                        children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                        .vertical(
-                                                                    top: Radius
-                                                                        .circular(
-                                                                            10)),
-                                                            child: Image.network(
-                                                                e.image ?? '',
-                                                                height: 140,
-                                                                fit: BoxFit
-                                                                    .fitHeight,
-                                                                loadingBuilder:
-                                                                    (context,
-                                                                        child,
-                                                                        loadingProgress) {
-                                                                  if (loadingProgress ==
-                                                                      null) {
-                                                                    return child;
-                                                                  }
-                                                                  return Shimmer
-                                                                      .fromColors(
-                                                                    baseColor:
-                                                                        Colors
-                                                                            .grey,
-                                                                    highlightColor:
-                                                                        Colors
-                                                                            .grey
-                                                                            .shade400,
-                                                                    direction:
-                                                                        ShimmerDirection
-                                                                            .ltr,
-                                                                    child:
-                                                                        Container(
-                                                                      width: double
-                                                                          .infinity,
-                                                                      height:
-                                                                          140,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                    ),
-                                                                  );
-                                                                },
-                                                                errorBuilder: (context,
-                                                                        error,
-                                                                        stackTrace) =>
-                                                                    Container(
-                                                                      width: double
-                                                                          .infinity,
-                                                                      height:
-                                                                          140,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                    )),
-                                                          ),
-                                                          Text(
-                                                            e.name ?? '',
-                                                            style: GoogleFonts
-                                                                .catamaran(
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        semiBold),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
+                                        children: c.pabrikModel!.data!.data!
+                                            .map((e) => GestureDetector(
+                                                  onTap: () => Get.to(
+                                                      () => DetailPabrikPage(),
+                                                      arguments: e.id),
+                                                  child: PabrikCard(
+                                                    image: e.image!,
+                                                    title: e.name!,
                                                   ),
                                                 ))
                                             .toList()),
@@ -346,92 +289,15 @@ class PetaniHomePage extends StatelessWidget {
                                   SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
-                                        children: c.tokoModel!.data!
-                                            .map((e) => Container(
-                                                  margin: const EdgeInsets.only(
-                                                      left: 8),
-                                                  child: Card(
-                                                    elevation: 3,
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        10)),
-                                                    child: SizedBox(
-                                                      width: 140,
-                                                      height: 180,
-                                                      child: Column(
-                                                        children: [
-                                                          ClipRRect(
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                        .vertical(
-                                                                    top: Radius
-                                                                        .circular(
-                                                                            10)),
-                                                            child: Image.network(
-                                                                e.image ?? '',
-                                                                height: 140,
-                                                                fit: BoxFit
-                                                                    .fitHeight,
-                                                                loadingBuilder:
-                                                                    (context,
-                                                                        child,
-                                                                        loadingProgress) {
-                                                                  if (loadingProgress ==
-                                                                      null) {
-                                                                    return child;
-                                                                  }
-                                                                  return Shimmer
-                                                                      .fromColors(
-                                                                    baseColor:
-                                                                        Colors
-                                                                            .grey,
-                                                                    highlightColor:
-                                                                        Colors
-                                                                            .grey
-                                                                            .shade400,
-                                                                    direction:
-                                                                        ShimmerDirection
-                                                                            .ltr,
-                                                                    child:
-                                                                        Container(
-                                                                      width: double
-                                                                          .infinity,
-                                                                      height:
-                                                                          140,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                    ),
-                                                                  );
-                                                                },
-                                                                errorBuilder: (context,
-                                                                        error,
-                                                                        stackTrace) =>
-                                                                    Container(
-                                                                      width: double
-                                                                          .infinity,
-                                                                      height:
-                                                                          140,
-                                                                      color: Colors
-                                                                          .grey,
-                                                                    )),
-                                                          ),
-                                                          Text(
-                                                            e.name ?? '',
-                                                            style: GoogleFonts
-                                                                .catamaran(
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        semiBold),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ))
+                                        children: c.tokoModel!.data!.data!
+                                            .map((e) => GestureDetector(
+                                                onTap: () => Get.to(
+                                                    () => DetailTokoPage(),
+                                                    arguments: e.id),
+                                                child: TokoCard(
+                                                  image: e.image ?? ' ',
+                                                  title: e.name ?? ' ',
+                                                )))
                                             .toList()),
                                   ),
                                   const SizedBox(
@@ -468,96 +334,40 @@ class PetaniHomePage extends StatelessWidget {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 16),
                                     child: Column(
-                                      children: [
-                                        Card(
-                                          elevation: 3,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          child: Column(
-                                            children: [
-                                              Card(
-                                                elevation: 3,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10)),
-                                                child: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                  child: Image.asset(
-                                                      'assets/images/img_slider1.jpg'),
-                                                ),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(8),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    SizedBox(
-                                                      width: 300,
-                                                      child: Text(
-                                                        '31 Februari 2022',
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: GoogleFonts
-                                                            .catamaran(
-                                                                fontSize: 14,
-                                                                fontWeight:
-                                                                    regular,
-                                                                color: Colors
-                                                                    .black54),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: 300,
-                                                      child: Text(
-                                                        'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: GoogleFonts
-                                                            .catamaran(
-                                                          fontSize: 20,
-                                                          fontWeight: semiBold,
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      width: double.infinity,
-                                                      child: Text(
-                                                        'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                                                        maxLines: 3,
-                                                        overflow: TextOverflow
-                                                            .ellipsis,
-                                                        style: GoogleFonts
-                                                            .catamaran(
-                                                          fontSize: 16,
-                                                          fontWeight: regular,
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                        children: c
+                                            .listArticleModel!.data!.data!
+                                            .map((e) => GestureDetector(
+                                                  onTap: () {
+                                                    Get.to(
+                                                        () =>
+                                                            DetailArtikelPage(),
+                                                        arguments: {
+                                                          'title': e.title,
+                                                          'image': e.image,
+                                                          'author': e.author,
+                                                          'content': e.body,
+                                                          'date': e.createdAt,
+                                                          'category':
+                                                              e.idCategory
+                                                        });
+                                                  },
+                                                  child: ArticleCard(
+                                                      image: e.image,
+                                                      title: e.title,
+                                                      date: e.createdAt,
+                                                      description: e.body),
+                                                ))
+                                            .toList()),
                                   )),
-                                  // TextButton(
-                                  //   onPressed: () async {
-                                  //     whatsapp();
-                                  //   },
-                                  //   child: Text('wa'),
-                                  // )
+                                  TextButton(
+                                    onPressed: () async {
+                                      // whatsapp();
+                                    },
+                                    child: Text('wa'),
+                                  ),
                                   const SizedBox(
                                     height: 12,
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -565,9 +375,9 @@ class PetaniHomePage extends StatelessWidget {
                         ],
                       ),
                     )
-                  : Container(
-                      color: Colors.white,
-                      child: const Center(child: CircularProgressIndicator())));
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    ));
         });
   }
 

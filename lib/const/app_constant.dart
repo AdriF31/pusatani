@@ -1,4 +1,4 @@
-const baseUrl = 'http://10.0.2.2:8000/api';
+const baseUrl = 'http://pusatani.masuk.web.id/api';
 
 const List<Map> pabrik = [
   {'image': 'assets/images/img_slider1.jpg', 'title': 'Pabrik apa'},

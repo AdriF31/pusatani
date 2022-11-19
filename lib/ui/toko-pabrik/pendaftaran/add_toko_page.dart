@@ -217,7 +217,9 @@ class AddTokoPage extends StatelessWidget {
                                     }
                                   },
                                   child: Text(
-                                    'Daftarkan Toko',
+                                    Get.arguments == 1
+                                        ? 'Daftarkan Toko'
+                                        : 'Daftarkan Pabrik',
                                     style: GoogleFonts.firaSans(
                                         fontSize: 16,
                                         color: Colors.white,

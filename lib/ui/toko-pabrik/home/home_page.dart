@@ -9,8 +9,8 @@ import 'package:pusatani/ui/toko-pabrik/home/home_controller.dart';
 import '../../../const/font_weight.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key, required this.role});
+  int role;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -60,7 +60,9 @@ class HomePage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Toko Anda mana',
+                                  role == 3
+                                      ? 'Toko Anda mana'
+                                      : 'Pabrik anda mana',
                                   style: whiteTextStyle.copyWith(
                                       fontSize: 24, color: Colors.white),
                                 ),

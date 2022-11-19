@@ -2,7 +2,10 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:pusatani/ui/detail/detail_page.dart';
+import 'package:pusatani/data/model/list_article_model.dart';
+import 'package:pusatani/reusable/article_card.dart';
+import 'package:pusatani/reusable/back_button.dart';
+import 'package:pusatani/ui/detail-artikel/detail_artikel_page.dart';
 import 'package:pusatani/ui/petani/infotani/info_tani_controller.dart';
 
 import '../../../const/colors.dart';
@@ -29,128 +32,129 @@ class _InfoTaniPageState extends State<InfoTaniPage>
   Widget build(BuildContext context) {
     return GetBuilder<InfoTaniController>(
         init: InfoTaniController(),
-        builder: (controller) {
-          return Scaffold(
-            appBar: AppBar(title: const Text('info Tani')),
-            body: Column(
-              children: [
-                SafeArea(
-                    child: Container(
-                  height: 10,
-                )),
-                ButtonsTabBar(
-                  controller: tabController,
-                  backgroundColor: primaryColor,
-                  height: 60,
-                  unselectedBackgroundColor: Colors.transparent,
-                  labelStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                  borderWidth: 1,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20),
-                  unselectedBorderColor: blackColor,
-                  tabs: const [
-                    Tab(
-                      text: 'Semua',
-                    ),
-                    Tab(
-                      text: "Teknologi",
-                    ),
-                    Tab(
-                      text: "Pertanian",
-                    ),
-                    Tab(
-                      text: "Hama dan Penyakit",
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: TabBarView(
-                    controller: tabController,
-                    children: <Widget>[
-                      semua(),
-                      teknologi(),
-                      pertanian(),
-                      hama(),
+        builder: (c) {
+          return c.isLoading
+              ? Scaffold(
+                  appBar: AppBar(
+                      leading: const CustomBackButton(),
+                      title: const Text('info Tani')),
+                  body: Column(
+                    children: [
+                      SafeArea(
+                          child: Container(
+                        height: 10,
+                      )),
+                      ButtonsTabBar(
+                        controller: tabController,
+                        backgroundColor: primaryColor,
+                        height: 60,
+                        unselectedBackgroundColor: Colors.transparent,
+                        labelStyle: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        borderWidth: 1,
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 20),
+                        unselectedBorderColor: blackColor,
+                        tabs: const [
+                          Tab(
+                            text: 'Semua',
+                          ),
+                          Tab(
+                            text: "Teknologi",
+                          ),
+                          Tab(
+                            text: "Pertanian",
+                          ),
+                          Tab(
+                            text: "Hama dan Penyakit",
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                          child: TabBarView(
+                        controller: tabController,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 12),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: c.listArticleModel!.data!.data!
+                                    .map(
+                                      (e) => ArticleCard(
+                                          image: e.image ?? '',
+                                          title: e.title ?? '',
+                                          date: e.createdAt ?? '',
+                                          description: e.body ?? ''),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          ),
+                          // semua(),
+                          // teknologi(),
+                          // pertanian(),
+                          // hama(),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: c.listArticleModel!.data!.data!
+                                  .where((element) => element.idCategory == 1)
+                                  .map(
+                                    (e) => ArticleCard(
+                                        image: e.image ?? '',
+                                        title: e.title ?? '',
+                                        date: e.createdAt ?? '',
+                                        description: e.body ?? ''),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: c.listArticleModel!.data!.data!
+                                  .where((element) => element.idCategory == 2)
+                                  .map(
+                                    (e) => ArticleCard(
+                                        image: e.image ?? '',
+                                        title: e.title ?? '',
+                                        date: e.createdAt ?? '',
+                                        description: e.body ?? ''),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: c.listArticleModel!.data!.data!
+                                  .where((element) => element.idCategory == 3)
+                                  .map(
+                                    (e) => ArticleCard(
+                                        image: e.image ?? '',
+                                        title: e.title ?? '',
+                                        date: e.createdAt ?? '',
+                                        description: e.body ?? ''),
+                                  )
+                                  .toList(),
+                            ),
+                          ),
+                        ],
+                      ))
                     ],
-                  ),
-                ),
-              ],
-            ),
-          );
+                  ))
+              : Scaffold(
+                  body: Center(child: CircularProgressIndicator()),
+                );
         });
   }
 
-  Widget semua() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        children: [
-          Card(
-            elevation: 3,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Column(
-              children: [
-                Card(
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset('assets/images/img_slider1.jpg'),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          '31 Februari 2022',
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                              fontSize: 14,
-                              fontWeight: regular,
-                              color: Colors.black54),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                            fontSize: 20,
-                            fontWeight: semiBold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                            fontSize: 16,
-                            fontWeight: regular,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
+  // Widget semua() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  //     child: Column(
+  //       children:c
+  //     ),
+  //   );
+  // }
 
   Widget teknologi() {
     return Padding(
@@ -158,7 +162,7 @@ class _InfoTaniPageState extends State<InfoTaniPage>
       child: Column(
         children: [
           GestureDetector(
-            onTap: () => Get.to(() => const DetailPage()),
+            onTap: () => Get.to(() => const DetailArtikelPage()),
             child: Card(
               elevation: 3,
               shape: RoundedRectangleBorder(

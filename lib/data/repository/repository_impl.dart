@@ -3,6 +3,9 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
+import 'package:pusatani/data/model/detail_pabrik_model.dart';
+import 'package:pusatani/data/model/detail_toko_model.dart';
+import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/data/model/login_model.dart';
 import 'package:pusatani/data/model/pabrik_model.dart';
 import 'package:pusatani/data/model/register_model.dart';
@@ -85,6 +88,39 @@ class RepositoryImpl implements Repository {
       return RegisterModel.fromJson(response.data);
     } on DioError catch (e) {
       return RegisterModel.fromJson(e.response!.data);
+    }
+  }
+
+  @override
+  FutureOr<ListArticleModel?> getListArticle() async {
+    try {
+      var response = await network.dio.get('/article');
+      return ListArticleModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return ListArticleModel.fromJson(e.response!.data);
+    }
+  }
+
+  @override
+  FutureOr<DetailPabrikModel> getDetailPabrik(int id) async {
+    try {
+      var response = await network.dio.get('/pabrikWith/$id');
+      return DetailPabrikModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return DetailPabrikModel.fromJson(e.response!.data);
+    }
+  }
+
+  @override
+  FutureOr<DetailTokoModel?> getDetailToko(int id) async {
+    try {
+      var response = await network.dio.get('/tokoWith/$id',
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return DetailTokoModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return DetailTokoModel.fromJson(e.response?.data);
     }
   }
 }

@@ -5,7 +5,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pusatani/base/base_controller.dart';
+import 'package:pusatani/data/storage_core.dart';
 import 'package:pusatani/ui/auth/login/login_page.dart';
+import 'package:pusatani/ui/toko-pabrik/home/home_page.dart';
+import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
+import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_page.dart';
 
 class RegisterController extends BaseController {
   var emailController = TextEditingController();
@@ -20,6 +24,7 @@ class RegisterController extends BaseController {
   var value = 1;
   File? profilePicture;
   File? idPicture;
+  var storage = StorageCore();
 
   getProfilePicture() async {
     final ImagePicker picker = ImagePicker();
@@ -69,7 +74,17 @@ class RegisterController extends BaseController {
         passwordController.text);
     Fluttertoast.showToast(msg: response.meta!.message!);
     if (response.meta?.code == 201) {
-      Get.offAll(() => const LoginPage());
+      var login = await repository.postLogin(
+          emailController.text, passwordController.text);
+      print(login);
+      storage.saveAuthResponse(login);
+      if (role == 1) {
+        Get.offAll(
+            () => HomePage(
+                  role: role,
+                ),
+            arguments: role);
+      }
     }
   }
 }

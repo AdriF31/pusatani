@@ -7,7 +7,10 @@ import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/profile_button.dart';
+import 'package:pusatani/ui/petani/home/petani_home_page.dart';
+import 'package:pusatani/ui/toko-pabrik/edit-profil/edit_profile_page.dart';
 import 'package:pusatani/ui/toko-pabrik/profile/profile_controller.dart';
+import 'package:pusatani/ui/toko-pabrik/ubah-password/edit_password_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -24,7 +27,7 @@ class ProfilePage extends StatelessWidget {
                 height: 250,
                 color: primaryColor,
               ),
-              SvgPicture.asset('assets/images/decoration.svg'),
+              Image.asset('assets/images/decoration.png'),
               Positioned(
                   top: 160,
                   left: 0,
@@ -36,9 +39,9 @@ class ProfilePage extends StatelessWidget {
                           width: 140,
                           height: 140,
                           padding: const EdgeInsets.all(4),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               color: Colors.white, shape: BoxShape.circle),
-                          child: CircleAvatar(
+                          child: const CircleAvatar(
                             backgroundImage:
                                 AssetImage('assets/images/img_slider1.jpg'),
                           ),
@@ -69,17 +72,21 @@ class ProfilePage extends StatelessWidget {
                 ProfileButton(
                   icon: Icons.person,
                   title: 'Ubah Profil',
-                  onTap: () {},
+                  onTap: () => Get.to(() => EditProfilePage()),
                 ),
                 ProfileButton(
                   icon: Icons.store,
                   title: 'Ubah Toko',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => PetaniHomePage());
+                  },
                 ),
                 ProfileButton(
                   icon: Icons.key,
                   title: 'Ubah Password',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => EditPasswordPage());
+                  },
                 ),
                 ProfileButton(
                   icon: Icons.info,

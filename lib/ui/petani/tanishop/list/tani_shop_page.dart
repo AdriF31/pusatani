@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/custom_card.dart';
-import 'package:pusatani/ui/detail/detail_page.dart';
-import 'package:pusatani/ui/petani/tanishop/detail_shop.dart/detail_shop_page.dart';
+import 'package:pusatani/ui/detail-artikel/detail_artikel_page.dart';
+import 'package:pusatani/ui/petani/tanishop/detail_shop.dart/detail_pabrik_page.dart';
 import 'package:pusatani/ui/petani/tanishop/list/tani_shop_controller.dart';
 
 import '../../../../const/colors.dart';
@@ -81,7 +81,7 @@ class _InfoTaniPageState extends State<TaniShopPage>
       child: Column(
         children: [
           GestureDetector(
-            onTap: () => Get.to(() => const DetailShopPage()),
+            onTap: () => Get.to(() => const DetailPabrikPage()),
             child: SizedBox(
               height: 120,
               child: Card(
@@ -146,7 +146,7 @@ class _InfoTaniPageState extends State<TaniShopPage>
       child: Column(
         children: [
           GestureDetector(
-              onTap: () => Get.to(() => const DetailPage()),
+              onTap: () => Get.to(() => const DetailArtikelPage()),
               child: CustomCard(
                 image: 'assets/images/img_slider1.jpg',
                 toko: 'Wanda',

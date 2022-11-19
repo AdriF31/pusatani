@@ -5,6 +5,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
+import 'package:pusatani/const/text_style.dart';
+import 'package:pusatani/reusable/back_button.dart';
+import 'package:pusatani/reusable/custom_elevated_button.dart';
 import 'package:pusatani/ui/auth/register/register_controller.dart';
 import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_page.dart';
 
@@ -17,9 +20,10 @@ class RegisterPage extends StatelessWidget {
         init: RegisterController(),
         builder: (c) => Scaffold(
               appBar: AppBar(
+                  leading: CustomBackButton(),
                   title: const Text(
-                'Register',
-              )),
+                    'Register',
+                  )),
               body: SingleChildScrollView(
                 child: Form(
                   key: c.formKey,
@@ -200,21 +204,31 @@ class RegisterPage extends StatelessWidget {
                             height: 8,
                           ),
                           InkWell(
+                            splashColor: primaryColor,
+                            
                             onTap: () {
                               c.getIdPicture();
                             },
                             child: SizedBox(
                               height: 200,
                               child: DottedBorder(
+                                  strokeCap: StrokeCap.butt,
+                                  dashPattern: [10],
+                                  color: primaryColor,
                                   child: Center(
-                                child: c.idPicture != null
-                                    ? Image.file(
-                                        c.idPicture!,
-                                        fit: BoxFit.fill,
-                                        width: double.infinity,
-                                      )
-                                    : const Text('upload photo'),
-                              )),
+                                    child: c.idPicture != null
+                                        ? Image.file(
+                                            c.idPicture!,
+                                            fit: BoxFit.fill,
+                                            width: double.infinity,
+                                          )
+                                        : Text(
+                                            'Unggah foto KTP',
+                                            style: greenTextStyle.copyWith(
+                                                fontSize: 18,
+                                                fontWeight: semiBold),
+                                          ),
+                                  )),
                             ),
                           ),
                           Column(
@@ -369,42 +383,16 @@ class RegisterPage extends StatelessWidget {
                               const SizedBox(
                                 height: 18,
                               ),
-                              Container(
-                                  width: double.infinity,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(25),
-                                      gradient: LinearGradient(
-                                          colors: [
-                                            secondaryColor,
-                                            primaryColor.withOpacity(0.7),
-                                          ],
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          stops: const [0.2, 1])),
-                                  child: TextButton(
-                                      style: TextButton.styleFrom(
-                                          // backgroundColor: secondaryColor,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(25))),
-                                      onPressed: () {
-                                        Get.to(() => AddTokoPage());
-                                        if (c.formKey.currentState
-                                                ?.validate() ==
-                                            true) {
-                                          // c.register();
-
-                                        }
-                                      },
-                                      child: Text(
-                                        'Register',
-                                        style: GoogleFonts.firaSans(
-                                            fontSize: 16,
-                                            color: Colors.white,
-                                            fontWeight: medium),
-                                      ))),
                             ],
+                          ),
+                          CustomElevatedButton(
+                            title: 'Register',
+                            onTap: () {
+                              
+                              if (c.formKey.currentState?.validate() == true) {
+                                c.register();
+                              }
+                            },
                           ),
                         ],
                       ),

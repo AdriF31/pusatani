@@ -5,6 +5,7 @@ import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/ui/auth/login/login_controller.dart';
 import 'package:pusatani/ui/auth/register/register_page.dart';
+import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -61,8 +62,9 @@ class LoginPage extends StatelessWidget {
                                         hintText: 'user@gmail.com',
                                         hintStyle:
                                             GoogleFonts.catamaran(fontSize: 14),
-                                        contentPadding: const EdgeInsets.symmetric(
-                                            horizontal: 16),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 16),
                                         border: OutlineInputBorder(
                                             borderSide:
                                                 BorderSide(color: primaryColor),
@@ -155,6 +157,7 @@ class LoginPage extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(25))),
                                   onPressed: () {
+                                    // Get.offAll(() => MainPage());
                                     if (c.formKey.currentState?.validate() ==
                                         true) {
                                       c.isLoading = true;
