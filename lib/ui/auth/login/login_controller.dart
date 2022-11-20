@@ -30,8 +30,7 @@ class LoginController extends BaseController {
       loginModel = res;
       if (loginModel?.meta?.code == 200) {
         storage.saveAuthResponse(res);
-        print('id:${storage.getCurrentUserId()}');
-        print('store-id:${storage.getCurrentStoreId()}');
+
         isLoading = false;
         Fluttertoast.showToast(msg: res!.meta!.message!);
         update();

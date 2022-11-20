@@ -3,11 +3,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/helper/scroll_configuration.dart';
-import 'package:pusatani/ui/auth/login/login_page.dart';
 import 'package:pusatani/ui/onboarding/onboarding_page.dart';
-import 'package:pusatani/ui/petani/home/petani_home_page.dart';
-import 'package:pusatani/ui/petani/infotani/info_tani_page.dart';
-import 'package:pusatani/ui/splash/splash_page.dart';
 
 class Pusatani extends StatelessWidget {
   const Pusatani({super.key});

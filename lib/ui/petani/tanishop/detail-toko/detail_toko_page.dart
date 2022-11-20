@@ -17,7 +17,19 @@ class DetailTokoPage extends StatelessWidget {
     return GetBuilder<DetailTokoController>(
         init: DetailTokoController(),
         builder: (c) => Scaffold(
-              appBar: AppBar(title: const Text('yo')),
+              appBar: AppBar(
+                title: const Text('Detail Toko'),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                        onPressed: () {
+                          c.whatsapp();
+                        },
+                        icon: Icon(Icons.message)),
+                  )
+                ],
+              ),
               body: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -75,6 +87,14 @@ class DetailTokoPage extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              c.detailTokoModel?.data?.deskripsi ?? '',
+                              style: blackTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: medium),
+                            ),
+                            const SizedBox(
                               height: 16,
                             ),
                             Text(
@@ -93,40 +113,13 @@ class DetailTokoPage extends StatelessWidget {
                                         CustomProductCard(
                                           stok: element.stok,
                                           toko: element.name ?? '-',
-                                          alamat: element.price ?? '-',
+                                          alamat: c.formatter
+                                              .format(element.price.toString()),
                                           image:
-                                              'http://pusatani.masuk.web.id/images/produk/${element.image}' ??
-                                                  '',
+                                              'http://pusatani.masuk.web.id/images/produk/${element.image}',
                                         )))
                                     .values
                                     .toList()),
-                            Container(
-                              height: 60,
-                              width: double.infinity,
-                              margin: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                  color: primaryColor,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: TextButton(
-                                  onPressed: () {},
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Icon(
-                                        Icons.abc_rounded,
-                                        size: 24,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        '+62b22222222',
-                                        style: TextStyle(color: Colors.white),
-                                      )
-                                    ],
-                                  )),
-                            ),
                           ],
                         ),
                       )

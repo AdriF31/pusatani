@@ -3,11 +3,14 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
+import 'package:pusatani/data/model/add_product_model.dart';
 import 'package:pusatani/data/model/add_toko_model.dart';
+import 'package:pusatani/data/model/delete_product_model.dart';
 import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/data/model/login_model.dart';
+import 'package:pusatani/data/model/logout_model.dart';
 import 'package:pusatani/data/model/pabrik_model.dart';
 import 'package:pusatani/data/model/register_model.dart';
 import 'package:pusatani/data/model/toko_model.dart';
@@ -19,6 +22,7 @@ import '../network_core.dart';
 class RepositoryImpl implements Repository {
   final network = Get.find<NetworkCore>();
   final storage = StorageCore();
+  String token = StorageCore().getAccessToken()!;
   @override
   FutureOr<LoginModel?> postLogin(String email, String password) async {
     try {
@@ -31,33 +35,7 @@ class RepositoryImpl implements Repository {
       return LoginModel.fromJson(e.response?.data);
     }
   }
-
-  @override
-  FutureOr<TokoModel?> getToko() async {
-    try {
-      var response = await network.dio.get('/toko',
-          options: Options(headers: {
-            'Authorization': 'Bearer ${storage.getAccessToken()}'
-          }));
-      return TokoModel.fromJson(response.data);
-    } on DioError catch (e) {
-      return TokoModel.fromJson(e.response?.data);
-    }
-  }
-
-  @override
-  FutureOr<PabrikModel> getPabrik() async {
-    try {
-      var response = await network.dio.get('/pabrik',
-          options: Options(headers: {
-            'Authorization': 'Bearer ${storage.getAccessToken()}'
-          }));
-      return PabrikModel.fromJson(response.data);
-    } on DioError catch (e) {
-      return PabrikModel.fromJson(e.response!.data);
-    }
-  }
-
+  
   @override
   FutureOr<RegisterModel> postRegister(
       File? profilePicture,
@@ -93,26 +71,19 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  FutureOr<ListArticleModel?> getListArticle() async {
+  FutureOr<TokoModel?> getToko() async {
     try {
-      var response = await network.dio.get('/article');
-      return ListArticleModel.fromJson(response.data);
+      var response = await network.dio.get('/toko',
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return TokoModel.fromJson(response.data);
     } on DioError catch (e) {
-      return ListArticleModel.fromJson(e.response!.data);
+      return TokoModel.fromJson(e.response?.data);
     }
   }
 
-  @override
-  FutureOr<DetailPabrikModel> getDetailPabrik(int id) async {
-    try {
-      var response = await network.dio.get('/pabrikWith/$id');
-      return DetailPabrikModel.fromJson(response.data);
-    } on DioError catch (e) {
-      return DetailPabrikModel.fromJson(e.response!.data);
-    }
-  }
-
-  @override
+    @override
   FutureOr<DetailTokoModel?> getDetailToko(int id) async {
     try {
       var response = await network.dio.get('/tokoWith/$id',
@@ -125,9 +96,9 @@ class RepositoryImpl implements Repository {
     }
   }
 
-  @override
-  FutureOr<AddTokoModel?> postToko( String name, String address,
-       String deskripsi, File? image) async {
+    @override
+  FutureOr<AddTokoModel?> postToko(
+      String name, String address, String deskripsi, File? image) async {
     try {
       var formData = FormData.fromMap({
         'name': name,
@@ -151,6 +122,101 @@ class RepositoryImpl implements Repository {
       return AddTokoModel.fromJson(response.data);
     } on DioError catch (e) {
       return AddTokoModel.fromJson(e.response!.data);
+    }
+  }
+
+ @override
+  FutureOr<PabrikModel> getPabrik() async {
+    try {
+      var response = await network.dio.get('/pabrik',
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return PabrikModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return PabrikModel.fromJson(e.response!.data);
+    }
+  }
+
+    @override
+  FutureOr<DetailPabrikModel> getDetailPabrik(int id) async {
+    try {
+      var response = await network.dio.get('/pabrikWith/$id');
+      return DetailPabrikModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return DetailPabrikModel.fromJson(e.response!.data);
+    }
+  }
+
+ 
+
+  @override
+  FutureOr<ListArticleModel?> getListArticle() async {
+    try {
+      var response = await network.dio.get('/article');
+      return ListArticleModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return ListArticleModel.fromJson(e.response!.data);
+    }
+  }
+
+
+
+
+
+
+  @override
+  FutureOr<LogoutModel?> getLogout() async {
+    try {
+      var response = await network.dio.get('/auth/logout',
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return LogoutModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return LogoutModel.fromJson(e.response!.data);
+    }
+  }
+
+  @override
+  FutureOr<AddProductModel?> postProduk(
+      String name, String detail, int price, String stok, File? image) async {
+    try {
+      var formData = FormData.fromMap({
+        'name': name,
+        'id_toko': storage.getCurrentStoreId(),
+        'price': price,
+        'stok': stok,
+        'detail': detail,
+      });
+
+      if (image != null) {
+        formData.files.addAll([
+          MapEntry("image", await MultipartFile.fromFile(image.path)),
+        ]);
+      }
+
+      var response = await network.dio.post('/produk',
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return AddProductModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return AddProductModel.fromJson(e.response!.data!);
+    }
+  }
+
+  @override
+  FutureOr<DeleteProductModel?> deleteProduct(int id) async {
+    try {
+      var response = await network.dio.delete('/produk/$id',
+          options: Options(headers: {
+            'Authorization': "Bearer ${storage.getAccessToken()}"
+          }));
+      return DeleteProductModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return DeleteProductModel.fromJson(e.response!.data);
     }
   }
 }

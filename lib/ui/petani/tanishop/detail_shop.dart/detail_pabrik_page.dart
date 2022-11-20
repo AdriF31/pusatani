@@ -16,7 +16,19 @@ class DetailPabrikPage extends StatelessWidget {
     return GetBuilder<DetailPabrikController>(
         init: DetailPabrikController(),
         builder: (c) => Scaffold(
-              appBar: AppBar(title: const Text('yo')),
+              appBar: AppBar(
+                title: const Text('Data Pabrik'),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: IconButton(
+                        onPressed: () {
+                          c.whatsapp();
+                        },
+                        icon: Icon(Icons.message)),
+                  )
+                ],
+              ),
               body: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 16,
@@ -74,6 +86,14 @@ class DetailPabrikPage extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(
+                              height: 8,
+                            ),
+                            Text(
+                              c.detailPabrikModel.data?.deskripsi ?? '',
+                              style: blackTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: medium),
+                            ),
+                            const SizedBox(
                               height: 16,
                             ),
                             Text(
@@ -85,46 +105,21 @@ class DetailPabrikPage extends StatelessWidget {
                               height: 8,
                             ),
                             Column(
-                                children:
-                                    c.detailPabrikModel.data!.pabrikToGabah!
-                                        .asMap()
-                                        .map((index, element) => MapEntry(
-                                            index,
-                                            CustomProductCard(
-                                              toko: element.name,
-                                              alamat: element.detail,
-                                              image: element.image,
-                                              stok: 'tersedia',
-                                            )))
-                                        .values
-                                        .toList()),
-                            Container(
-                              height: 60,
-                              width: double.infinity,
-                              margin: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                  color: primaryColor,
-                                  borderRadius: BorderRadius.circular(5)),
-                              child: TextButton(
-                                  onPressed: () {},
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Icon(
-                                        Icons.abc_rounded,
-                                        size: 24,
-                                        color: Colors.white,
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        '+62b22222222',
-                                        style: TextStyle(color: Colors.white),
-                                      )
-                                    ],
-                                  )),
-                            ),
+                                children: c
+                                    .detailPabrikModel.data!.pabrikToGabah!
+                                    .asMap()
+                                    .map((index, element) => MapEntry(
+                                        index,
+                                        CustomProductCard(
+                                          toko: element.name,
+                                          alamat: c.formatter
+                                              .format(element.price.toString()),
+                                          image:
+                                              'http://pusatani.masuk.web.id/images/gabah/${element.image}',
+                                          stok: 'tersedia',
+                                        )))
+                                    .values
+                                    .toList()),
                           ],
                         ),
                       )

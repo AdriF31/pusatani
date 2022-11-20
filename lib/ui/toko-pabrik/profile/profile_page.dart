@@ -41,19 +41,19 @@ class ProfilePage extends StatelessWidget {
                           padding: const EdgeInsets.all(4),
                           decoration: const BoxDecoration(
                               color: Colors.white, shape: BoxShape.circle),
-                          child: const CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/img_slider1.jpg'),
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                "http://pusatani.masuk.web.id/images/profile/${c.storage.getCurrentProfilePicture()!}"),
                           ),
                         ),
                       ),
                       Text(
-                        'Iu hiyahiya',
+                        c.storage.getCurrentUsername()!,
                         style: blackTextStyle.copyWith(
                             fontSize: 24, fontWeight: semiBold),
                       ),
                       Text(
-                        'dray@gmail.com',
+                        c.storage.getCurrentEmail()!,
                         style: blackTextStyle.copyWith(
                           fontSize: 18,
                         ),
@@ -92,6 +92,13 @@ class ProfilePage extends StatelessWidget {
                   icon: Icons.info,
                   title: 'Tentang Kami',
                   onTap: () {},
+                ),
+                ProfileButton(
+                  icon: Icons.logout,
+                  title: 'Logout',
+                  onTap: () {
+                    c.logout();
+                  },
                 ),
               ],
             ),

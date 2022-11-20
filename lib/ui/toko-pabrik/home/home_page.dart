@@ -8,8 +8,10 @@ import 'package:pusatani/ui/toko-pabrik/home/home_controller.dart';
 import '../../../const/font_weight.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({super.key, required this.role});
-  int role;
+  HomePage({
+    super.key,
+  });
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
@@ -30,16 +32,22 @@ class HomePage extends StatelessWidget {
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                      'Hai ${c.storage.getCurrentUsername()},\n Selamat datang di PusaTanI',
+                                      'Hai ${c.storage.getCurrentUsername()},\nSelamat datang di PusaTanI',
                                       style: blackTextStyle.copyWith(
-                                          fontSize: 20, fontWeight: semiBold),
+                                          fontSize: 18, fontWeight: semiBold),
                                     ),
                                   ),
                                   Expanded(
-                                    child: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          'http://pusatani.masuk.web.id/images/profile/${c.storage.getCurrentProfilePicture() ?? ''}'),
-                                      radius: 50,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(2),
+                                      decoration: BoxDecoration(
+                                          color: blackColor,
+                                          shape: BoxShape.circle),
+                                      child: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                            'http://pusatani.masuk.web.id/images/profile/${c.storage.getCurrentProfilePicture() ?? ''}'),
+                                        radius: 50,
+                                      ),
                                     ),
                                   )
                                 ],
@@ -65,7 +73,7 @@ class HomePage extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        role == 3
+                                        c.storage.getCurrentRole() == 3
                                             ? c.detailTokoModel?.data?.name ??
                                                 ''
                                             : c.detailPabrikModel.data?.name ??
@@ -170,7 +178,7 @@ class HomePage extends StatelessWidget {
                                                   color: Colors.white),
                                             ),
                                             Text(
-                                              role == 3
+                                              c.storage.getCurrentRole() == 3
                                                   ? c.detailTokoModel!.data!
                                                       .tokoToProduk!.length
                                                       .toString()
@@ -193,22 +201,59 @@ class HomePage extends StatelessWidget {
                             const SizedBox(
                               height: 8,
                             ),
-                            Text(
-                              'Produk',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 24, fontWeight: semiBold),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text(
+                                c.storage.getCurrentRole() == 3
+                                    ? 'Produk'
+                                    : 'Gabah',
+                                style: blackTextStyle.copyWith(
+                                    fontSize: 24, fontWeight: semiBold),
+                              ),
                             ),
                             Column(
-                                children:
-                                    c.detailPabrikModel.data!.pabrikToGabah!
+                                children: c.storage.getCurrentRole() == 3
+                                    ? c.detailTokoModel!.data!.tokoToProduk!
                                         .asMap()
                                         .map((index, element) => MapEntry(
                                             index,
-                                            CustomProductCard(
-                                              toko: element.name,
-                                              alamat: element.detail,
-                                              image: element.image,
-                                              stok: 'tersedia',
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16),
+                                              child: GestureDetector(
+                                                onLongPress: () {
+                                                  c.deleteData(element.id!);
+                                                  c.update();
+                                                  c.getData();
+                                                },
+                                                child: CustomProductCard(
+                                                  toko: element.name,
+                                                  alamat: element.detail,
+                                                  image:
+                                                      'http://pusatani.masuk.web.id/images/produk/${element.image}',
+                                                  stok: element.stok,
+                                                ),
+                                              ),
+                                            )))
+                                        .values
+                                        .toList()
+                                    : c.detailPabrikModel.data!.pabrikToGabah!
+                                        .asMap()
+                                        .map((index, element) => MapEntry(
+                                            index,
+                                            Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: GestureDetector(
+                                                child: CustomProductCard(
+                                                  toko: element.name,
+                                                  alamat: element.detail,
+                                                  image:
+                                                      'http://pusatani.masuk.web.id/images/gabah/${element.image}',
+                                                  stok: 'tersedia',
+                                                ),
+                                              ),
                                             )))
                                         .values
                                         .toList()),

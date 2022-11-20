@@ -1,4 +1,3 @@
-
 class DetailTokoModel {
   Meta? meta;
   Data? data;
@@ -12,10 +11,10 @@ class DetailTokoModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
-    if(meta != null) {
+    if (meta != null) {
       _data["meta"] = meta?.toJson();
     }
-    if(data != null) {
+    if (data != null) {
       _data["data"] = data?.toJson();
     }
     return _data;
@@ -35,7 +34,18 @@ class Data {
   String? userName;
   List<TokoToProduk>? tokoToProduk;
 
-  Data({this.id, this.createdAt, this.updatedAt, this.idUser, this.name, this.address, this.image, this.status, this.deskripsi, this.userName, this.tokoToProduk});
+  Data(
+      {this.id,
+      this.createdAt,
+      this.updatedAt,
+      this.idUser,
+      this.name,
+      this.address,
+      this.image,
+      this.status,
+      this.deskripsi,
+      this.userName,
+      this.tokoToProduk});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -48,7 +58,11 @@ class Data {
     status = json["status"];
     deskripsi = json["deskripsi"];
     userName = json["user_name"];
-    tokoToProduk = json["toko_to_produk"] == null ? null : (json["toko_to_produk"] as List).map((e) => TokoToProduk.fromJson(e)).toList();
+    tokoToProduk = json["toko_to_produk"] == null
+        ? null
+        : (json["toko_to_produk"] as List)
+            .map((e) => TokoToProduk.fromJson(e))
+            .toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -63,7 +77,7 @@ class Data {
     _data["status"] = status;
     _data["deskripsi"] = deskripsi;
     _data["user_name"] = userName;
-    if(tokoToProduk != null) {
+    if (tokoToProduk != null) {
       _data["toko_to_produk"] = tokoToProduk?.map((e) => e.toJson()).toList();
     }
     return _data;
@@ -77,12 +91,22 @@ class TokoToProduk {
   int? idToko;
   String? name;
   String? detail;
-  String? price;
+  int? price;
   String? stok;
   String? image;
   String? tokoName;
 
-  TokoToProduk({this.id, this.createdAt, this.updatedAt, this.idToko, this.name, this.detail, this.price, this.stok, this.image, this.tokoName});
+  TokoToProduk(
+      {this.id,
+      this.createdAt,
+      this.updatedAt,
+      this.idToko,
+      this.name,
+      this.detail,
+      this.price,
+      this.stok,
+      this.image,
+      this.tokoName});
 
   TokoToProduk.fromJson(Map<String, dynamic> json) {
     id = json["id"];

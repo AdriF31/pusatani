@@ -83,7 +83,8 @@ class StorageCore {
       return null;
     }
   }
-    int? getCurrentPabrikId() {
+
+  int? getCurrentPabrikId() {
     try {
       Map<String, dynamic> data = storage.getItem('auth_result');
       LoginModel auth = LoginModel.fromJson(data);
@@ -127,6 +128,19 @@ class StorageCore {
       debugPrint(auth.data?.user?.name);
       debugPrint(auth.data?.token);
       return auth.data?.user?.userDetails?.photoProfile;
+    } catch (e) {
+      debugPrint("Error while load user_name: $e");
+      return 'user_name_not_loaded';
+    }
+  }
+
+  String? getCurrentPhoneNumber() {
+    try {
+      Map<String, dynamic> data = storage.getItem('auth_result');
+      LoginModel auth = LoginModel.fromJson(data);
+      debugPrint(auth.data?.user?.name);
+      debugPrint(auth.data?.token);
+      return auth.data?.user?.userDetails?.phone;
     } catch (e) {
       debugPrint("Error while load user_name: $e");
       return 'user_name_not_loaded';

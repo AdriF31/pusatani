@@ -14,6 +14,7 @@ class CustomTextFormField extends StatelessWidget {
       this.maxLines})
       : super(key: key);
   TextEditingController controller;
+  
   String hintText;
   String label;
   final String? Function(String?)? validator;
@@ -34,8 +35,10 @@ class CustomTextFormField extends StatelessWidget {
             controller: controller,
             keyboardType: inputType,
             maxLines: maxLines,
+            inputFormatters: [],
             textInputAction: textInputAction,
             decoration: InputDecoration(
+              
                 fillColor: primaryColor,
                 hintText: hintText,
                 hintStyle: GoogleFonts.catamaran(fontSize: 14),

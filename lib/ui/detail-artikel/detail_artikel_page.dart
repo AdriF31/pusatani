@@ -41,18 +41,23 @@ class DetailArtikelPage extends StatelessWidget {
                       const SizedBox(
                         height: 4,
                       ),
-                      Text(
-                        Get.arguments['author'],
-                        style: blackTextStyle.copyWith(
-                            fontSize: 16, fontWeight: regular),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            Get.arguments['author'],
+                            style: blackTextStyle.copyWith(
+                                fontSize: 16, fontWeight: regular),
+                          ),
+                          Text(
+                            Get.arguments['date'].toString().split('T').first,
+                            style: blackTextStyle.copyWith(
+                                fontSize: 16, fontWeight: regular),
+                          ),
+                        ],
                       ),
                       const SizedBox(
-                        height: 4,
-                      ),
-                      Text(
-                        Get.arguments['date'].toString().split('T').first,
-                        style: blackTextStyle.copyWith(
-                            fontSize: 16, fontWeight: regular),
+                        height: 8,
                       ),
                       Card(
                         elevation: 3,

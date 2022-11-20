@@ -1,4 +1,3 @@
-
 class DetailPabrikModel {
   Meta? meta;
   Data? data;
@@ -12,10 +11,10 @@ class DetailPabrikModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
-    if(meta != null) {
+    if (meta != null) {
       _data["meta"] = meta?.toJson();
     }
-    if(data != null) {
+    if (data != null) {
       _data["data"] = data?.toJson();
     }
     return _data;
@@ -35,7 +34,18 @@ class Data {
   String? userName;
   List<PabrikToGabah>? pabrikToGabah;
 
-  Data({this.id, this.createdAt, this.updatedAt, this.idUser, this.name, this.deskripsi, this.address, this.image, this.status, this.userName, this.pabrikToGabah});
+  Data(
+      {this.id,
+      this.createdAt,
+      this.updatedAt,
+      this.idUser,
+      this.name,
+      this.deskripsi,
+      this.address,
+      this.image,
+      this.status,
+      this.userName,
+      this.pabrikToGabah});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -48,7 +58,11 @@ class Data {
     image = json["image"];
     status = json["status"];
     userName = json["user_name"];
-    pabrikToGabah = json["pabrik_to_gabah"] == null ? null : (json["pabrik_to_gabah"] as List).map((e) => PabrikToGabah.fromJson(e)).toList();
+    pabrikToGabah = json["pabrik_to_gabah"] == null
+        ? null
+        : (json["pabrik_to_gabah"] as List)
+            .map((e) => PabrikToGabah.fromJson(e))
+            .toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -63,7 +77,7 @@ class Data {
     _data["image"] = image;
     _data["status"] = status;
     _data["user_name"] = userName;
-    if(pabrikToGabah != null) {
+    if (pabrikToGabah != null) {
       _data["pabrik_to_gabah"] = pabrikToGabah?.map((e) => e.toJson()).toList();
     }
     return _data;
@@ -77,11 +91,20 @@ class PabrikToGabah {
   int? idPabrik;
   String? name;
   String? detail;
-  String? price;
+  int? price;
   String? image;
   String? pabrikName;
 
-  PabrikToGabah({this.id, this.createdAt, this.updatedAt, this.idPabrik, this.name, this.detail, this.price, this.image, this.pabrikName});
+  PabrikToGabah(
+      {this.id,
+      this.createdAt,
+      this.updatedAt,
+      this.idPabrik,
+      this.name,
+      this.detail,
+      this.price,
+      this.image,
+      this.pabrikName});
 
   PabrikToGabah.fromJson(Map<String, dynamic> json) {
     id = json["id"];

@@ -354,7 +354,9 @@ class PetaniHomePage extends StatelessWidget {
                                                   child: ArticleCard(
                                                       image: e.image,
                                                       title: e.title,
-                                                      date: e.createdAt,
+                                                      date: e.createdAt!
+                                                          .split('T')
+                                                          .first,
                                                       description: e.body),
                                                 ))
                                             .toList()),
@@ -381,20 +383,5 @@ class PetaniHomePage extends StatelessWidget {
         });
   }
 
-  // whatsapp() async {
-  //   var contact = "+6282319858335";
-  //   var androidUrl = "whatsapp://send?phone=$contact&text=Hi, I need some help";
-  //   var iosUrl =
-  //       "https://wa.me/$contact?text=${Uri.parse('Hi, I need some help')}";
 
-  //   try {
-  //     if (Platform.isIOS) {
-  //       await launchUrl(Uri.parse(iosUrl));
-  //     } else {
-  //       await launchUrl(Uri.parse(androidUrl));
-  //     }
-  //   } on Exception catch (e) {
-  //     Fluttertoast.showToast(msg: 'WhatsApp is not installed.');
-  //   }
-  // }
 }

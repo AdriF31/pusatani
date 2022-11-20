@@ -7,10 +7,5 @@ import 'package:pusatani/ui/toko-pabrik/profile/profile_page.dart';
 class MainController extends BaseController {
   int currentIndex = 0;
 
-  List<Widget> widgetOptions = [
-    HomePage(
-      role: Get.arguments,
-    ),
-    ProfilePage()
-  ];
+  List<Widget> widgetOptions = [HomePage(), ProfilePage()];
 }

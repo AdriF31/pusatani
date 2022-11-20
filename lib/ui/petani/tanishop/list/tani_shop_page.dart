@@ -10,6 +10,7 @@ import 'package:pusatani/ui/petani/tanishop/list/tani_shop_controller.dart';
 
 import '../../../../const/colors.dart';
 import '../../../../const/font_weight.dart';
+import '../detail-toko/detail_toko_page.dart';
 
 class TaniShopPage extends StatefulWidget {
   const TaniShopPage({Key? key}) : super(key: key);
@@ -70,7 +71,7 @@ class _InfoTaniPageState extends State<TaniShopPage>
                               children: c.tokoModel!.data!.data!
                                   .map((e) => GestureDetector(
                                         onTap: () => Get.to(
-                                            () => const DetailPabrikPage(),
+                                            () => const DetailTokoPage(),
                                             arguments: e.id),
                                         child: Padding(
                                           padding: const EdgeInsets.symmetric(

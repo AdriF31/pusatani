@@ -62,7 +62,7 @@ class ArticleCard extends StatelessWidget {
                   SizedBox(
                     width: 300,
                     child: Text(
-                      DateTime.parse(date!).toString(),
+                      date!,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.catamaran(
                           fontSize: 14,
@@ -78,7 +78,7 @@ class ArticleCard extends StatelessWidget {
                       style: GoogleFonts.catamaran(
                         fontSize: 20,
                         fontWeight: semiBold,
-                        color: Colors.black,
+                        color: Colors.white,
                       ),
                     ),
                   ),
