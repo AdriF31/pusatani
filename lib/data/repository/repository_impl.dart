@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
+import 'package:pusatani/data/model/add_toko_model.dart';
 import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
@@ -121,6 +122,35 @@ class RepositoryImpl implements Repository {
       return DetailTokoModel.fromJson(response.data);
     } on DioError catch (e) {
       return DetailTokoModel.fromJson(e.response?.data);
+    }
+  }
+
+  @override
+  FutureOr<AddTokoModel?> postToko( String name, String address,
+       String deskripsi, File? image) async {
+    try {
+      var formData = FormData.fromMap({
+        'name': name,
+        'id_user': storage.getCurrentUserId(),
+        'address': address,
+        'status': 'belum verifikasi',
+        'deskripsi': deskripsi,
+      });
+
+      if (image != null) {
+        formData.files.addAll([
+          MapEntry("image", await MultipartFile.fromFile(image.path)),
+        ]);
+      }
+
+      var response = await network.dio.post('/toko',
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return AddTokoModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return AddTokoModel.fromJson(e.response!.data);
     }
   }
 }

@@ -5,13 +5,16 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
+import 'package:pusatani/const/text_style.dart';
+import 'package:pusatani/reusable/custom_text_form_field.dart';
 import 'package:pusatani/ui/auth/register/register_controller.dart';
 import 'package:pusatani/ui/toko-pabrik/home/home_page.dart';
 import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_controller.dart';
 
 class AddTokoPage extends StatelessWidget {
-  const AddTokoPage({super.key});
+  AddTokoPage({super.key, required this.role});
+  int role;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class AddTokoPage extends StatelessWidget {
         builder: (c) => Scaffold(
               appBar: AppBar(
                   title: const Text(
-                'Register',
+                'Buat Toko',
               )),
               body: SingleChildScrollView(
                 child: Form(
@@ -38,15 +41,23 @@ class AddTokoPage extends StatelessWidget {
                             child: SizedBox(
                               height: 200,
                               child: DottedBorder(
+                                  strokeWidth: 2,
+                                  dashPattern: [10],
+                                  color: primaryColor,
                                   child: Center(
-                                child: c.tokoImage != null
-                                    ? Image.file(
-                                        c.tokoImage!,
-                                        fit: BoxFit.fill,
-                                        width: double.infinity,
-                                      )
-                                    : const Text('upload photo'),
-                              )),
+                                    child: c.tokoImage != null
+                                        ? Image.file(
+                                            c.tokoImage!,
+                                            fit: BoxFit.fill,
+                                            width: double.infinity,
+                                          )
+                                        : Text(
+                                            'unggah foto toko',
+                                            style: greenTextStyle.copyWith(
+                                                fontSize: 18,
+                                                fontWeight: semiBold),
+                                          ),
+                                  )),
                             ),
                           ),
                           const SizedBox(
@@ -63,7 +74,7 @@ class AddTokoPage extends StatelessWidget {
                               SizedBox(
                                 height: 60,
                                 child: TextFormField(
-                                  controller: c.nameController,
+                                  controller: c.storeController,
                                   decoration: InputDecoration(
                                       fillColor: primaryColor,
                                       hintText: 'Adri Jaya',
@@ -98,10 +109,10 @@ class AddTokoPage extends StatelessWidget {
                               SizedBox(
                                 height: 60,
                                 child: TextFormField(
-                                  controller: c.emailController,
+                                  controller: c.addressController,
                                   decoration: InputDecoration(
                                       fillColor: primaryColor,
-                                      hintText: 'user@gmail.com',
+                                      hintText: 'Jl trunojoyo no 2 ',
                                       hintStyle:
                                           GoogleFonts.catamaran(fontSize: 14),
                                       contentPadding:
@@ -114,10 +125,7 @@ class AddTokoPage extends StatelessWidget {
                                               BorderRadius.circular(5))),
                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return 'Email tidak boleh kosong';
-                                    } else if (GetUtils.isEmail(value) ==
-                                        false) {
-                                      return 'Email tidak valid';
+                                      return 'Alamat tidak boleh kosong';
                                     }
                                     return null;
                                   },
@@ -128,65 +136,12 @@ class AddTokoPage extends StatelessWidget {
                           const SizedBox(
                             height: 8,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'No Whatsapp',
-                                style: GoogleFonts.catamaran(
-                                    fontSize: 16, color: primaryColor),
-                              ),
-                              SizedBox(
-                                height: 60,
-                                child: TextFormField(
-                                  controller: c.phoneController,
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                      fillColor: primaryColor,
-                                      prefixIcon: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 12.0, horizontal: 12),
-                                        child: SizedBox(
-                                          width: 50,
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                '+62',
-                                                style: GoogleFonts.catamaran(
-                                                    fontSize: 16,
-                                                    color: blackColor,
-                                                    fontWeight: medium),
-                                              ),
-                                              SizedBox(
-                                                  height: 30,
-                                                  child: VerticalDivider(
-                                                    color: primaryColor,
-                                                  ))
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                      hintText: '8526277272',
-                                      hintStyle:
-                                          GoogleFonts.catamaran(fontSize: 14),
-                                      contentPadding:
-                                          const EdgeInsets.symmetric(
-                                              horizontal: 16),
-                                      border: OutlineInputBorder(
-                                          borderSide:
-                                              BorderSide(color: primaryColor),
-                                          borderRadius:
-                                              BorderRadius.circular(5))),
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'No whatsapp tidak boleh kosong';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
+                          CustomTextFormField(
+                              controller: c.descController,
+                              textInputAction: TextInputAction.done,
+                              maxLines: 7,
+                              hintText: '',
+                              label: 'Deskripsi Toko'),
                           const SizedBox(
                             height: 18,
                           ),
@@ -210,14 +165,13 @@ class AddTokoPage extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(25))),
                                   onPressed: () {
-                                    Get.offAll(() => MainPage());
                                     if (c.formKey.currentState?.validate() ==
                                         true) {
-                                      // c.register();
+                                      c.addToko();
                                     }
                                   },
                                   child: Text(
-                                    Get.arguments == 1
+                                    Get.arguments == 2
                                         ? 'Daftarkan Toko'
                                         : 'Daftarkan Pabrik',
                                     style: GoogleFonts.firaSans(

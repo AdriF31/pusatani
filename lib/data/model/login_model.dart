@@ -25,14 +25,20 @@ class LoginModel {
 class Data {
   String? token;
   User? user;
-  List<String>? role;
+  String? phone;
+  int? idPabrik;
+  dynamic idToko;
+  String? role;
 
-  Data({this.token, this.user, this.role});
+  Data({this.token, this.user, this.phone, this.idPabrik, this.idToko, this.role});
 
   Data.fromJson(Map<String, dynamic> json) {
     token = json["token"];
     user = json["user"] == null ? null : User.fromJson(json["user"]);
-    role = json["role"] == null ? null : List<String>.from(json["role"]);
+    phone = json["phone"];
+    idPabrik = json["id_pabrik"];
+    idToko = json["id_toko"];
+    role = json["role"];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,9 +47,10 @@ class Data {
     if(user != null) {
       _data["user"] = user?.toJson();
     }
-    if(role != null) {
-      _data["role"] = role;
-    }
+    _data["phone"] = phone;
+    _data["id_pabrik"] = idPabrik;
+    _data["id_toko"] = idToko;
+    _data["role"] = role;
     return _data;
   }
 }
@@ -55,9 +62,10 @@ class User {
   dynamic emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
+  UserDetails? userDetails;
   List<Roles>? roles;
 
-  User({this.id, this.name, this.email, this.emailVerifiedAt, this.createdAt, this.updatedAt, this.roles});
+  User({this.id, this.name, this.email, this.emailVerifiedAt, this.createdAt, this.updatedAt, this.userDetails, this.roles});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -66,6 +74,7 @@ class User {
     emailVerifiedAt = json["email_verified_at"];
     createdAt = json["created_at"];
     updatedAt = json["updated_at"];
+    userDetails = json["user_details"] == null ? null : UserDetails.fromJson(json["user_details"]);
     roles = json["roles"] == null ? null : (json["roles"] as List).map((e) => Roles.fromJson(e)).toList();
   }
 
@@ -77,6 +86,9 @@ class User {
     _data["email_verified_at"] = emailVerifiedAt;
     _data["created_at"] = createdAt;
     _data["updated_at"] = updatedAt;
+    if(userDetails != null) {
+      _data["user_details"] = userDetails?.toJson();
+    }
     if(roles != null) {
       _data["roles"] = roles?.map((e) => e.toJson()).toList();
     }
@@ -135,6 +147,40 @@ class Pivot {
     _data["model_id"] = modelId;
     _data["role_id"] = roleId;
     _data["model_type"] = modelType;
+    return _data;
+  }
+}
+
+class UserDetails {
+  int? id;
+  int? idUser;
+  String? phone;
+  String? photoProfile;
+  String? photoId;
+  String? createdAt;
+  String? updatedAt;
+
+  UserDetails({this.id, this.idUser, this.phone, this.photoProfile, this.photoId, this.createdAt, this.updatedAt});
+
+  UserDetails.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    idUser = json["id_user"];
+    phone = json["phone"];
+    photoProfile = json["photo_profile"];
+    photoId = json["photo_id"];
+    createdAt = json["created_at"];
+    updatedAt = json["updated_at"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["id"] = id;
+    _data["id_user"] = idUser;
+    _data["phone"] = phone;
+    _data["photo_profile"] = photoProfile;
+    _data["photo_id"] = photoId;
+    _data["created_at"] = createdAt;
+    _data["updated_at"] = updatedAt;
     return _data;
   }
 }

@@ -33,7 +33,7 @@ class CustomElevatedButton extends StatelessWidget {
                     borderRadius: BorderRadius.circular(25))),
             onPressed: onTap,
             child: Text(
-              'Register',
+              title,
               style: GoogleFonts.firaSans(
                   fontSize: 16, color: Colors.white, fontWeight: medium),
             )));

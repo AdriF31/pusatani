@@ -78,13 +78,12 @@ class RegisterController extends BaseController {
           emailController.text, passwordController.text);
       print(login);
       storage.saveAuthResponse(login);
-      if (role == 1) {
-        Get.offAll(
-            () => HomePage(
-                  role: role,
-                ),
-            arguments: role);
-      }
+
+      Get.offAll(
+          () => AddTokoPage(
+                role: role,
+              ),
+          arguments: role);
     }
   }
 }

@@ -205,7 +205,6 @@ class RegisterPage extends StatelessWidget {
                           ),
                           InkWell(
                             splashColor: primaryColor,
-                            
                             onTap: () {
                               c.getIdPicture();
                             },
@@ -388,7 +387,6 @@ class RegisterPage extends StatelessWidget {
                           CustomElevatedButton(
                             title: 'Register',
                             onTap: () {
-                              
                               if (c.formKey.currentState?.validate() == true) {
                                 c.register();
                               }

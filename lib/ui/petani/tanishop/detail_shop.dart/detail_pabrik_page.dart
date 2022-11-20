@@ -90,10 +90,11 @@ class DetailPabrikPage extends StatelessWidget {
                                         .asMap()
                                         .map((index, element) => MapEntry(
                                             index,
-                                            CustomCard(
+                                            CustomProductCard(
                                               toko: element.name,
                                               alamat: element.detail,
                                               image: element.image,
+                                              stok: 'tersedia',
                                             )))
                                         .values
                                         .toList()),

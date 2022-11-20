@@ -68,7 +68,7 @@ class DetailTokoPage extends StatelessWidget {
                                     Text(
                                       c.detailTokoModel!.data?.address ?? '-',
                                       style: blackTextStyle.copyWith(
-                                          fontSize: 16, fontWeight: regular),
+                                          fontSize: 16, fontWeight: medium),
                                     ),
                                   ],
                                 ),
@@ -78,9 +78,9 @@ class DetailTokoPage extends StatelessWidget {
                               height: 16,
                             ),
                             Text(
-                              'Harga Beli Gabah',
+                              'Produk',
                               style: blackTextStyle.copyWith(
-                                  fontSize: 16, fontWeight: semiBold),
+                                  fontSize: 24, fontWeight: semiBold),
                             ),
                             const SizedBox(
                               height: 8,
@@ -90,10 +90,13 @@ class DetailTokoPage extends StatelessWidget {
                                     .asMap()
                                     .map((index, element) => MapEntry(
                                         index,
-                                        CustomCard(
-                                          toko: element.name ?? 'def',
-                                          alamat: element.detail ?? 'def',
-                                          image: element.image ?? 'defa',
+                                        CustomProductCard(
+                                          stok: element.stok,
+                                          toko: element.name ?? '-',
+                                          alamat: element.price ?? '-',
+                                          image:
+                                              'http://pusatani.masuk.web.id/images/produk/${element.image}' ??
+                                                  '',
                                         )))
                                     .values
                                     .toList()),

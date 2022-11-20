@@ -17,7 +17,6 @@ class DetailPabrikController extends BaseController {
       var response = await repository.getDetailPabrik(Get.arguments);
       print(Get.arguments);
       detailPabrikModel = response;
-      print(detailPabrikModel.data?.pabrikToGabah?.first.name);
       isLoading = false;
       update();
     } catch (e) {

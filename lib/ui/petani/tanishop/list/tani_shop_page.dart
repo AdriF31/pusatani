@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/custom_card.dart';
+import 'package:pusatani/reusable/custom_store_card.dart';
 import 'package:pusatani/ui/detail-artikel/detail_artikel_page.dart';
 import 'package:pusatani/ui/petani/tanishop/detail_shop.dart/detail_pabrik_page.dart';
 import 'package:pusatani/ui/petani/tanishop/list/tani_shop_controller.dart';
@@ -31,129 +32,98 @@ class _InfoTaniPageState extends State<TaniShopPage>
   Widget build(BuildContext context) {
     return GetBuilder<TaniShopController>(
         init: TaniShopController(),
-        builder: (controller) {
+        builder: (c) {
           return Scaffold(
             appBar: AppBar(title: const Text('Tani Shop')),
-            body: Column(
-              children: [
-                SafeArea(
-                    child: Container(
-                  height: 10,
-                )),
-                ButtonsTabBar(
-                  controller: tabController,
-                  backgroundColor: primaryColor,
-                  height: 60,
-                  unselectedBackgroundColor: Colors.transparent,
-                  labelStyle: const TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                  borderWidth: 1,
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: Get.width * 0.18),
-                  unselectedBorderColor: blackColor,
-                  tabs: const [
-                    Tab(
-                      text: 'Toko',
-                    ),
-                    Tab(
-                      text: "Pabrik",
-                    ),
-                  ],
-                ),
-                Expanded(
-                  child: TabBarView(
-                    controller: tabController,
-                    children: <Widget>[
-                      toko(),
-                      pabrik(),
+            body: c.isLoading == false
+                ? Column(
+                    children: [
+                      SafeArea(
+                          child: Container(
+                        height: 10,
+                      )),
+                      ButtonsTabBar(
+                        controller: tabController,
+                        backgroundColor: primaryColor,
+                        height: 60,
+                        unselectedBackgroundColor: Colors.transparent,
+                        labelStyle: const TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold),
+                        borderWidth: 1,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: Get.width * 0.18),
+                        unselectedBorderColor: blackColor,
+                        tabs: const [
+                          Tab(
+                            text: 'Toko',
+                          ),
+                          Tab(
+                            text: "Pabrik",
+                          ),
+                        ],
+                      ),
+                      Expanded(
+                        child: TabBarView(
+                          controller: tabController,
+                          children: <Widget>[
+                            Column(
+                              children: c.tokoModel!.data!.data!
+                                  .map((e) => GestureDetector(
+                                        onTap: () => Get.to(
+                                            () => const DetailPabrikPage(),
+                                            arguments: e.id),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 4),
+                                          child: CustomStoreCard(
+                                            address: e.address,
+                                            image: e.image,
+                                            name: e.name,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                            Column(
+                              children: c.pabrikModel!.data!.data!
+                                  .map((e) => GestureDetector(
+                                        onTap: () => Get.to(
+                                            () => const DetailPabrikPage(),
+                                            arguments: e.id),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 4),
+                                          child: CustomStoreCard(
+                                            address: e.address,
+                                            image: e.image,
+                                            name: e.name,
+                                          ),
+                                        ),
+                                      ))
+                                  .toList(),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
+                  )
+                : Center(
+                    child: CircularProgressIndicator(),
                   ),
-                ),
-              ],
-            ),
           );
         });
   }
 
-  Widget toko() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () => Get.to(() => const DetailPabrikPage()),
-            child: SizedBox(
-              height: 120,
-              child: Card(
-                elevation: 3,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 150,
-                      height: double.infinity,
-                      child: Card(
-                        elevation: 3,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
-                          child: Image.asset(
-                            'assets/images/img_slider1.jpg',
-                            fit: BoxFit.fitHeight,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Toko Al Wanda',
-                            style: blackTextStyle.copyWith(
-                                fontSize: 18, fontWeight: semiBold),
-                            overflow: TextOverflow.clip,
-                            maxLines: 2,
-                          ),
-                          Text(
-                            'Jl. i aja dulu',
-                            style: greyTextStyle.copyWith(
-                                fontSize: 14, fontWeight: semiBold),
-                            overflow: TextOverflow.clip,
-                            maxLines: 2,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget pabrik() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        children: [
-          GestureDetector(
-              onTap: () => Get.to(() => const DetailArtikelPage()),
-              child: CustomCard(
-                image: 'assets/images/img_slider1.jpg',
-                toko: 'Wanda',
-                alamat: 'Jl apa ya',
-              ))
-        ],
-      ),
-    );
-  }
+  // Widget pabrik() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+  //     child: Column(
+  //       children: [
+  //         GestureDetector(
+  //             onTap: () => Get.to(() => const DetailArtikelPage()),
+  //             child: CustomStoreCard())
+  //       ],
+  //     ),
+  //   );
+  // }
 }

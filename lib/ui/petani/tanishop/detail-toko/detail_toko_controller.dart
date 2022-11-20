@@ -17,7 +17,6 @@ class DetailTokoController extends BaseController {
       var response = await repository.getDetailToko(Get.arguments);
       print(Get.arguments);
       detailTokoModel = response;
-      print(detailTokoModel?.data?.tokoToProduk?.first.name);
       isLoading = false;
       update();
     } catch (e) {

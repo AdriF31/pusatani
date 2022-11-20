@@ -30,14 +30,15 @@ class LoginController extends BaseController {
       loginModel = res;
       if (loginModel?.meta?.code == 200) {
         storage.saveAuthResponse(res);
-
+        print('id:${storage.getCurrentUserId()}');
+        print('store-id:${storage.getCurrentStoreId()}');
         isLoading = false;
         Fluttertoast.showToast(msg: res!.meta!.message!);
         update();
-        if (loginModel?.data?.role?.first == 'Toko') {
-          Get.offAll(() => const MainPage(), arguments: 3);
-        } else if (loginModel?.data?.role?.first == 'Pabrik') {
+        if (loginModel?.data?.user?.roles?.first.id == 2) {
           Get.offAll(() => const MainPage(), arguments: 2);
+        } else if (loginModel?.data?.user?.roles?.first.id == 3) {
+          Get.offAll(() => const MainPage(), arguments: 3);
         }
       } else {
         Fluttertoast.showToast(msg: res!.meta!.message!);

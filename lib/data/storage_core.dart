@@ -62,14 +62,48 @@ class StorageCore {
     }
   }
 
-  String? getCurrentUserId() {
+  int? getCurrentUserId() {
     try {
       Map<String, dynamic> data = storage.getItem('auth_result');
       LoginModel auth = LoginModel.fromJson(data);
-      return auth.data?.user?.id.toString();
+      return auth.data?.user?.id;
     } catch (e) {
       debugPrint("Error while load user_id: $e");
-      return 'user_id_not_loaded';
+      return null;
+    }
+  }
+
+  int? getCurrentStoreId() {
+    try {
+      Map<String, dynamic> data = storage.getItem('auth_result');
+      LoginModel auth = LoginModel.fromJson(data);
+      return auth.data?.idToko;
+    } catch (e) {
+      debugPrint("Error while load user_id: $e");
+      return null;
+    }
+  }
+    int? getCurrentPabrikId() {
+    try {
+      Map<String, dynamic> data = storage.getItem('auth_result');
+      LoginModel auth = LoginModel.fromJson(data);
+      return auth.data?.idPabrik;
+    } catch (e) {
+      debugPrint("Error while load user_id: $e");
+      return null;
+    }
+  }
+
+  String? getCurrentEmail() {
+    try {
+      Map<String, dynamic> data = storage.getItem('auth_result');
+      LoginModel auth = LoginModel.fromJson(data);
+      debugPrint(auth.data?.user?.name);
+      debugPrint(auth.data?.token);
+      return auth.data?.user?.email;
+    } catch (e) {
+      debugPrint("Error while load user_name: $e");
+      return 'user_name_not_loaded';
     }
   }
 
@@ -83,6 +117,29 @@ class StorageCore {
     } catch (e) {
       debugPrint("Error while load user_name: $e");
       return 'user_name_not_loaded';
+    }
+  }
+
+  String? getCurrentProfilePicture() {
+    try {
+      Map<String, dynamic> data = storage.getItem('auth_result');
+      LoginModel auth = LoginModel.fromJson(data);
+      debugPrint(auth.data?.user?.name);
+      debugPrint(auth.data?.token);
+      return auth.data?.user?.userDetails?.photoProfile;
+    } catch (e) {
+      debugPrint("Error while load user_name: $e");
+      return 'user_name_not_loaded';
+    }
+  }
+
+  int? getCurrentRole() {
+    try {
+      Map<String, dynamic> data = storage.getItem('auth_result');
+      LoginModel auth = LoginModel.fromJson(data);
+      return auth.data!.user!.roles!.first.id;
+    } catch (e) {
+      return null;
     }
   }
 
