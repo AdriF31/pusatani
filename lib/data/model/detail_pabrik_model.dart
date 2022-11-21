@@ -1,5 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 class DetailPabrikModel {
   Meta? meta;
   Data? data;
@@ -24,6 +22,24 @@ class DetailPabrikModel {
 }
 
 class Data {
+  Data1? data;
+
+  Data({this.data});
+
+  Data.fromJson(Map<String, dynamic> json) {
+    data = json["data"] == null ? null : Data1.fromJson(json["data"]);
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    if (data != null) {
+      _data["data"] = data?.toJson();
+    }
+    return _data;
+  }
+}
+
+class Data1 {
   int? id;
   String? createdAt;
   String? updatedAt;
@@ -34,9 +50,9 @@ class Data {
   String? image;
   String? status;
   String? userName;
-  List<PabrikToGabah>? pabrikToGabah;
+  List<dynamic>? pabrikToGabah;
 
-  Data(
+  Data1(
       {this.id,
       this.createdAt,
       this.updatedAt,
@@ -49,7 +65,7 @@ class Data {
       this.userName,
       this.pabrikToGabah});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  Data1.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     createdAt = json["created_at"];
     updatedAt = json["updated_at"];
@@ -60,11 +76,7 @@ class Data {
     image = json["image"];
     status = json["status"];
     userName = json["user_name"];
-    pabrikToGabah = json["pabrik_to_gabah"] == null
-        ? null
-        : (json["pabrik_to_gabah"] as List)
-            .map((e) => PabrikToGabah.fromJson(e))
-            .toList();
+    pabrikToGabah = json["pabrik_to_gabah"] ?? [];
   }
 
   Map<String, dynamic> toJson() {
@@ -80,57 +92,8 @@ class Data {
     _data["status"] = status;
     _data["user_name"] = userName;
     if (pabrikToGabah != null) {
-      _data["pabrik_to_gabah"] = pabrikToGabah?.map((e) => e.toJson()).toList();
+      _data["pabrik_to_gabah"] = pabrikToGabah;
     }
-    return _data;
-  }
-}
-
-class PabrikToGabah {
-  int? id;
-  String? createdAt;
-  String? updatedAt;
-  int? idPabrik;
-  String? name;
-  String? detail;
-  int? price;
-  String? image;
-  String? pabrikName;
-
-  PabrikToGabah(
-      {this.id,
-      this.createdAt,
-      this.updatedAt,
-      this.idPabrik,
-      this.name,
-      this.detail,
-      this.price,
-      this.image,
-      this.pabrikName});
-
-  PabrikToGabah.fromJson(Map<String, dynamic> json) {
-    id = json["id"];
-    createdAt = json["created_at"];
-    updatedAt = json["updated_at"];
-    idPabrik = json["id_pabrik"];
-    name = json["name"];
-    detail = json["detail"];
-    price = json["price"];
-    image = json["image"];
-    pabrikName = json["pabrik_name"];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> _data = <String, dynamic>{};
-    _data["id"] = id;
-    _data["created_at"] = createdAt;
-    _data["updated_at"] = updatedAt;
-    _data["id_pabrik"] = idPabrik;
-    _data["name"] = name;
-    _data["detail"] = detail;
-    _data["price"] = price;
-    _data["image"] = image;
-    _data["pabrik_name"] = pabrikName;
     return _data;
   }
 }

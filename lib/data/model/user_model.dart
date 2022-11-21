@@ -1,11 +1,11 @@
 
-class DetailTokoModel {
+class UserModel {
   Meta? meta;
   Data? data;
 
-  DetailTokoModel({this.meta, this.data});
+  UserModel({this.meta, this.data});
 
-  DetailTokoModel.fromJson(Map<String, dynamic> json) {
+  UserModel.fromJson(Map<String, dynamic> json) {
     meta = json["meta"] == null ? null : Meta.fromJson(json["meta"]);
     data = json["data"] == null ? null : Data.fromJson(json["data"]);
   }
@@ -23,70 +23,56 @@ class DetailTokoModel {
 }
 
 class Data {
-  Data1? data;
-  String? phone;
+  User? user;
+  dynamic idPabrik;
+  dynamic idToko;
 
-  Data({this.data, this.phone});
+  Data({this.user, this.idPabrik, this.idToko});
 
   Data.fromJson(Map<String, dynamic> json) {
-    data = json["data"] == null ? null : Data1.fromJson(json["data"]);
-    phone = json["phone"];
+    user = json["user"] == null ? null : User.fromJson(json["user"]);
+    idPabrik = json["id_pabrik"];
+    idToko = json["id_toko"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
-    if(data != null) {
-      _data["data"] = data?.toJson();
+    if(user != null) {
+      _data["user"] = user?.toJson();
     }
-    _data["phone"] = phone;
+    _data["id_pabrik"] = idPabrik;
+    _data["id_toko"] = idToko;
     return _data;
   }
 }
 
-class Data1 {
+class User {
   int? id;
+  String? name;
+  String? email;
+  dynamic emailVerifiedAt;
   String? createdAt;
   String? updatedAt;
-  int? idUser;
-  String? name;
-  String? address;
-  String? image;
-  String? status;
-  String? deskripsi;
-  String? userName;
-  List<dynamic>? tokoToProduk;
 
-  Data1({this.id, this.createdAt, this.updatedAt, this.idUser, this.name, this.address, this.image, this.status, this.deskripsi, this.userName, this.tokoToProduk});
+  User({this.id, this.name, this.email, this.emailVerifiedAt, this.createdAt, this.updatedAt});
 
-  Data1.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json["id"];
+    name = json["name"];
+    email = json["email"];
+    emailVerifiedAt = json["email_verified_at"];
     createdAt = json["created_at"];
     updatedAt = json["updated_at"];
-    idUser = json["id_user"];
-    name = json["name"];
-    address = json["address"];
-    image = json["image"];
-    status = json["status"];
-    deskripsi = json["deskripsi"];
-    userName = json["user_name"];
-    tokoToProduk = json["toko_to_produk"] ?? [];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
     _data["id"] = id;
+    _data["name"] = name;
+    _data["email"] = email;
+    _data["email_verified_at"] = emailVerifiedAt;
     _data["created_at"] = createdAt;
     _data["updated_at"] = updatedAt;
-    _data["id_user"] = idUser;
-    _data["name"] = name;
-    _data["address"] = address;
-    _data["image"] = image;
-    _data["status"] = status;
-    _data["deskripsi"] = deskripsi;
-    _data["user_name"] = userName;
-    if(tokoToProduk != null) {
-      _data["toko_to_produk"] = tokoToProduk;
-    }
     return _data;
   }
 }

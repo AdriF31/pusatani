@@ -71,12 +71,18 @@ class ProfilePage extends StatelessWidget {
                   title: 'Ubah Profil',
                   onTap: () => Get.to(() => const EditProfilePage()),
                 ),
-                ProfileButton(
-                  icon: Icons.store,
-                  title: 'Ubah Toko',
-                  onTap: () {
-                    Get.to(() => const PetaniHomePage());
-                  },
+                Visibility(
+                  visible: c.storage.getCurrentPabrikIdFromUser() != null ||
+                      c.storage.getCurrentStoreIdFromUser() != null,
+                  child: ProfileButton(
+                    icon: Icons.store,
+                    title: c.storage.getCurrentRole() == 3
+                        ? 'Ubah Toko'
+                        : 'Ubah Pabrik',
+                    onTap: () {
+                      Get.to(() => const PetaniHomePage());
+                    },
+                  ),
                 ),
                 ProfileButton(
                   icon: Icons.key,

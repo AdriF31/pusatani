@@ -186,6 +186,7 @@ class RegisterPage extends StatelessWidget {
                                               onChanged: (value) {
                                                 c.value = value!;
                                                 c.role = 2;
+                                                print(c.role);
                                                 c.update();
                                               }),
                                           Text(
@@ -300,7 +301,7 @@ class RegisterPage extends StatelessWidget {
                                 height: 60,
                                 child: Obx(() => TextFormField(
                                       controller: c.passwordController,
-                                      obscureText: c.isObscured.isFalse,
+                                      obscureText: c.isObscured.isTrue,
                                       decoration: InputDecoration(
                                           counterText: '',
                                           isDense: true,
@@ -346,7 +347,7 @@ class RegisterPage extends StatelessWidget {
                                 height: 60,
                                 child: Obx(() => TextFormField(
                                       controller: c.confirmPasswordController,
-                                      obscureText: c.isObscured.isFalse,
+                                      obscureText: c.isObscured.isTrue,
                                       decoration: InputDecoration(
                                           counterText: '',
                                           isDense: true,

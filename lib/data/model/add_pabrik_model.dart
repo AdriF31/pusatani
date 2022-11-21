@@ -1,20 +1,23 @@
-class AddProductModel {
+
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
+class AddPabrikModel {
   Meta? meta;
   List<dynamic>? data;
 
-  AddProductModel({this.meta, this.data});
+  AddPabrikModel({this.meta, this.data});
 
-  AddProductModel.fromJson(Map<String, dynamic> json) {
+  AddPabrikModel.fromJson(Map<String, dynamic> json) {
     meta = json["meta"] == null ? null : Meta.fromJson(json["meta"]);
     data = json["data"] ?? [];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
-    if (meta != null) {
+    if(meta != null) {
       _data["meta"] = meta?.toJson();
     }
-    if (data != null) {
+    if(data != null) {
       _data["data"] = data;
     }
     return _data;

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:pusatani/data/model/add_gabah_model.dart';
+import 'package:pusatani/data/model/add_pabrik_model.dart';
 import 'package:pusatani/data/model/add_product_model.dart';
 import 'package:pusatani/data/model/add_toko_model.dart';
 import 'package:pusatani/data/model/delete_product_model.dart';
@@ -14,6 +15,7 @@ import 'package:pusatani/data/model/logout_model.dart';
 import 'package:pusatani/data/model/pabrik_model.dart';
 import 'package:pusatani/data/model/register_model.dart';
 import 'package:pusatani/data/model/toko_model.dart';
+import 'package:pusatani/data/model/user_model.dart';
 
 abstract class Repository {
   FutureOr<LoginModel?> postLogin(String email, String password);
@@ -26,13 +28,15 @@ abstract class Repository {
   FutureOr<DetailPabrikModel> getDetailPabrik(int id);
   FutureOr<AddTokoModel?> postToko(
       String name, String address, String deskripsi, File? image);
-        FutureOr<AddTokoModel?> postPabrik(
+  FutureOr<AddPabrikModel?> postPabrik(
       String name, String address, String deskripsi, File? image);
   FutureOr<LogoutModel?> getLogout();
   FutureOr<AddProductModel?> postProduk(
       String name, String detail, int price, String stok, File? image);
-        FutureOr<EditProductModel?> postEditProduk(
-      String name, String detail, int price, String stok, File? image,int id);
+  FutureOr<EditProductModel?> postEditProduk(
+      String name, String detail, int price, String stok, File? image, int id);
   FutureOr<DeleteProductModel?> deleteProduct(int id);
-  FutureOr<AddGabahModel?> postGabah(String name, String detail,int price, File? image);
+  FutureOr<AddGabahModel?> postGabah(
+      String name, String detail, int price, File? image);
+  FutureOr<UserModel?> getUser(int id);
 }

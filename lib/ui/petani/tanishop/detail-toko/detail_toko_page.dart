@@ -54,7 +54,7 @@ class DetailTokoPage extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           child: Image.network(
-                                            c.detailTokoModel?.data?.image ??
+                                            c.detailTokoModel?.data?.data?.image ??
                                                 '',
                                             fit: BoxFit.cover,
                                           ),
@@ -71,7 +71,7 @@ class DetailTokoPage extends StatelessWidget {
                                         SizedBox(
                                           width: Get.width * 0.5,
                                           child: Text(
-                                            c.detailTokoModel?.data?.name ??
+                                            c.detailTokoModel?.data?.data?.name ??
                                                 '-',
                                             maxLines: 2,
                                             style: blackTextStyle.copyWith(
@@ -83,7 +83,7 @@ class DetailTokoPage extends StatelessWidget {
                                           height: 4,
                                         ),
                                         Text(
-                                          c.detailTokoModel?.data?.address ??
+                                          c.detailTokoModel?.data?.data?.address ??
                                               '-',
                                           style: blackTextStyle.copyWith(
                                               fontSize: 16, fontWeight: medium),
@@ -96,7 +96,7 @@ class DetailTokoPage extends StatelessWidget {
                                   height: 8,
                                 ),
                                 Text(
-                                  c.detailTokoModel?.data?.deskripsi ?? '',
+                                  c.detailTokoModel?.data?.data?.deskripsi ?? '',
                                   style: blackTextStyle.copyWith(
                                       fontSize: 16, fontWeight: medium),
                                 ),
@@ -144,7 +144,7 @@ class DetailTokoPage extends StatelessWidget {
                                                         .vertical(
                                                     top: Radius.circular(10)),
                                                 child: Image.network(
-                                                  'http://pusatani.masuk.web.id/images/produk/${c.detailTokoModel?.data?.tokoToProduk?[index].image}',
+                                                  'http://pusatani.masuk.web.id/images/produk/${c.detailTokoModel?.data?.data?.tokoToProduk?[index].image}',
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -159,7 +159,7 @@ class DetailTokoPage extends StatelessWidget {
                                                 Text(
                                                   c
                                                           .detailTokoModel
-                                                          ?.data
+                                                          ?.data?.data
                                                           ?.tokoToProduk?[index]
                                                           .name ??
                                                       '',
@@ -171,7 +171,7 @@ class DetailTokoPage extends StatelessWidget {
                                                 Text(
                                                   c.formatter.format(c
                                                           .detailTokoModel
-                                                          ?.data
+                                                          ?.data?.data
                                                           ?.tokoToProduk?[index]
                                                           .price
                                                           ?.toString() ??
@@ -189,7 +189,7 @@ class DetailTokoPage extends StatelessWidget {
                                 );
                               },
                               childCount:
-                                  c.detailTokoModel!.data!.tokoToProduk!.length,
+                                  c.detailTokoModel!.data!.data!.tokoToProduk!.length,
                             ),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(

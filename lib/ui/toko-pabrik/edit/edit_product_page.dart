@@ -17,8 +17,9 @@ class EditProductPage extends StatelessWidget {
     return GetBuilder<EditProductController>(
       init: EditProductController(),
       builder: (c) => Scaffold(
-        appBar:
-            AppBar(title: Text('Ubah Profil'), actions: const [CustomBackButton()]),
+        appBar: AppBar(
+            title: Text('Ubah Data Produk'),
+            actions: const [CustomBackButton()]),
         body: SingleChildScrollView(
           child: Form(
             key: c.formKey,
@@ -53,7 +54,8 @@ class EditProductPage extends StatelessWidget {
                     height: 4,
                   ),
                   CustomTextFormField(
-                    controller: c.nameController,
+                    controller: c.nameController
+                      ..text = c.storage.getCurrentUsername() ?? '',
                     hintText: 'Pupuk urea',
                     label: 'Nama Produk',
                     textInputAction: TextInputAction.next,

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 import 'package:pusatani/data/model/add_gabah_model.dart';
+import 'package:pusatani/data/model/add_pabrik_model.dart';
 import 'package:pusatani/data/model/add_product_model.dart';
 import 'package:pusatani/data/model/add_toko_model.dart';
 import 'package:pusatani/data/model/delete_product_model.dart';
@@ -16,6 +17,7 @@ import 'package:pusatani/data/model/logout_model.dart';
 import 'package:pusatani/data/model/pabrik_model.dart';
 import 'package:pusatani/data/model/register_model.dart';
 import 'package:pusatani/data/model/toko_model.dart';
+import 'package:pusatani/data/model/user_model.dart';
 import 'package:pusatani/data/repository/repository.dart';
 import 'package:pusatani/data/storage_core.dart';
 
@@ -128,7 +130,7 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  FutureOr<AddTokoModel?> postPabrik(
+  FutureOr<AddPabrikModel?> postPabrik(
       String name, String address, String deskripsi, File? image) async {
     try {
       var formData = FormData.fromMap({
@@ -145,14 +147,14 @@ class RepositoryImpl implements Repository {
         ]);
       }
 
-      var response = await network.dio.post('/toko',
+      var response = await network.dio.post('/pabrik',
           data: formData,
           options: Options(headers: {
             'Authorization': 'Bearer ${storage.getAccessToken()}'
           }));
-      return AddTokoModel.fromJson(response.data);
+      return AddPabrikModel.fromJson(response.data);
     } on DioError catch (e) {
-      return AddTokoModel.fromJson(e.response!.data);
+      return AddPabrikModel.fromJson(e.response!.data);
     }
   }
 
@@ -208,7 +210,7 @@ class RepositoryImpl implements Repository {
     try {
       var formData = FormData.fromMap({
         'name': name,
-        'id_toko': storage.getCurrentStoreId(),
+        'id_toko': storage.getCurrentStoreIdFromUser(),
         'price': price,
         'stok': stok,
         'detail': detail,
@@ -279,7 +281,7 @@ class RepositoryImpl implements Repository {
     try {
       var formData = FormData.fromMap({
         'name': name,
-        'id_pabrik': storage.getCurrentPabrikId(),
+        'id_pabrik': storage.getCurrentPabrikIdFromUser(),
         'price': price,
         'detail': detail,
       });
@@ -298,6 +300,16 @@ class RepositoryImpl implements Repository {
       return AddGabahModel.fromJson(response.data);
     } on DioError catch (e) {
       return AddGabahModel.fromJson(e.response?.data);
+    }
+  }
+
+  @override
+  FutureOr<UserModel?> getUser(int id) async {
+    try {
+      var response = await network.dio.get('/auth/user/$id');
+      return UserModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return UserModel.fromJson(e.response?.data);
     }
   }
 }

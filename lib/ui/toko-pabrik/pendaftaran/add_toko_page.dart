@@ -19,8 +19,8 @@ class AddTokoPage extends StatelessWidget {
         init: AddTokoController(),
         builder: (c) => Scaffold(
               appBar: AppBar(
-                  title: const Text(
-                'Buat Toko',
+                  title: Text(
+                c.storage.getCurrentRole().toString(),
               )),
               body: SingleChildScrollView(
                 child: Form(
@@ -49,7 +49,9 @@ class AddTokoPage extends StatelessWidget {
                                             width: double.infinity,
                                           )
                                         : Text(
-                                            'unggah foto toko',
+                                            c.storage.getCurrentRole() == 3
+                                                ? 'unggah foto toko'
+                                                : 'unggah foto pabrik',
                                             style: greenTextStyle.copyWith(
                                                 fontSize: 18,
                                                 fontWeight: semiBold),
@@ -64,7 +66,9 @@ class AddTokoPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Nama Toko',
+                                c.storage.getCurrentRole() == 3
+                                    ? 'Nama Toko'
+                                    : 'Nama Pabrik',
                                 style: GoogleFonts.catamaran(
                                     fontSize: 16, color: primaryColor),
                               ),
