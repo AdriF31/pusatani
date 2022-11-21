@@ -36,6 +36,7 @@ abstract class Repository {
   FutureOr<EditProductModel?> postEditProduk(
       String name, String detail, int price, String stok, File? image, int id);
   FutureOr<DeleteProductModel?> deleteProduct(int id);
+  FutureOr<DeleteProductModel?> deleteGabah(int id);
   FutureOr<AddGabahModel?> postGabah(
       String name, String detail, int price, File? image);
   FutureOr<UserModel?> getUser(int id);

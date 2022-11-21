@@ -23,11 +23,13 @@ class DetailPabrikModel {
 
 class Data {
   Data1? data;
+  String? phone;
 
-  Data({this.data});
+  Data({this.data, this.phone});
 
   Data.fromJson(Map<String, dynamic> json) {
     data = json["data"] == null ? null : Data1.fromJson(json["data"]);
+    phone = json["phone"];
   }
 
   Map<String, dynamic> toJson() {
@@ -35,6 +37,7 @@ class Data {
     if (data != null) {
       _data["data"] = data?.toJson();
     }
+    _data["phone"] = phone;
     return _data;
   }
 }
@@ -50,7 +53,7 @@ class Data1 {
   String? image;
   String? status;
   String? userName;
-  List<dynamic>? pabrikToGabah;
+  List<PabrikToGabah>? pabrikToGabah;
 
   Data1(
       {this.id,
@@ -76,7 +79,11 @@ class Data1 {
     image = json["image"];
     status = json["status"];
     userName = json["user_name"];
-    pabrikToGabah = json["pabrik_to_gabah"] ?? [];
+    pabrikToGabah = json["pabrik_to_gabah"] == null
+        ? null
+        : (json["pabrik_to_gabah"] as List)
+            .map((e) => PabrikToGabah.fromJson(e))
+            .toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -92,8 +99,57 @@ class Data1 {
     _data["status"] = status;
     _data["user_name"] = userName;
     if (pabrikToGabah != null) {
-      _data["pabrik_to_gabah"] = pabrikToGabah;
+      _data["pabrik_to_gabah"] = pabrikToGabah?.map((e) => e.toJson()).toList();
     }
+    return _data;
+  }
+}
+
+class PabrikToGabah {
+  int? id;
+  String? createdAt;
+  String? updatedAt;
+  int? idPabrik;
+  String? name;
+  String? detail;
+  int? price;
+  String? image;
+  String? pabrikName;
+
+  PabrikToGabah(
+      {this.id,
+      this.createdAt,
+      this.updatedAt,
+      this.idPabrik,
+      this.name,
+      this.detail,
+      this.price,
+      this.image,
+      this.pabrikName});
+
+  PabrikToGabah.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    createdAt = json["created_at"];
+    updatedAt = json["updated_at"];
+    idPabrik = json["id_pabrik"];
+    name = json["name"];
+    detail = json["detail"];
+    price = json["price"];
+    image = json["image"];
+    pabrikName = json["pabrik_name"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["id"] = id;
+    _data["created_at"] = createdAt;
+    _data["updated_at"] = updatedAt;
+    _data["id_pabrik"] = idPabrik;
+    _data["name"] = name;
+    _data["detail"] = detail;
+    _data["price"] = price;
+    _data["image"] = image;
+    _data["pabrik_name"] = pabrikName;
     return _data;
   }
 }

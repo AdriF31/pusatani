@@ -274,6 +274,18 @@ class RepositoryImpl implements Repository {
       return DeleteProductModel.fromJson(e.response!.data);
     }
   }
+    @override
+  FutureOr<DeleteProductModel?> deleteGabah(int id) async {
+    try {
+      var response = await network.dio.delete('/gabah/$id',
+          options: Options(headers: {
+            'Authorization': "Bearer ${storage.getAccessToken()}"
+          }));
+      return DeleteProductModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return DeleteProductModel.fromJson(e.response!.data);
+    }
+  }
 
   @override
   FutureOr<AddGabahModel?> postGabah(

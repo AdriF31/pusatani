@@ -36,9 +36,9 @@ class DetailPabrikController extends BaseController {
   }
 
   whatsapp() async {
-    var contact = "+6282319858335";
+    var contact = detailPabrikModel?.data?.phone;
     var androidUrl =
-        "whatsapp://send?phone=${storage.getCurrentPhoneNumber()}&text=Hi, I need some help";
+        "whatsapp://send?phone=${contact}&text=Hi, I need some help";
     var iosUrl =
         "https://wa.me/${storage.getCurrentPhoneNumber()}?text=${Uri.parse('Permisi, saya ingin menjual gabah saya')}";
 

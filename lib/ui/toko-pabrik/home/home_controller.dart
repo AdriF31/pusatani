@@ -48,11 +48,18 @@ class HomeController extends BaseController {
     }
   }
 
-  Future deleteData(int id) async {
+  deleteData(int id) async {
     try {
-      var response = await repository.deleteProduct(id);
-      if (response!.meta!.code == 202) {
-        Fluttertoast.showToast(msg: 'data berhasil dihapus');
+      if (storage.getCurrentRole() == 3) {
+        var response = await repository.deleteProduct(id);
+        if (response!.meta!.code == 202) {
+          Fluttertoast.showToast(msg: 'data berhasil dihapus');
+        }
+      } else if (storage.getCurrentRole() == 2) {
+        var response = await repository.deleteGabah(id);
+        if (response!.meta!.code == 202) {
+          Fluttertoast.showToast(msg: 'data berhasil dihapus');
+        }
       }
     } catch (e) {
       return null;

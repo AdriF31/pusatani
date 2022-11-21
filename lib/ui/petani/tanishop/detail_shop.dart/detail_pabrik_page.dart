@@ -125,7 +125,8 @@ class DetailPabrikPage extends StatelessWidget {
                           sliver: SliverGrid(
                             delegate: SliverChildBuilderDelegate(
                               (context, index) {
-                                print("image url : ${c.detailPabrikModel?.data?.data?.pabrikToGabah?[index]['image']}");
+                                print(
+                                    "image url : ${c.detailPabrikModel?.data?.data?.pabrikToGabah?[index].image}");
                                 return Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
@@ -149,7 +150,7 @@ class DetailPabrikPage extends StatelessWidget {
                                                         .vertical(
                                                     top: Radius.circular(10)),
                                                 child: Image.network(
-                                                  'http://pusatani.masuk.web.id/images/gabah/${c.detailPabrikModel?.data?.data?.pabrikToGabah?[index]['image']}',
+                                                  'http://pusatani.masuk.web.id/images/gabah/${c.detailPabrikModel?.data?.data?.pabrikToGabah?[index].image}',
                                                   // c.detailPabrikModel?.data?.data?.pabrikToGabah?[index]['image'] ?? "https://",
                                                   fit: BoxFit.cover,
                                                 ),
@@ -168,7 +169,8 @@ class DetailPabrikPage extends StatelessWidget {
                                                           ?.data
                                                           ?.data
                                                           ?.pabrikToGabah?[
-                                                              index]['name']??
+                                                              index]
+                                                          .name ??
                                                       '',
                                                   style:
                                                       blackTextStyle.copyWith(
@@ -180,7 +182,8 @@ class DetailPabrikPage extends StatelessWidget {
                                                           .detailPabrikModel
                                                           ?.data!
                                                           .data!
-                                                          .pabrikToGabah![index]["price"]
+                                                          .pabrikToGabah![index]
+                                                          .price
                                                           .toString() ??
                                                       "0"),
                                                   style:
@@ -195,7 +198,9 @@ class DetailPabrikPage extends StatelessWidget {
                                   ),
                                 );
                               },
-                              childCount: c.detailPabrikModel?.data?.data?.pabrikToGabah?.length ?? 0,
+                              childCount: c.detailPabrikModel?.data?.data
+                                      ?.pabrikToGabah?.length ??
+                                  0,
                             ),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(

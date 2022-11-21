@@ -56,7 +56,7 @@ class AddProductController extends BaseController {
     }
   }
 
-  Future<AddGabahModel?> addGabah() async {
+  addGabah() async {
     try {
       var response = await repository.postGabah(
           nameController.text,
@@ -65,12 +65,11 @@ class AddProductController extends BaseController {
           productImage);
       if (response?.meta?.code == 201) {
         Fluttertoast.showToast(msg: 'Produk berhasil ditambahkan');
+
         Get.offAll(() => MainPage());
       }
     } catch (e) {
       return null;
     }
   }
-
-
 }
