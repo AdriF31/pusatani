@@ -54,9 +54,9 @@ class DetailPabrikPage extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           child: Image.network(
-                                            c.detailPabrikModel.data?.data
+                                            c.detailPabrikModel?.data?.data
                                                     ?.image ??
-                                                '',
+                                                'https://',
                                             fit: BoxFit.cover,
                                           ),
                                         ),
@@ -72,7 +72,7 @@ class DetailPabrikPage extends StatelessWidget {
                                         SizedBox(
                                           width: Get.width * 0.5,
                                           child: Text(
-                                            c.detailPabrikModel.data!.data
+                                            c.detailPabrikModel?.data!.data
                                                     ?.name ??
                                                 '-',
                                             maxLines: 2,
@@ -85,7 +85,7 @@ class DetailPabrikPage extends StatelessWidget {
                                           height: 4,
                                         ),
                                         Text(
-                                          c.detailPabrikModel.data?.data
+                                          c.detailPabrikModel?.data?.data
                                                   ?.address ??
                                               '-',
                                           style: blackTextStyle.copyWith(
@@ -99,7 +99,7 @@ class DetailPabrikPage extends StatelessWidget {
                                   height: 8,
                                 ),
                                 Text(
-                                  c.detailPabrikModel.data?.data?.deskripsi ??
+                                  c.detailPabrikModel?.data?.data?.deskripsi ??
                                       '',
                                   style: blackTextStyle.copyWith(
                                       fontSize: 16, fontWeight: medium),
@@ -125,6 +125,7 @@ class DetailPabrikPage extends StatelessWidget {
                           sliver: SliverGrid(
                             delegate: SliverChildBuilderDelegate(
                               (context, index) {
+                                print("image url : ${c.detailPabrikModel?.data?.data?.pabrikToGabah?[index]['image']}");
                                 return Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),
@@ -148,7 +149,8 @@ class DetailPabrikPage extends StatelessWidget {
                                                         .vertical(
                                                     top: Radius.circular(10)),
                                                 child: Image.network(
-                                                  'http://pusatani.masuk.web.id/images/gabah/${c.detailPabrikModel.data?.data?.pabrikToGabah?[index].image}',
+                                                  'http://pusatani.masuk.web.id/images/gabah/${c.detailPabrikModel?.data?.data?.pabrikToGabah?[index]['image']}',
+                                                  // c.detailPabrikModel?.data?.data?.pabrikToGabah?[index]['image'] ?? "https://",
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
@@ -163,11 +165,10 @@ class DetailPabrikPage extends StatelessWidget {
                                                 Text(
                                                   c
                                                           .detailPabrikModel
-                                                          .data
+                                                          ?.data
                                                           ?.data
                                                           ?.pabrikToGabah?[
-                                                              index]
-                                                          .name ??
+                                                              index]['name']??
                                                       '',
                                                   style:
                                                       blackTextStyle.copyWith(
@@ -176,12 +177,12 @@ class DetailPabrikPage extends StatelessWidget {
                                                 ),
                                                 Text(
                                                   c.formatter.format(c
-                                                      .detailPabrikModel
-                                                      .data!
-                                                      .data!
-                                                      .pabrikToGabah![index]
-                                                      .price!
-                                                      .toString()),
+                                                          .detailPabrikModel
+                                                          ?.data!
+                                                          .data!
+                                                          .pabrikToGabah![index]["price"]
+                                                          .toString() ??
+                                                      "0"),
                                                   style:
                                                       blackTextStyle.copyWith(
                                                           fontSize: 16,
@@ -194,8 +195,7 @@ class DetailPabrikPage extends StatelessWidget {
                                   ),
                                 );
                               },
-                              childCount: c.detailPabrikModel.data!.data!
-                                  .pabrikToGabah!.length,
+                              childCount: c.detailPabrikModel?.data?.data?.pabrikToGabah?.length ?? 0,
                             ),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(

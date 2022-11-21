@@ -9,9 +9,11 @@ import 'package:pusatani/data/storage_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailPabrikController extends BaseController {
-  DetailPabrikModel detailPabrikModel = DetailPabrikModel();
+  DetailPabrikModel? detailPabrikModel;
+
   CurrencyTextInputFormatter formatter =
       CurrencyTextInputFormatter(decimalDigits: 0, locale: 'id', symbol: 'Rp ');
+
   bool isLoading = false;
   StorageCore storage = StorageCore();
   @override
