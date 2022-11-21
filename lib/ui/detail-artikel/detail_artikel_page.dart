@@ -34,9 +34,10 @@ class DetailArtikelPage extends StatelessWidget {
                       ),
                       Text(
                         Get.arguments['title'],
-                        maxLines: 5,
+                        maxLines: 3,
                         style: blackTextStyle.copyWith(
                             fontSize: 24, fontWeight: semiBold),
+                        textAlign: TextAlign.justify,
                       ),
                       const SizedBox(
                         height: 4,

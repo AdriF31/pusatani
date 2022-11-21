@@ -13,8 +13,9 @@ import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_controller.dart';
 
 class AddTokoPage extends StatelessWidget {
-  AddTokoPage({super.key, required this.role});
-  int role;
+  AddTokoPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -171,7 +172,7 @@ class AddTokoPage extends StatelessWidget {
                                     }
                                   },
                                   child: Text(
-                                    Get.arguments == 2
+                                    c.storage.getCurrentRole() == 3
                                         ? 'Daftarkan Toko'
                                         : 'Daftarkan Pabrik',
                                     style: GoogleFonts.firaSans(

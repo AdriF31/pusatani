@@ -33,7 +33,7 @@ class AddTokoController extends BaseController {
     var response = await repository.postToko(storeController.text,
         addressController.text, descController.text, tokoImage);
     if (response!.meta!.code == 201) {
-      Get.offAll(() => MainPage(), arguments: storage.getCurrentRole());
+      Get.offAll(() => MainPage());
     }
   }
 }

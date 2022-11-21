@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
@@ -29,7 +27,7 @@ class ProfilePage extends StatelessWidget {
               ),
               Image.asset('assets/images/decoration.png'),
               Positioned(
-                  top: 160,
+                  top: 140,
                   left: 0,
                   right: 0,
                   child: Column(
@@ -72,20 +70,20 @@ class ProfilePage extends StatelessWidget {
                 ProfileButton(
                   icon: Icons.person,
                   title: 'Ubah Profil',
-                  onTap: () => Get.to(() => EditProfilePage()),
+                  onTap: () => Get.to(() => const EditProfilePage()),
                 ),
                 ProfileButton(
                   icon: Icons.store,
                   title: 'Ubah Toko',
                   onTap: () {
-                    Get.to(() => PetaniHomePage());
+                    Get.to(() => const PetaniHomePage());
                   },
                 ),
                 ProfileButton(
                   icon: Icons.key,
                   title: 'Ubah Password',
                   onTap: () {
-                    Get.to(() => EditPasswordPage());
+                    Get.to(() => const EditPasswordPage());
                   },
                 ),
                 ProfileButton(

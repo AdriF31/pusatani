@@ -316,12 +316,16 @@ class PetaniHomePage extends StatelessWidget {
                                               fontSize: 20,
                                               fontWeight: semiBold),
                                         ),
-                                        Text(
-                                          'Lihat Semua',
-                                          style: GoogleFonts.catamaran(
-                                              fontSize: 20,
-                                              fontWeight: semiBold,
-                                              color: primaryColor),
+                                        GestureDetector(
+                                          onTap: () =>
+                                              Get.to(() => InfoTaniPage()),
+                                          child: Text(
+                                            'Lihat Semua',
+                                            style: GoogleFonts.catamaran(
+                                                fontSize: 20,
+                                                fontWeight: semiBold,
+                                                color: primaryColor),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -346,7 +350,9 @@ class PetaniHomePage extends StatelessWidget {
                                                           'image': e.image,
                                                           'author': e.author,
                                                           'content': e.body,
-                                                          'date': e.createdAt,
+                                                          'date': e.createdAt!
+                                                              .split('T')
+                                                              .first,
                                                           'category':
                                                               e.idCategory
                                                         });
@@ -361,12 +367,6 @@ class PetaniHomePage extends StatelessWidget {
                                                 ))
                                             .toList()),
                                   )),
-                                  TextButton(
-                                    onPressed: () async {
-                                      // whatsapp();
-                                    },
-                                    child: Text('wa'),
-                                  ),
                                   const SizedBox(
                                     height: 12,
                                   ),
@@ -382,6 +382,4 @@ class PetaniHomePage extends StatelessWidget {
                     ));
         });
   }
-
-
 }

@@ -47,6 +47,7 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                       ButtonsTabBar(
                         controller: tabController,
                         backgroundColor: primaryColor,
+                        
                         height: 60,
                         unselectedBackgroundColor: Colors.transparent,
                         labelStyle: const TextStyle(
@@ -76,7 +77,8 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 12),
+                              horizontal: 16,
+                            ),
                             child: SingleChildScrollView(
                               child: Column(
                                 children: c.listArticleModel!.data!.data!
@@ -84,17 +86,13 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                                       (e) => ArticleCard(
                                           image: e.image ?? '',
                                           title: e.title ?? '',
-                                          date: e.createdAt ?? '',
+                                          date: e.createdAt!.split('T').first,
                                           description: e.body ?? ''),
                                     )
                                     .toList(),
                               ),
                             ),
                           ),
-                          // semua(),
-                          // teknologi(),
-                          // pertanian(),
-                          // hama(),
                           SingleChildScrollView(
                             child: Column(
                               children: c.listArticleModel!.data!.data!

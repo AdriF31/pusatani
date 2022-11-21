@@ -1,8 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
@@ -10,7 +7,6 @@ import 'package:pusatani/reusable/back_button.dart';
 import 'package:pusatani/reusable/custom_elevated_button.dart';
 import 'package:pusatani/reusable/custom_text_form_field.dart';
 import 'package:pusatani/ui/add-product/add_product_controller.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 
 class AddProductPage extends StatelessWidget {
   const AddProductPage({super.key});
@@ -42,7 +38,7 @@ class AddProductPage extends StatelessWidget {
                             child: DottedBorder(
                                 padding: const EdgeInsets.all(4),
                                 color: primaryColor,
-                                dashPattern: [10],
+                                dashPattern: const [10],
                                 strokeWidth: 3,
                                 child: Center(
                                   child: c.productImage != null
@@ -200,7 +196,6 @@ class AddProductPage extends StatelessWidget {
                               height: 100,
                               child: TextFormField(
                                 controller: c.descriptionController,
-                                keyboardType: TextInputType.number,
                                 textInputAction: TextInputAction.next,
                                 maxLines: 5,
                                 decoration: InputDecoration(
@@ -232,14 +227,11 @@ class AddProductPage extends StatelessWidget {
                             title: 'Tambah Produk',
                             onTap: () async {
                               if (c.formKey.currentState?.validate() == true) {
-                                c.addProduct().then((response) {
-                                  Fluttertoast.showToast(
-                                      msg: 'Produk berhasil ditambah');
-                                  if (response?.meta?.code == 201) {
-                                    Get.offAll(() => MainPage(),
-                                        arguments: c.storage.getCurrentRole());
-                                  }
-                                });
+                                if (c.storage.getCurrentRole() == 2) {
+                                  c.addGabah();
+                                } else if (c.storage.getCurrentRole() == 3) {
+                                  c.addProduct();
+                                }
                               }
                             }),
                       ],

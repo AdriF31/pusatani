@@ -18,7 +18,7 @@ class RegisterController extends BaseController {
   var phoneController = TextEditingController();
   var nameController = TextEditingController();
   var lastNameController = TextEditingController();
-  int role = 1;
+  int role = 2;
   RxBool isObscured = true.obs;
   var formKey = GlobalKey<FormState>();
   var value = 1;
@@ -81,9 +81,9 @@ class RegisterController extends BaseController {
 
       Get.offAll(
           () => AddTokoPage(
-                role: role,
+               
               ),
-          arguments: role);
+          );
     }
   }
 }

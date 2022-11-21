@@ -3,10 +3,7 @@ import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
-import 'package:pusatani/reusable/custom_card.dart';
 import 'package:pusatani/ui/petani/tanishop/detail_shop.dart/detail_pabrik_controller.dart';
-
-import '../../../../const/app_constant.dart';
 
 class DetailPabrikPage extends StatelessWidget {
   const DetailPabrikPage({super.key});
@@ -16,117 +13,205 @@ class DetailPabrikPage extends StatelessWidget {
     return GetBuilder<DetailPabrikController>(
         init: DetailPabrikController(),
         builder: (c) => Scaffold(
-              appBar: AppBar(
-                title: const Text('Data Pabrik'),
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: IconButton(
-                        onPressed: () {
-                          c.whatsapp();
-                        },
-                        icon: Icon(Icons.message)),
-                  )
-                ],
-              ),
-              body: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
-                child: c.isLoading == false
-                    ? SingleChildScrollView(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Row(
+              body: c.isLoading == false
+                  ? CustomScrollView(
+                      slivers: [
+                        SliverAppBar(
+                          title: const Text('Data Pabrik'),
+                          pinned: true,
+                          actions: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: IconButton(
+                                  onPressed: () {
+                                    c.whatsapp();
+                                  },
+                                  icon: const Icon(Icons.message)),
+                            )
+                          ],
+                        ),
+                        SliverToBoxAdapter(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  width: 150,
-                                  height: 150,
-                                  child: Card(
-                                    elevation: 3,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.network(
-                                        c.detailPabrikModel.data?.image ?? '',
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
                                 const SizedBox(
-                                  width: 12,
+                                  height: 12,
                                 ),
-                                Column(
+                                Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      c.detailPabrikModel.data?.name ?? '-',
-                                      maxLines: 5,
-                                      style: blackTextStyle.copyWith(
-                                          fontSize: 24, fontWeight: semiBold),
+                                    SizedBox(
+                                      width: 150,
+                                      height: 150,
+                                      child: Card(
+                                        elevation: 3,
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: Image.network(
+                                            c.detailPabrikModel.data?.image ??
+                                                '',
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
                                     ),
                                     const SizedBox(
-                                      height: 4,
+                                      width: 12,
                                     ),
-                                    Text(
-                                      c.detailPabrikModel.data?.address ?? '-',
-                                      style: blackTextStyle.copyWith(
-                                          fontSize: 16, fontWeight: regular),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          width: Get.width * 0.5,
+                                          child: Text(
+                                            c.detailPabrikModel.data!.name ??
+                                                '-',
+                                            maxLines: 2,
+                                            style: blackTextStyle.copyWith(
+                                                fontSize: 20,
+                                                fontWeight: semiBold),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 4,
+                                        ),
+                                        Text(
+                                          c.detailPabrikModel.data?.address ??
+                                              '-',
+                                          style: blackTextStyle.copyWith(
+                                              fontSize: 16, fontWeight: medium),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
+                                const SizedBox(
+                                  height: 8,
+                                ),
+                                Text(
+                                  c.detailPabrikModel.data?.deskripsi ?? '',
+                                  style: blackTextStyle.copyWith(
+                                      fontSize: 16, fontWeight: medium),
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  color: primaryColor,
+                                  margin: const EdgeInsets.all(8),
+                                  child: Center(
+                                    child: Text(
+                                      'Harga Beli Gabah',
+                                      style: whiteTextStyle.copyWith(
+                                          fontSize: 20, fontWeight: semiBold),
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              c.detailPabrikModel.data?.deskripsi ?? '',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 16, fontWeight: medium),
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            Text(
-                              'Harga Beli Gabah',
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 16, fontWeight: semiBold),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Column(
-                                children: c
-                                    .detailPabrikModel.data!.pabrikToGabah!
-                                    .asMap()
-                                    .map((index, element) => MapEntry(
-                                        index,
-                                        CustomProductCard(
-                                          toko: element.name,
-                                          alamat: c.formatter
-                                              .format(element.price.toString()),
-                                          image:
-                                              'http://pusatani.masuk.web.id/images/gabah/${element.image}',
-                                          stok: 'tersedia',
-                                        )))
-                                    .values
-                                    .toList()),
-                          ],
+                          ),
                         ),
-                      )
-                    : Center(
-                        child: CircularProgressIndicator(),
-                      ),
-              ),
+                        SliverGrid(
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              return Container(
+                                  margin:
+                                      const EdgeInsets.only(left: 8, right: 8),
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    elevation: 3,
+                                    child: Container(
+                                      height: 300,
+                                      width: Get.width * 0.4,
+                                      decoration: const BoxDecoration(
+                                          color: Colors.white),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Flexible(
+                                              flex: 2,
+                                              child: SizedBox(
+                                                height: 100,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius
+                                                              .vertical(
+                                                          top: Radius.circular(
+                                                              10)),
+                                                  child: Image.network(
+                                                    'http://pusatani.masuk.web.id/images/gabah/${c.detailPabrikModel.data?.pabrikToGabah?[index].image}',
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    c
+                                                            .detailPabrikModel
+                                                            .data
+                                                            ?.pabrikToGabah?[
+                                                                index]
+                                                            .name ??
+                                                        '',
+                                                    style:
+                                                        blackTextStyle.copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                semiBold),
+                                                  ),
+                                                  Text(
+                                                    c.formatter.format(c
+                                                        .detailPabrikModel
+                                                        .data!
+                                                        .pabrikToGabah![index]
+                                                        .price!
+                                                        .toString()),
+                                                    style:
+                                                        blackTextStyle.copyWith(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                semiBold),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          ]),
+                                    ),
+                                  ));
+                            },
+                            childCount:
+                                c.detailPabrikModel.data!.pabrikToGabah!.length,
+                          ),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 1,
+                                  mainAxisSpacing: 5,
+                                  crossAxisSpacing: 0),
+                        ),
+                        SliverPadding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16))
+                      ],
+                    )
+                  : const Center(
+                      child: CircularProgressIndicator(),
+                    ),
             ));
   }
 }

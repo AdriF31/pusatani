@@ -3,11 +3,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
+import 'package:pusatani/data/model/add_gabah_model.dart';
 import 'package:pusatani/data/model/add_product_model.dart';
 import 'package:pusatani/data/model/add_toko_model.dart';
 import 'package:pusatani/data/model/delete_product_model.dart';
 import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
+import 'package:pusatani/data/model/edit_product_model.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/data/model/login_model.dart';
 import 'package:pusatani/data/model/logout_model.dart';
@@ -35,7 +37,7 @@ class RepositoryImpl implements Repository {
       return LoginModel.fromJson(e.response?.data);
     }
   }
-  
+
   @override
   FutureOr<RegisterModel> postRegister(
       File? profilePicture,
@@ -83,7 +85,7 @@ class RepositoryImpl implements Repository {
     }
   }
 
-    @override
+  @override
   FutureOr<DetailTokoModel?> getDetailToko(int id) async {
     try {
       var response = await network.dio.get('/tokoWith/$id',
@@ -96,7 +98,7 @@ class RepositoryImpl implements Repository {
     }
   }
 
-    @override
+  @override
   FutureOr<AddTokoModel?> postToko(
       String name, String address, String deskripsi, File? image) async {
     try {
@@ -125,7 +127,36 @@ class RepositoryImpl implements Repository {
     }
   }
 
- @override
+    @override
+  FutureOr<AddTokoModel?> postPabrik(
+      String name, String address, String deskripsi, File? image) async {
+    try {
+      var formData = FormData.fromMap({
+        'name': name,
+        'id_user': storage.getCurrentUserId(),
+        'address': address,
+        'status': 'belum verifikasi',
+        'deskripsi': deskripsi,
+      });
+
+      if (image != null) {
+        formData.files.addAll([
+          MapEntry("image", await MultipartFile.fromFile(image.path)),
+        ]);
+      }
+
+      var response = await network.dio.post('/toko',
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return AddTokoModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return AddTokoModel.fromJson(e.response!.data);
+    }
+  }
+
+  @override
   FutureOr<PabrikModel> getPabrik() async {
     try {
       var response = await network.dio.get('/pabrik',
@@ -138,7 +169,7 @@ class RepositoryImpl implements Repository {
     }
   }
 
-    @override
+  @override
   FutureOr<DetailPabrikModel> getDetailPabrik(int id) async {
     try {
       var response = await network.dio.get('/pabrikWith/$id');
@@ -147,8 +178,6 @@ class RepositoryImpl implements Repository {
       return DetailPabrikModel.fromJson(e.response!.data);
     }
   }
-
- 
 
   @override
   FutureOr<ListArticleModel?> getListArticle() async {
@@ -159,11 +188,6 @@ class RepositoryImpl implements Repository {
       return ListArticleModel.fromJson(e.response!.data);
     }
   }
-
-
-
-
-
 
   @override
   FutureOr<LogoutModel?> getLogout() async {
@@ -208,6 +232,35 @@ class RepositoryImpl implements Repository {
   }
 
   @override
+  FutureOr<EditProductModel?> postEditProduk(String name, String detail,
+      int price, String stok, File? image, int id) async {
+    try {
+      var formData = FormData.fromMap({
+        'name': name,
+        'id_toko': storage.getCurrentStoreId(),
+        'price': price,
+        'stok': stok,
+        'detail': detail,
+      });
+
+      if (image != null) {
+        formData.files.addAll([
+          MapEntry("image", await MultipartFile.fromFile(image.path)),
+        ]);
+      }
+
+      var response = await network.dio.post('/produk/$id',
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return EditProductModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return EditProductModel.fromJson(e.response!.data!);
+    }
+  }
+
+  @override
   FutureOr<DeleteProductModel?> deleteProduct(int id) async {
     try {
       var response = await network.dio.delete('/produk/$id',
@@ -218,5 +271,30 @@ class RepositoryImpl implements Repository {
     } on DioError catch (e) {
       return DeleteProductModel.fromJson(e.response!.data);
     }
+  }
+
+  @override
+  FutureOr<AddGabahModel?> postGabah(
+      String name, String detail, int price, File? image) async {
+    try {
+      var formData = FormData.fromMap({
+        'name': name,
+        'id_pabrik': storage.getCurrentPabrikId(),
+        'price': price,
+        'detail': detail,
+      });
+
+      if (image != null) {
+        formData.files.addAll([
+          MapEntry("image", await MultipartFile.fromFile(image.path)),
+        ]);
+      }
+
+      var response = await network.dio.post('/gabah',
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+    } on DioError catch (e) {}
   }
 }

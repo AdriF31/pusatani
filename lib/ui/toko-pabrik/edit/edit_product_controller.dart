@@ -1,19 +1,16 @@
 import 'dart:io';
 
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pusatani/base/base_controller.dart';
-import 'package:pusatani/data/model/add_product_model.dart';
-import 'package:pusatani/data/storage_core.dart';
 import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 
-import '../../data/model/add_gabah_model.dart';
+import '../../../data/storage_core.dart';
 
-class AddProductController extends BaseController {
+class EditProductController extends BaseController {
   var formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
   var priceController = TextEditingController();
@@ -39,38 +36,21 @@ class AddProductController extends BaseController {
     }
   }
 
-  addProduct() async {
+  void updateProduct(int id) async {
     try {
-      var response = await repository.postProduk(
+      var response = await repository.postEditProduk(
           nameController.text,
           descriptionController.text,
           formatter.getUnformattedValue().toInt(),
           stok,
-          productImage);
-      if (response?.meta?.code == 201) {
-        Fluttertoast.showToast(msg: 'Produk berhasil ditambahkan');
+          productImage,
+          id);
+      if (response?.meta?.code == 202) {
+        Fluttertoast.showToast(msg: 'Data berhasil diubah');
         Get.offAll(() => MainPage());
       }
     } catch (e) {
       return null;
     }
   }
-
-  Future<AddGabahModel?> addGabah() async {
-    try {
-      var response = await repository.postGabah(
-          nameController.text,
-          descriptionController.text,
-          formatter.getUnformattedValue().toInt(),
-          productImage);
-      if (response?.meta?.code == 201) {
-        Fluttertoast.showToast(msg: 'Produk berhasil ditambahkan');
-        Get.offAll(() => MainPage());
-      }
-    } catch (e) {
-      return null;
-    }
-  }
-
-
 }

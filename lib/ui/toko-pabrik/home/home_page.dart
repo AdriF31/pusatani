@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/text_style.dart';
-import 'package:pusatani/reusable/custom_card.dart';
+import 'package:pusatani/ui/toko-pabrik/edit/edit_product_page.dart';
 import 'package:pusatani/ui/toko-pabrik/home/home_controller.dart';
 
 import '../../../const/font_weight.dart';
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10)),
                               child: Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Column(
                                     crossAxisAlignment:
@@ -82,7 +82,13 @@ class HomePage extends StatelessWidget {
                                             fontSize: 24, color: Colors.white),
                                       ),
                                       Text(
-                                        'Jl. I Aja dulu',
+                                        c.storage.getCurrentRole() == 3
+                                            ? c.detailTokoModel?.data
+                                                    ?.address ??
+                                                ''
+                                            : c.detailPabrikModel.data
+                                                    ?.address ??
+                                                '',
                                         style: whiteTextStyle.copyWith(
                                             fontSize: 16, color: Colors.white),
                                       ),
@@ -97,8 +103,10 @@ class HomePage extends StatelessWidget {
                                             BorderRadius.circular(10)),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset(
-                                        'assets/images/img_slider1.jpg',
+                                      child: Image.network(
+                                        c.storage.getCurrentRole() == 3
+                                            ? 'http://pusatani.masuk.web.id/images/toko/${c.detailTokoModel?.data?.image}'
+                                            : 'http://pusatani.masuk.web.id/images/pabrik/${c.detailPabrikModel.data?.image}',
                                         fit: BoxFit.cover,
                                       ),
                                     ),
@@ -172,7 +180,9 @@ class HomePage extends StatelessWidget {
                                               MainAxisAlignment.spaceAround,
                                           children: [
                                             Text(
-                                              'Jumlah Produk',
+                                              c.storage.getCurrentRole() == 3
+                                                  ? 'Jumlah Produk'
+                                                  : 'Jumlah Gabah',
                                               style: whiteTextStyle.copyWith(
                                                   fontSize: 20,
                                                   color: Colors.white),
@@ -221,47 +231,398 @@ class HomePage extends StatelessWidget {
                                             Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                      horizontal: 16),
-                                              child: GestureDetector(
-                                                onLongPress: () {
-                                                  c.deleteData(element.id!);
-                                                  c.update();
-                                                  c.getData();
-                                                },
-                                                child: CustomProductCard(
-                                                  toko: element.name,
-                                                  alamat: element.detail,
-                                                  image:
-                                                      'http://pusatani.masuk.web.id/images/produk/${element.image}',
-                                                  stok: element.stok,
-                                                ),
+                                                      horizontal: 16,
+                                                      vertical: 4),
+                                              child: Stack(
+                                                children: [
+                                                  SizedBox(
+                                                    width: double.infinity,
+                                                    height: 150,
+                                                    child: Card(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                      elevation: 3,
+                                                      child: Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 120,
+                                                            height:
+                                                                double.infinity,
+                                                            child: Card(
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20)),
+                                                              child: ClipRRect(
+                                                                borderRadius: const BorderRadius.horizontal(
+                                                                    left: Radius
+                                                                        .circular(
+                                                                            20)),
+                                                                child: Image
+                                                                    .network(
+                                                                  'http://pusatani.masuk.web.id/images/produk/${element.image}',
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 6,
+                                                          ),
+                                                          Column(
+                                                            children: [
+                                                              SizedBox(
+                                                                width:
+                                                                    Get.width *
+                                                                        0.5,
+                                                                child: Text(
+                                                                  element.name ??
+                                                                      '-',
+                                                                  style: blackTextStyle.copyWith(
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          medium),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width:
+                                                                    Get.width *
+                                                                        0.5,
+                                                                child: Text(
+                                                                  c.formatter.format(
+                                                                      element
+                                                                          .price
+                                                                          .toString()),
+                                                                  style: blackTextStyle.copyWith(
+                                                                      fontSize:
+                                                                          20,
+                                                                      fontWeight:
+                                                                          semiBold),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width:
+                                                                    Get.width *
+                                                                        0.5,
+                                                                child: Text(
+                                                                  element.id
+                                                                          .toString(),
+                                                                  style: blackTextStyle.copyWith(
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          regular),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                      right: 8,
+                                                      top: 8,
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: PopupMenuButton<
+                                                            int>(
+                                                          offset: const Offset(0, 0),
+                                                          itemBuilder:
+                                                              (context) => [
+                                                            PopupMenuItem<int>(
+                                                                value: 0,
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    Get.to(
+                                                                        () =>
+                                                                            const EditProductPage(),
+                                                                        arguments:
+                                                                            element.id);
+                                                                  },
+                                                                  child: Row(
+                                                                    children: const [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .edit,
+                                                                        color: Colors
+                                                                            .yellow,
+                                                                      ),
+                                                                      Text(
+                                                                        'Edit',
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )),
+                                                            PopupMenuItem<int>(
+                                                                value: 1,
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    c.deleteData(
+                                                                        element
+                                                                            .id!);
+                                                                    c.update();
+
+                                                                    c.getData();
+                                                                  },
+                                                                  child: Row(
+                                                                    children: const [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .delete,
+                                                                        color: Colors
+                                                                            .red,
+                                                                      ),
+                                                                      Text(
+                                                                        'Hapus',
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )),
+                                                          ],
+                                                          child: const Icon(
+                                                            Icons.more_vert,
+                                                            size: 24,
+                                                          ),
+                                                        ),
+                                                      )),
+                                                ],
                                               ),
-                                            )))
+                                            )
+                                            // Padding(
+                                            //   padding:
+                                            //       const EdgeInsets.symmetric(
+                                            //           horizontal: 16),
+                                            //   child: GestureDetector(
+                                            //     onLongPress: () {
+                                            //       c.deleteData(element.id!);
+                                            //       c.update();
+                                            //       c.getData();
+                                            //     },
+                                            //     child: CustomProductCard(
+                                            //       toko: element.name,
+                                            //       alamat: element.detail,
+                                            //       image:
+                                            //           'http://pusatani.masuk.web.id/images/produk/${element.image}',
+                                            //       stok: element.stok,
+                                            //     ),
+                                            //   ),
+                                            // )
+
+                                            ))
                                         .values
                                         .toList()
                                     : c.detailPabrikModel.data!.pabrikToGabah!
                                         .asMap()
                                         .map((index, element) => MapEntry(
                                             index,
-                                            Padding(
-                                              padding: const EdgeInsets.all(16),
-                                              child: GestureDetector(
-                                                child: CustomProductCard(
-                                                  toko: element.name,
-                                                  alamat: element.detail,
-                                                  image:
-                                                      'http://pusatani.masuk.web.id/images/gabah/${element.image}',
-                                                  stok: 'tersedia',
-                                                ),
+                                             Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16,
+                                                      vertical: 4),
+                                              child: Stack(
+                                                children: [
+                                                  SizedBox(
+                                                    width: double.infinity,
+                                                    height: 150,
+                                                    child: Card(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                      elevation: 3,
+                                                      child: Row(
+                                                        children: [
+                                                          SizedBox(
+                                                            width: 120,
+                                                            height:
+                                                                double.infinity,
+                                                            child: Card(
+                                                              shape: RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              20)),
+                                                              child: ClipRRect(
+                                                                borderRadius: const BorderRadius.horizontal(
+                                                                    left: Radius
+                                                                        .circular(
+                                                                            20)),
+                                                                child: Image
+                                                                    .network(
+                                                                  'http://pusatani.masuk.web.id/images/produk/${element.image}',
+                                                                  fit: BoxFit
+                                                                      .cover,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          const SizedBox(
+                                                            width: 6,
+                                                          ),
+                                                          Column(
+                                                            children: [
+                                                              SizedBox(
+                                                                width:
+                                                                    Get.width *
+                                                                        0.5,
+                                                                child: Text(
+                                                                  element.name ??
+                                                                      '-',
+                                                                  style: blackTextStyle.copyWith(
+                                                                      fontSize:
+                                                                          16,
+                                                                      fontWeight:
+                                                                          medium),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width:
+                                                                    Get.width *
+                                                                        0.5,
+                                                                child: Text(
+                                                                  c.formatter.format(
+                                                                      element
+                                                                          .price
+                                                                          .toString()),
+                                                                  style: blackTextStyle.copyWith(
+                                                                      fontSize:
+                                                                          20,
+                                                                      fontWeight:
+                                                                          semiBold),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
+                                                              ),
+                                                              SizedBox(
+                                                                width:
+                                                                    Get.width *
+                                                                        0.5,
+                                                                child: Text(
+                                                                  element.id
+                                                                          .toString() ,
+                                                                  style: blackTextStyle.copyWith(
+                                                                      fontSize:
+                                                                          14,
+                                                                      fontWeight:
+                                                                          regular),
+                                                                  overflow:
+                                                                      TextOverflow
+                                                                          .ellipsis,
+                                                                ),
+                                                              )
+                                                            ],
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                      right: 8,
+                                                      top: 8,
+                                                      child: Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: PopupMenuButton<
+                                                            int>(
+                                                          offset: const Offset(0, 0),
+                                                          itemBuilder:
+                                                              (context) => [
+                                                            PopupMenuItem<int>(
+                                                                value: 0,
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    Get.to(
+                                                                        () =>
+                                                                            const EditProductPage(),
+                                                                        arguments:
+                                                                            element.id);
+                                                                  },
+                                                                  child: Row(
+                                                                    children: const [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .edit,
+                                                                        color: Colors
+                                                                            .yellow,
+                                                                      ),
+                                                                      Text(
+                                                                        'Edit',
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )),
+                                                            PopupMenuItem<int>(
+                                                                value: 1,
+                                                                child:
+                                                                    GestureDetector(
+                                                                  onTap: () {
+                                                                    c.deleteData(
+                                                                        element
+                                                                            .id!);
+                                                                    c.update();
+
+                                                                    c.getData();
+                                                                  },
+                                                                  child: Row(
+                                                                    children: const [
+                                                                      Icon(
+                                                                        Icons
+                                                                            .delete,
+                                                                        color: Colors
+                                                                            .red,
+                                                                      ),
+                                                                      Text(
+                                                                        'Hapus',
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                )),
+                                                          ],
+                                                          child: const Icon(
+                                                            Icons.more_vert,
+                                                            size: 24,
+                                                          ),
+                                                        ),
+                                                      )),
+                                                ],
                                               ),
-                                            )))
+                                            )
+                                          ))
                                         .values
                                         .toList()),
                           ],
                         ),
                       ),
                     )
-                  : Center(
+                  : const Center(
                       child: CircularProgressIndicator(),
                     ),
             ));

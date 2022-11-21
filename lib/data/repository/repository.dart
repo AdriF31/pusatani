@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:pusatani/data/model/add_gabah_model.dart';
 import 'package:pusatani/data/model/add_product_model.dart';
 import 'package:pusatani/data/model/add_toko_model.dart';
 import 'package:pusatani/data/model/delete_product_model.dart';
 import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
+import 'package:pusatani/data/model/edit_product_model.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/data/model/login_model.dart';
 import 'package:pusatani/data/model/logout_model.dart';
@@ -24,8 +26,13 @@ abstract class Repository {
   FutureOr<DetailPabrikModel> getDetailPabrik(int id);
   FutureOr<AddTokoModel?> postToko(
       String name, String address, String deskripsi, File? image);
+        FutureOr<AddTokoModel?> postPabrik(
+      String name, String address, String deskripsi, File? image);
   FutureOr<LogoutModel?> getLogout();
   FutureOr<AddProductModel?> postProduk(
       String name, String detail, int price, String stok, File? image);
+        FutureOr<EditProductModel?> postEditProduk(
+      String name, String detail, int price, String stok, File? image,int id);
   FutureOr<DeleteProductModel?> deleteProduct(int id);
+  FutureOr<AddGabahModel?> postGabah(String name, String detail,int price, File? image);
 }

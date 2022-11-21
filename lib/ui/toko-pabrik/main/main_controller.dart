@@ -8,4 +8,9 @@ class MainController extends BaseController {
   int currentIndex = 0;
 
   List<Widget> widgetOptions = [HomePage(), ProfilePage()];
+  @override
+  void onInit() {
+    super.onInit();
+    widgetOptions;
+  }
 }

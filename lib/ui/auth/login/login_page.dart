@@ -5,6 +5,7 @@ import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/ui/auth/login/login_controller.dart';
 import 'package:pusatani/ui/auth/register/register_page.dart';
+import 'package:pusatani/ui/petani/home/petani_home_page.dart';
 import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 
 class LoginPage extends StatelessWidget {
@@ -100,7 +101,7 @@ class LoginPage extends StatelessWidget {
                                   height: 60,
                                   child: Obx(() => TextFormField(
                                         controller: c.passwordController,
-                                        obscureText: c.isObscured.isFalse,
+                                        obscureText: c.isObscured.isTrue,
                                         decoration: InputDecoration(
                                             counterText: '',
                                             isDense: true,
@@ -193,14 +194,19 @@ class LoginPage extends StatelessWidget {
                                   child: Text('Register',
                                       style: GoogleFonts.firaSans(
                                           fontSize: 16, fontWeight: medium)))),
-                          // ClipPath(
-                          //   clipper: WaveClipper(),
-                          //   child: Container(
-                          //     width: Get.width,
-                          //     height: 300,
-                          //     color: primaryColor,
-                          //   ),
-                          // ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          GestureDetector(
+                            onTap: () => Get.offAll(() => PetaniHomePage()),
+                            child: Text(
+                              'Masuk sebagai petani',
+                              style: GoogleFonts.firaSans(
+                                  fontSize: 16,
+                                  color: primaryColor,
+                                  fontWeight: medium),
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -208,34 +214,5 @@ class LoginPage extends StatelessWidget {
                 : const Center(
                     child: CircularProgressIndicator(),
                   )));
-  }
-}
-
-class WaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.lineTo(0, size.height / 2);
-    var firstStart = Offset(size.width / 4, size.height - 100);
-    var firstEnd = Offset(size.width / 2.25, size.height / 2);
-    path.quadraticBezierTo(
-        firstStart.dx, firstStart.dy, firstEnd.dx, firstEnd.dy);
-    var secondStart =
-        Offset(size.width - (size.width / 3.5), size.height - 200);
-    var secondEnd = Offset(size.width - 40, size.height - 50);
-    path.quadraticBezierTo(
-        secondStart.dx, secondStart.dy, secondEnd.dx, secondEnd.dy);
-    var thirdStart = Offset(size.width - 32, size.height - 30);
-    var thirdEnd = Offset(size.width, size.height - 20);
-    path.quadraticBezierTo(
-        thirdStart.dx, thirdStart.dy, thirdEnd.dx, thirdEnd.dy);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    return true;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/detail_pabrik_model.dart';
@@ -9,6 +10,8 @@ class HomeController extends BaseController {
   DetailTokoModel? detailTokoModel = DetailTokoModel();
   DetailPabrikModel detailPabrikModel = DetailPabrikModel();
   StorageCore storage = StorageCore();
+  CurrencyTextInputFormatter formatter =
+      CurrencyTextInputFormatter(decimalDigits: 0, locale: 'id', symbol: 'Rp ');
   var isLoading = false;
 
   @override
@@ -46,4 +49,5 @@ class HomeController extends BaseController {
       return null;
     }
   }
+
 }
