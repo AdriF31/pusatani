@@ -8,7 +8,7 @@ import 'package:pusatani/ui/toko-pabrik/home/home_controller.dart';
 import '../../../const/font_weight.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({
+  const HomePage({
     super.key,
   });
 

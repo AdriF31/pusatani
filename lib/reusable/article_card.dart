@@ -29,7 +29,7 @@ class ArticleCard extends StatelessWidget {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+              borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
               child: SizedBox(
                 height: 200,
                 width: double.infinity,

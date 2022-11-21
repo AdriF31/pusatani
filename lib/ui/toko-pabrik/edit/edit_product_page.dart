@@ -1,7 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
@@ -20,7 +18,7 @@ class EditProductPage extends StatelessWidget {
       init: EditProductController(),
       builder: (c) => Scaffold(
         appBar:
-            AppBar(title: Text('Ubah Profil'), actions: [CustomBackButton()]),
+            AppBar(title: Text('Ubah Profil'), actions: const [CustomBackButton()]),
         body: SingleChildScrollView(
           child: Form(
             key: c.formKey,
@@ -38,7 +36,7 @@ class EditProductPage extends StatelessWidget {
                       child: DottedBorder(
                           padding: const EdgeInsets.all(4),
                           color: primaryColor,
-                          dashPattern: [10],
+                          dashPattern: const [10],
                           strokeWidth: 3,
                           child: Center(
                             child: c.productImage != null

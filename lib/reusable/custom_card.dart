@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/text_style.dart';
-import 'package:basic_utils/basic_utils.dart';
 import '../const/font_weight.dart';
 
 // ignore: must_be_immutable

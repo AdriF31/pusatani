@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/ui/add-product/add_product_page.dart';
-import 'package:pusatani/ui/toko-pabrik/home/home_page.dart';
 import 'package:pusatani/ui/toko-pabrik/main/main_controller.dart';
-import 'package:pusatani/ui/toko-pabrik/profile/profile_page.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -24,7 +22,7 @@ class MainPage extends StatelessWidget {
               width: 70,
               child: FloatingActionButton(
                   onPressed: () {
-                    Get.to(() => AddProductPage());
+                    Get.to(() => const AddProductPage());
                   },
                   backgroundColor: Colors.white,
                   child: Image.asset(

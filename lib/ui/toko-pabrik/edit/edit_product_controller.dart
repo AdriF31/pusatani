@@ -47,7 +47,7 @@ class EditProductController extends BaseController {
           id);
       if (response?.meta?.code == 202) {
         Fluttertoast.showToast(msg: 'Data berhasil diubah');
-        Get.offAll(() => MainPage());
+        Get.offAll(() => const MainPage());
       }
     } catch (e) {
       return null;

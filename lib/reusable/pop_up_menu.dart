@@ -23,11 +23,11 @@ class PopUpMenu extends StatelessWidget {
                 onTap: onTap,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.edit,
                       color: Colors.yellow,
                     ),
-                    Text(
+                    const Text(
                       'Edit',
                     ),
                   ],
@@ -39,18 +39,18 @@ class PopUpMenu extends StatelessWidget {
                 onTap: onTap,
                 child: Row(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.delete,
                       color: Colors.red,
                     ),
-                    Text(
+                    const Text(
                       'Edit',
                     ),
                   ],
                 ),
               )),
         ],
-        child: Icon(
+        child: const Icon(
           Icons.more_vert,
           size: 24,
         ),

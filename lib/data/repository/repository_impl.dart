@@ -127,7 +127,7 @@ class RepositoryImpl implements Repository {
     }
   }
 
-    @override
+  @override
   FutureOr<AddTokoModel?> postPabrik(
       String name, String address, String deskripsi, File? image) async {
     try {
@@ -295,6 +295,9 @@ class RepositoryImpl implements Repository {
           options: Options(headers: {
             'Authorization': 'Bearer ${storage.getAccessToken()}'
           }));
-    } on DioError catch (e) {}
+      return AddGabahModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return AddGabahModel.fromJson(e.response?.data);
+    }
   }
 }

@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,7 +32,7 @@ class AddTokoController extends BaseController {
     var response = await repository.postToko(storeController.text,
         addressController.text, descController.text, tokoImage);
     if (response!.meta!.code == 201) {
-      Get.offAll(() => MainPage());
+      Get.offAll(() => const MainPage());
     }
   }
 }

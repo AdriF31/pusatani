@@ -6,9 +6,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/storage_core.dart';
-import 'package:pusatani/ui/auth/login/login_page.dart';
-import 'package:pusatani/ui/toko-pabrik/home/home_page.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_page.dart';
 
 class RegisterController extends BaseController {
@@ -80,7 +77,7 @@ class RegisterController extends BaseController {
       storage.saveAuthResponse(login);
 
       Get.offAll(
-          () => AddTokoPage(
+          () => const AddTokoPage(
                
               ),
           );

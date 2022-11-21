@@ -139,20 +139,12 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                       ))
                     ],
                   ))
-              : Scaffold(
+              : const Scaffold(
                   body: Center(child: CircularProgressIndicator()),
                 );
         });
   }
 
-  // Widget semua() {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-  //     child: Column(
-  //       children:c
-  //     ),
-  //   );
-  // }
 
   Widget teknologi() {
     return Padding(

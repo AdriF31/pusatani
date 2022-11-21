@@ -20,14 +20,14 @@ class Pusatani extends StatelessWidget {
       title: 'Pusatani',
       theme: ThemeData(
           inputDecorationTheme:
-              InputDecorationTheme(border: OutlineInputBorder(gapPadding: 0)),
+              const InputDecorationTheme(border: OutlineInputBorder(gapPadding: 0)),
           colorScheme: ThemeData().colorScheme.copyWith(primary: primaryColor),
           primarySwatch: Colors.blue,
           appBarTheme: AppBarTheme(
               backgroundColor: secondaryColor,
               centerTitle: true,
               titleTextStyle: GoogleFonts.firaSans(fontSize: 20))),
-      home: OnboardingPage(),
+      home: const OnboardingPage(),
     );
   }
 }

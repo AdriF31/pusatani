@@ -10,7 +10,7 @@ class CustomBackButton extends StatelessWidget {
         onPressed: () {
           Get.back();
         },
-        icon: Icon(
+        icon: const Icon(
           Icons.chevron_left,
           size: 24,
         ));

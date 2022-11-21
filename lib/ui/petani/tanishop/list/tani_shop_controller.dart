@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/toko_model.dart';
 
-import '../../../../data/model/list_article_model.dart';
 import '../../../../data/model/pabrik_model.dart';
 
 class TaniShopController extends BaseController {
@@ -13,7 +12,7 @@ class TaniShopController extends BaseController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
+    
     super.onInit();
     getData();
   }

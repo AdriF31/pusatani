@@ -9,7 +9,6 @@ import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/back_button.dart';
 import 'package:pusatani/reusable/custom_elevated_button.dart';
 import 'package:pusatani/ui/auth/register/register_controller.dart';
-import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_page.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});

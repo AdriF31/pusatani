@@ -1,15 +1,11 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:pusatani/const/text_style.dart';
-import 'package:pusatani/reusable/custom_card.dart';
 import 'package:pusatani/reusable/custom_store_card.dart';
-import 'package:pusatani/ui/detail-artikel/detail_artikel_page.dart';
 import 'package:pusatani/ui/petani/tanishop/detail_shop.dart/detail_pabrik_page.dart';
 import 'package:pusatani/ui/petani/tanishop/list/tani_shop_controller.dart';
 
 import '../../../../const/colors.dart';
-import '../../../../const/font_weight.dart';
 import '../detail-toko/detail_toko_page.dart';
 
 class TaniShopPage extends StatefulWidget {
@@ -108,7 +104,7 @@ class _InfoTaniPageState extends State<TaniShopPage>
                       ),
                     ],
                   )
-                : Center(
+                : const Center(
                     child: CircularProgressIndicator(),
                   ),
           );

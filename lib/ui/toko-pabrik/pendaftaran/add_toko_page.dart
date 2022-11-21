@@ -1,19 +1,15 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/custom_text_form_field.dart';
-import 'package:pusatani/ui/auth/register/register_controller.dart';
-import 'package:pusatani/ui/toko-pabrik/home/home_page.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_controller.dart';
 
 class AddTokoPage extends StatelessWidget {
-  AddTokoPage({
+  const AddTokoPage({
     super.key,
   });
 

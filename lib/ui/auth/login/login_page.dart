@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -198,7 +199,7 @@ class LoginPage extends StatelessWidget {
                             height: 24,
                           ),
                           GestureDetector(
-                            onTap: () => Get.offAll(() => PetaniHomePage()),
+                            onTap: () => Get.offAll(() => const PetaniHomePage()),
                             child: Text(
                               'Masuk sebagai petani',
                               style: GoogleFonts.firaSans(
