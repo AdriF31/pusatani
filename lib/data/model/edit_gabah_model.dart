@@ -1,4 +1,3 @@
-
 class EditGabahModel {
   Meta? meta;
   Data? data;
@@ -12,10 +11,10 @@ class EditGabahModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
-    if(meta != null) {
+    if (meta != null) {
       _data["meta"] = meta?.toJson();
     }
-    if(data != null) {
+    if (data != null) {
       _data["data"] = data?.toJson();
     }
     return _data;
@@ -33,7 +32,16 @@ class Data {
   String? image;
   String? pabrikName;
 
-  Data({this.id, this.createdAt, this.updatedAt, this.idPabrik, this.name, this.detail, this.price, this.image, this.pabrikName});
+  Data(
+      {this.id,
+      this.createdAt,
+      this.updatedAt,
+      this.idPabrik,
+      this.name,
+      this.detail,
+      this.price,
+      this.image,
+      this.pabrikName});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json["id"];

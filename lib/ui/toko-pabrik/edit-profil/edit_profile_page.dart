@@ -28,9 +28,9 @@ class EditProfilePage extends StatelessWidget {
                   children: [
                     InkWell(
                         onTap: () {
-                          // c.getProfilePicture();
+                          c.getProfilePicture();
                         },
-                        child: c.profilePicture == null
+                        child: c.storage.getCurrentProfilePicture() == null
                             ? SvgPicture.asset('assets/images/avatar.svg')
                             : Container(
                                 height: 120,
@@ -39,10 +39,15 @@ class EditProfilePage extends StatelessWidget {
                                     const BoxDecoration(shape: BoxShape.circle),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(70),
-                                  child: Image.file(
-                                    c.profilePicture!,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: c.profilePicture == null
+                                      ? Image.network(
+                                          "http://pusatani.masuk.web.id/images/profile/${c.storage.getCurrentProfilePicture()!}",
+                                          fit: BoxFit.cover,
+                                        )
+                                      : Image.file(
+                                          c.profilePicture!,
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               )),
                     const SizedBox(
@@ -59,10 +64,46 @@ class EditProfilePage extends StatelessWidget {
                         SizedBox(
                           height: 60,
                           child: TextFormField(
-                            controller: c.nameController,
+                            controller: c.nameController
+                              ..text = c.storage.getCurrentUsername() ?? '',
                             decoration: InputDecoration(
                                 fillColor: primaryColor,
                                 hintText: 'Adri',
+                                hintStyle: GoogleFonts.catamaran(fontSize: 14),
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: primaryColor),
+                                    borderRadius: BorderRadius.circular(5))),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Nama lengkap tidak boleh kosong';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Nama Lengkap',
+                          style: GoogleFonts.catamaran(
+                              fontSize: 16, color: primaryColor),
+                        ),
+                        SizedBox(
+                          height: 60,
+                          child: TextFormField(
+                            controller: c.emailController
+                              ..text = c.storage.getCurrentEmail() ?? '',
+                            decoration: InputDecoration(
+                                fillColor: primaryColor,
+                                hintText: 'user@gmail.com',
                                 hintStyle: GoogleFonts.catamaran(fontSize: 14),
                                 contentPadding:
                                     const EdgeInsets.symmetric(horizontal: 16),
@@ -93,7 +134,11 @@ class EditProfilePage extends StatelessWidget {
                         SizedBox(
                           height: 60,
                           child: TextFormField(
-                            controller: c.phoneController,
+                            controller: c.phoneController
+                              ..text = c.storage
+                                      .getCurrentPhoneNumber()
+                                      ?.replaceAll('+62', '') ??
+                                  '',
                             keyboardType: TextInputType.number,
                             decoration: InputDecoration(
                                 fillColor: primaryColor,
@@ -155,17 +200,15 @@ class EditProfilePage extends StatelessWidget {
                                 stops: const [0.2, 1])),
                         child: TextButton(
                             style: TextButton.styleFrom(
-                                // backgroundColor: secondaryColor,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(25))),
                             onPressed: () {
-                              // Get.to(() => AddTokoPage());
                               if (c.formKey.currentState?.validate() == true) {
-                                // c.register();
+                                c.updateProfile();
                               }
                             },
                             child: Text(
-                              'Register',
+                              'Ubah Profile',
                               style: GoogleFonts.firaSans(
                                   fontSize: 16,
                                   color: Colors.white,

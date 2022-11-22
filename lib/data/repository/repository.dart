@@ -10,6 +10,7 @@ import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
 import 'package:pusatani/data/model/edit_gabah_model.dart';
 import 'package:pusatani/data/model/edit_product_model.dart';
+import 'package:pusatani/data/model/edit_profile_model.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/data/model/login_model.dart';
 import 'package:pusatani/data/model/logout_model.dart';
@@ -43,4 +44,6 @@ abstract class Repository {
   FutureOr<EditGabahModel?> postEditGabah(
       String name, String detail, int price, File? image, int id);
   FutureOr<UserModel?> getUser(int id);
+  FutureOr<EditProfileModel?> postUpdateProfile(
+      String name, String email, String phone, File? image);
 }

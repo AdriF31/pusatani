@@ -19,7 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
-
   @override
   void initState() {
     Get.put<HomeController>(HomeController());
@@ -363,7 +362,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                                                                     SizedBox(
                                                                                       width: Get.width * 0.5,
                                                                                       child: Text(
-                                                                                        element['deskripsi'] ?? '-',
+                                                                                        element['detail'] ?? '-',
                                                                                         style: blackTextStyle.copyWith(fontSize: 14, fontWeight: regular),
                                                                                         overflow: TextOverflow.ellipsis,
                                                                                       ),
@@ -395,7 +394,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                                                                             'image': element['image'],
                                                                                             'title': element['name'],
                                                                                             'price': element['price'],
-                                                                                            'deskripsi': element['deskripsi']
+                                                                                            'deskripsi': element['detail']
                                                                                           });
                                                                                         },
                                                                                         child: Row(
@@ -638,14 +637,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if(state == AppLifecycleState.resumed)  {
+    if (state == AppLifecycleState.resumed) {
       Get.find<HomeController>().getData();
     }
   }
 
-  @override
-  void dispose() {
-    Get.find<HomeController>().dispose();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   Get.find<HomeController>().dispose();
+  //   super.dispose();
+  // }
 }

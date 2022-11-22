@@ -23,7 +23,7 @@ class ListArticleModel {
 
 class Data {
   int? currentPage;
-  List<Data1>? data;
+  List<Data2>? data;
   String? firstPageUrl;
   int? from;
   int? lastPage;
@@ -53,7 +53,7 @@ class Data {
     currentPage = json["current_page"];
     data = json["data"] == null
         ? null
-        : (json["data"] as List).map((e) => Data1.fromJson(e)).toList();
+        : (json["data"] as List).map((e) => Data2.fromJson(e)).toList();
     firstPageUrl = json["first_page_url"];
     from = json["from"];
     lastPage = json["last_page"];
@@ -86,7 +86,7 @@ class Data {
   }
 }
 
-class Data1 {
+class Data2 {
   int? id;
   int? idCategory;
   String? title;
@@ -97,7 +97,7 @@ class Data1 {
   String? createdAt;
   String? updatedAt;
 
-  Data1(
+  Data2(
       {this.id,
       this.idCategory,
       this.title,
@@ -108,7 +108,7 @@ class Data1 {
       this.createdAt,
       this.updatedAt});
 
-  Data1.fromJson(Map<String, dynamic> json) {
+  Data2.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     idCategory = json["id_category"];
     title = json["title"];

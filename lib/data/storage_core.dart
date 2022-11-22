@@ -54,56 +54,7 @@ class StorageCore {
     }
   }
 
-  // Future saveHelper(HelperModel? helperModel) async {
-  //   bool isStorageReady = await storage.ready;
-  //   try {
-  //     if (isStorageReady) {
-  //       await storage.setItem('helper', helperModel?.toJson());
-  //     }
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
 
-// String? getPassword(){
-//       try {
-//       Map<String, dynamic> data = storage.getItem('helper');
-//       HelperModel auth = HelperModel.fromJson(data);
-//       return auth.password;
-//     } catch (e) {
-//       debugPrint("Error while load access token: $e");
-//       return 'token_not_loaded';
-//     }
-// }
-// String? getIsFirst(){
-//       try {
-//       Map<String, dynamic> data = storage.getItem('helper');
-//       HelperModel auth = HelperModel.fromJson(data);
-//       return auth.isFirst;
-//     } catch (e) {
-//       debugPrint("Error while load access token: $e");
-//       return 'token_not_loaded';
-//     }
-// }
-  // Future<String?> saveIsFirstOpen(String first) async {
-  //   bool isStorageReady = await isFirst.ready;
-  //   try {
-  //     if (isStorageReady) {
-  //       await isFirst.setItem('isFirst', {'first':});
-  //     }
-  //   } catch (e) {
-  //     return 'false';
-  //   }
-  // }
-
-  // bool? getIsFirstOpen() {
-  //   try {
-  //     bool data = isFirst.getItem('isFirst');
-  //     return data;
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
 
   Future deleteAuthResponse() async {
     try {
@@ -239,6 +190,15 @@ class StorageCore {
       Map<String, dynamic> data = storage.getItem('auth_result');
       LoginModel auth = LoginModel.fromJson(data);
       return auth.data!.user!.roles!.first.id;
+    } catch (e) {
+      return null;
+    }
+  }
+
+    dynamic getObject(String key) {
+    try {
+      Map<String, dynamic> data = storage.getItem(key);
+      return data;
     } catch (e) {
       return null;
     }

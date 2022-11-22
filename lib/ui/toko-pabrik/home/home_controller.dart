@@ -1,6 +1,6 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
-import 'package:dio/dio.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/user_model.dart';
@@ -52,12 +52,14 @@ class HomeController extends BaseController {
     try {
       if (storage.getCurrentRole() == 3) {
         var response = await repository.deleteProduct(id);
+        Get.back(closeOverlays: true);
         getData();
         if (response!.meta!.code == 202) {
           Fluttertoast.showToast(msg: 'data berhasil dihapus');
         }
       } else if (storage.getCurrentRole() == 2) {
         var response = await repository.deleteGabah(id);
+        Get.back(closeOverlays: true);
         getData();
         if (response!.meta!.code == 202) {
           Fluttertoast.showToast(msg: 'data berhasil dihapus');

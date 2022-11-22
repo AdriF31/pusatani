@@ -1,4 +1,3 @@
-
 class EditProductModel {
   Meta? meta;
   Data? data;

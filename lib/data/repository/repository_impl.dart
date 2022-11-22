@@ -12,6 +12,7 @@ import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
 import 'package:pusatani/data/model/edit_gabah_model.dart';
 import 'package:pusatani/data/model/edit_product_model.dart';
+import 'package:pusatani/data/model/edit_profile_model.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/data/model/login_model.dart';
 import 'package:pusatani/data/model/logout_model.dart';
@@ -353,6 +354,34 @@ class RepositoryImpl implements Repository {
       return EditGabahModel.fromJson(response.data);
     } on DioError catch (e) {
       return EditGabahModel.fromJson(e.response?.data);
+    }
+  }
+
+  @override
+  FutureOr<EditProfileModel?> postUpdateProfile(
+      String name, String email, String phone, File? image) async {
+    try {
+      var formData = FormData.fromMap({
+        'name': name,
+        'email': email,
+        'phone': phone,
+      });
+
+      if (image != null) {
+        formData.files.addAll([
+          MapEntry("photo_profile", await MultipartFile.fromFile(image.path)),
+        ]);
+      }
+
+      var response = await network.dio.post('/auth/update',
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+
+      return EditProfileModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return EditProfileModel.fromJson(e.response!.data);
     }
   }
 }

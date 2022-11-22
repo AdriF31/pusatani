@@ -49,7 +49,7 @@ class EditProductController extends BaseController {
             id);
         if (response?.meta?.code == 202) {
           Fluttertoast.showToast(msg: 'Data produk berhasil diubah');
-          Get.offAll(() => const HomePage());
+          Get.offAll(() => const MainPage());
         }
       } else if (storage.getCurrentRole() == 2) {
         var response = await repository.postEditGabah(
