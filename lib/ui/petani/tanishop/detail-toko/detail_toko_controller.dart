@@ -5,6 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
+import 'package:pusatani/data/storage_core.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DetailTokoController extends BaseController {
@@ -12,6 +13,7 @@ class DetailTokoController extends BaseController {
   CurrencyTextInputFormatter formatter =
       CurrencyTextInputFormatter(decimalDigits: 0, locale: 'id', symbol: 'Rp ');
   bool isLoading = false;
+  var storage = StorageCore();
   @override
   void onInit() {
     getDetail();
@@ -32,8 +34,9 @@ class DetailTokoController extends BaseController {
   }
 
   whatsapp() async {
-    var contact = "+6282319858335";
-    var androidUrl = "whatsapp://send?phone=$contact&text=Hi, I need some help";
+    var contact = detailTokoModel?.data?.phone;
+    var androidUrl =
+        "whatsapp://send?phone=$contact&text=Halo, saya ingin membeli produk anda";
     var iosUrl =
         "https://wa.me/$contact?text=${Uri.parse('Permisi, saya ingin menjual gabah saya')}";
 

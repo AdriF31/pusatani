@@ -38,16 +38,29 @@ class EditProductController extends BaseController {
 
   void updateProduct(int id) async {
     try {
-      var response = await repository.postEditProduk(
-          nameController.text,
-          descriptionController.text,
-          formatter.getUnformattedValue().toInt(),
-          stok,
-          productImage,
-          id);
-      if (response?.meta?.code == 202) {
-        Fluttertoast.showToast(msg: 'Data berhasil diubah');
-        Get.offAll(() => const MainPage());
+      if (storage.getCurrentRole() == 3) {
+        var response = await repository.postEditProduk(
+            nameController.text,
+            descriptionController.text,
+            formatter.getUnformattedValue().toInt(),
+            stok,
+            productImage,
+            id);
+        if (response?.meta?.code == 202) {
+          Fluttertoast.showToast(msg: 'Data produk berhasil diubah');
+          Get.offAll(() => const MainPage());
+        }
+      } else if (storage.getCurrentRole() == 2) {
+        var response = await repository.postEditGabah(
+            nameController.text,
+            descriptionController.text,
+            formatter.getUnformattedValue().toInt(),
+            productImage,
+            id);
+        if (response?.meta?.code == 202) {
+          Fluttertoast.showToast(msg: 'Data gabah berhasil diubah');
+          Get.offAll(() => const MainPage());
+        }
       }
     } catch (e) {
       return null;

@@ -25,7 +25,7 @@ class _InfoTaniPageState extends State<InfoTaniPage>
   @override
   void initState() {
     super.initState();
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 5, vsync: this);
   }
 
   @override
@@ -47,7 +47,6 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                       ButtonsTabBar(
                         controller: tabController,
                         backgroundColor: primaryColor,
-                        
                         height: 60,
                         unselectedBackgroundColor: Colors.transparent,
                         labelStyle: const TextStyle(
@@ -59,6 +58,9 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                         tabs: const [
                           Tab(
                             text: 'Semua',
+                          ),
+                          Tab(
+                            text: 'Berita',
                           ),
                           Tab(
                             text: "Teknologi",
@@ -83,6 +85,102 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                               child: Column(
                                 children: c.listArticleModel!.data!.data!
                                     .map(
+                                      (e) => GestureDetector(
+                                        onTap: () => Get.to(
+                                            () => DetailArtikelPage(),
+                                            arguments: {
+                                              'title': e.title,
+                                              'image': e.image,
+                                              'author': e.author,
+                                              'content': e.body,
+                                              'date': e.createdAt,
+                                              'category': e.idCategory
+                                            }),
+                                        child: ArticleCard(
+                                            image: e.image ?? '',
+                                            title: e.title ?? '',
+                                            date: e.createdAt!.split('T').first,
+                                            description: e.body ?? ''),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: c.listArticleModel!.data!.data!
+                                    .where(
+                                        (element) => element.idCategory == 11)
+                                    .map(
+                                      (e) => GestureDetector(
+                                        onTap: () => Get.to(
+                                            () => DetailArtikelPage(),
+                                            arguments: {
+                                              'title': e.title,
+                                              'image': e.image,
+                                              'author': e.author,
+                                              'content': e.body,
+                                              'date': e.createdAt,
+                                              'category': e.idCategory
+                                            }),
+                                        child: ArticleCard(
+                                            image: e.image ?? '',
+                                            title: e.title ?? '',
+                                            date: e.createdAt!.split('T').first,
+                                            description: e.body ?? ''),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: c.listArticleModel!.data!.data!
+                                    .where(
+                                        (element) => element.idCategory == 12)
+                                    .map(
+                                      (e) => GestureDetector(
+                                        onTap: () => Get.to(
+                                            () => DetailArtikelPage(),
+                                            arguments: {
+                                              'title': e.title,
+                                              'image': e.image,
+                                              'author': e.author,
+                                              'content': e.body,
+                                              'date': e.createdAt,
+                                              'category': e.idCategory
+                                            }),
+                                        child: ArticleCard(
+                                            image: e.image ?? '',
+                                            title: e.title ?? '',
+                                            date: e.createdAt!.split('T').first,
+                                            description: e.body ?? ''),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: c.listArticleModel!.data!.data!
+                                    .where(
+                                        (element) => element.idCategory == 13)
+                                    .map(
                                       (e) => ArticleCard(
                                           image: e.image ?? '',
                                           title: e.title ?? '',
@@ -93,46 +191,36 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                               ),
                             ),
                           ),
-                          SingleChildScrollView(
-                            child: Column(
-                              children: c.listArticleModel!.data!.data!
-                                  .where((element) => element.idCategory == 1)
-                                  .map(
-                                    (e) => ArticleCard(
-                                        image: e.image ?? '',
-                                        title: e.title ?? '',
-                                        date: e.createdAt ?? '',
-                                        description: e.body ?? ''),
-                                  )
-                                  .toList(),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
                             ),
-                          ),
-                          SingleChildScrollView(
-                            child: Column(
-                              children: c.listArticleModel!.data!.data!
-                                  .where((element) => element.idCategory == 2)
-                                  .map(
-                                    (e) => ArticleCard(
-                                        image: e.image ?? '',
-                                        title: e.title ?? '',
-                                        date: e.createdAt ?? '',
-                                        description: e.body ?? ''),
-                                  )
-                                  .toList(),
-                            ),
-                          ),
-                          SingleChildScrollView(
-                            child: Column(
-                              children: c.listArticleModel!.data!.data!
-                                  .where((element) => element.idCategory == 3)
-                                  .map(
-                                    (e) => ArticleCard(
-                                        image: e.image ?? '',
-                                        title: e.title ?? '',
-                                        date: e.createdAt ?? '',
-                                        description: e.body ?? ''),
-                                  )
-                                  .toList(),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: c.listArticleModel!.data!.data!
+                                    .where(
+                                        (element) => element.idCategory == 14)
+                                    .map(
+                                      (e) => GestureDetector(
+                                        onTap: () => Get.to(
+                                            () => DetailArtikelPage(),
+                                            arguments: {
+                                              'title': e.title,
+                                              'image': e.image,
+                                              'author': e.author,
+                                              'content': e.body,
+                                              'date': e.createdAt,
+                                              'category': e.idCategory
+                                            }),
+                                        child: ArticleCard(
+                                            image: e.image ?? '',
+                                            title: e.title ?? '',
+                                            date: e.createdAt!.split('T').first,
+                                            description: e.body ?? ''),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
                             ),
                           ),
                         ],
@@ -144,7 +232,6 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                 );
         });
   }
-
 
   Widget teknologi() {
     return Padding(

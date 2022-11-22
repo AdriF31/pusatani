@@ -1,11 +1,11 @@
 
-class EditProductModel {
+class EditGabahModel {
   Meta? meta;
   Data? data;
 
-  EditProductModel({this.meta, this.data});
+  EditGabahModel({this.meta, this.data});
 
-  EditProductModel.fromJson(Map<String, dynamic> json) {
+  EditGabahModel.fromJson(Map<String, dynamic> json) {
     meta = json["meta"] == null ? null : Meta.fromJson(json["meta"]);
     data = json["data"] == null ? null : Data.fromJson(json["data"]);
   }
@@ -26,27 +26,25 @@ class Data {
   int? id;
   String? createdAt;
   String? updatedAt;
-  int? idToko;
+  int? idPabrik;
   String? name;
   String? detail;
   int? price;
-  String? stok;
   String? image;
-  String? tokoName;
+  String? pabrikName;
 
-  Data({this.id, this.createdAt, this.updatedAt, this.idToko, this.name, this.detail, this.price, this.stok, this.image, this.tokoName});
+  Data({this.id, this.createdAt, this.updatedAt, this.idPabrik, this.name, this.detail, this.price, this.image, this.pabrikName});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json["id"];
     createdAt = json["created_at"];
     updatedAt = json["updated_at"];
-    idToko = json["id_toko"];
+    idPabrik = json["id_pabrik"];
     name = json["name"];
     detail = json["detail"];
     price = json["price"];
-    stok = json["stok"];
     image = json["image"];
-    tokoName = json["toko_name"];
+    pabrikName = json["pabrik_name"];
   }
 
   Map<String, dynamic> toJson() {
@@ -54,13 +52,12 @@ class Data {
     _data["id"] = id;
     _data["created_at"] = createdAt;
     _data["updated_at"] = updatedAt;
-    _data["id_toko"] = idToko;
+    _data["id_pabrik"] = idPabrik;
     _data["name"] = name;
     _data["detail"] = detail;
     _data["price"] = price;
-    _data["stok"] = stok;
     _data["image"] = image;
-    _data["toko_name"] = tokoName;
+    _data["pabrik_name"] = pabrikName;
     return _data;
   }
 }

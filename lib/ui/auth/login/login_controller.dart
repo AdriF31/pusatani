@@ -40,9 +40,13 @@ class LoginController extends BaseController {
         update();
         if (loginModel?.data?.user?.roles?.first.id == 2) {
           getUser(loginModel?.data?.user?.id ?? 0);
+          // storage.saveUserResponse(userModel);
+          update();
           Get.offAll(() => const MainPage(), arguments: 2);
         } else if (loginModel?.data?.user?.roles?.first.id == 3) {
           getUser(loginModel?.data?.user?.id ?? 0);
+          // storage.saveUserResponse(userModel);
+          update();
           Get.offAll(() => const MainPage(), arguments: 3);
         }
       } else {

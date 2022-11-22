@@ -18,8 +18,11 @@ class EditProductPage extends StatelessWidget {
       init: EditProductController(),
       builder: (c) => Scaffold(
         appBar: AppBar(
-            title: Text('Ubah Data Produk'),
-            actions: const [CustomBackButton()]),
+          title: Text(c.storage.getCurrentRole() == 3
+              ? 'Ubah Data Produk'
+              : 'Ubah Data Gabah'),
+          leading: const CustomBackButton(),
+        ),
         body: SingleChildScrollView(
           child: Form(
             key: c.formKey,
@@ -29,33 +32,46 @@ class EditProductPage extends StatelessWidget {
                   child: Column(
                 children: [
                   InkWell(
+                    splashColor: primaryColor,
                     onTap: () {
                       c.getProductPicture();
                     },
                     child: SizedBox(
                       height: 200,
                       child: DottedBorder(
-                          padding: const EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(2),
                           color: primaryColor,
                           dashPattern: const [10],
                           strokeWidth: 3,
                           child: Center(
-                            child: c.productImage != null
-                                ? Image.file(
-                                    c.productImage!,
-                                    fit: BoxFit.fill,
-                                    width: double.infinity,
-                                  )
-                                : const Text('upload photo'),
-                          )),
+                              child: c.productImage != null
+                                  ? Image.file(
+                                      c.productImage!,
+                                      fit: BoxFit.fill,
+                                      width: double.infinity,
+                                    )
+                                  : Image.network(
+                                      c.storage.getCurrentRole() == 3
+                                          ? 'http://pusatani.masuk.web.id/images/produk/${Get.arguments['image']}'
+                                          : 'http://pusatani.masuk.web.id/images/gabah/${Get.arguments['image']}',
+                                      fit: BoxFit.cover,
+                                    )
+                              // : (Text(
+                              //     c.storage.getCurrentRole() == 3
+                              //         ? 'upload foto produk'
+                              //         : 'upload foto gabah',
+                              //     style:
+                              //         greenTextStyle.copyWith(fontSize: 18),
+                              //   )),
+                              )),
                     ),
                   ),
                   const SizedBox(
-                    height: 4,
+                    height: 8,
                   ),
                   CustomTextFormField(
                     controller: c.nameController
-                      ..text = c.storage.getCurrentUsername() ?? '',
+                      ..text = Get.arguments['title'] ?? '',
                     hintText: 'Pupuk urea',
                     label: 'Nama Produk',
                     textInputAction: TextInputAction.next,
@@ -78,7 +94,9 @@ class EditProductPage extends StatelessWidget {
                             fontSize: 16, color: primaryColor),
                       ),
                       TextFormField(
-                        controller: c.priceController,
+                        controller: c.priceController
+                          ..text = c.formatter
+                              .format(Get.arguments['price'].toString()),
                         keyboardType: TextInputType.number,
                         inputFormatters: [c.formatter],
                         textInputAction: TextInputAction.next,
@@ -183,14 +201,17 @@ class EditProductPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Deskripsi Produk',
+                        c.storage.getCurrentRole() == 3
+                            ? 'Deskripsi Produk'
+                            : 'Deskripsi Gabah',
                         style: GoogleFonts.catamaran(
                             fontSize: 16, color: primaryColor),
                       ),
                       SizedBox(
                         height: 100,
                         child: TextFormField(
-                          controller: c.descriptionController,
+                          controller: c.descriptionController
+                            ..text = Get.arguments['deskripsi'] ?? '',
                           textInputAction: TextInputAction.next,
                           maxLines: 5,
                           decoration: InputDecoration(
@@ -220,7 +241,7 @@ class EditProductPage extends StatelessWidget {
                       onTap: () async {
                         if (c.formKey.currentState?.validate() == true) {
                           if (c.storage.getCurrentRole() == 2) {
-                            // c.addGabah();
+                            c.updateProduct(Get.arguments);
                           } else if (c.storage.getCurrentRole() == 3) {
                             c.updateProduct(Get.arguments);
                           }

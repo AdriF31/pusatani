@@ -29,7 +29,8 @@ class ArticleCard extends StatelessWidget {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(10)),
               child: SizedBox(
                 height: 200,
                 width: double.infinity,
@@ -65,7 +66,7 @@ class ArticleCard extends StatelessWidget {
                       date!,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.catamaran(
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: regular,
                           color: Colors.black54),
                     ),

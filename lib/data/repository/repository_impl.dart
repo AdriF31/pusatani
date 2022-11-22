@@ -10,6 +10,7 @@ import 'package:pusatani/data/model/add_toko_model.dart';
 import 'package:pusatani/data/model/delete_product_model.dart';
 import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
+import 'package:pusatani/data/model/edit_gabah_model.dart';
 import 'package:pusatani/data/model/edit_product_model.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/data/model/login_model.dart';
@@ -274,7 +275,8 @@ class RepositoryImpl implements Repository {
       return DeleteProductModel.fromJson(e.response!.data);
     }
   }
-    @override
+
+  @override
   FutureOr<DeleteProductModel?> deleteGabah(int id) async {
     try {
       var response = await network.dio.delete('/gabah/$id',
@@ -322,6 +324,33 @@ class RepositoryImpl implements Repository {
       return UserModel.fromJson(response.data);
     } on DioError catch (e) {
       return UserModel.fromJson(e.response?.data);
+    }
+  }
+
+  @override
+  FutureOr<EditGabahModel?> postEditGabah(
+      String name, String detail, int price, File? image, int id) async {
+    try {
+      var formData = FormData.fromMap({
+        'name': name,
+        'id_pabrik': storage.getCurrentPabrikIdFromUser(),
+        'price': price,
+        'detail': detail,
+      });
+
+      if (image != null) {
+        formData.files.addAll([
+          MapEntry("image", await MultipartFile.fromFile(image.path)),
+        ]);
+      }
+      var response = await network.dio.post('/gabah/$id}',
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return EditGabahModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return EditGabahModel.fromJson(e.response?.data);
     }
   }
 }

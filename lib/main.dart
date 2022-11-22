@@ -6,6 +6,7 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
 
 
+
   GlobalBindings().dependencies();
   runApp(const Pusatani());
 }

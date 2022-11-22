@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/helper/scroll_configuration.dart';
 import 'package:pusatani/ui/onboarding/onboarding_page.dart';
+import 'package:pusatani/ui/splash/splash_page.dart';
 
 class Pusatani extends StatelessWidget {
   const Pusatani({super.key});
@@ -19,15 +20,15 @@ class Pusatani extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pusatani',
       theme: ThemeData(
-          inputDecorationTheme:
-              const InputDecorationTheme(border: OutlineInputBorder(gapPadding: 0)),
+          inputDecorationTheme: const InputDecorationTheme(
+              border: OutlineInputBorder(gapPadding: 0)),
           colorScheme: ThemeData().colorScheme.copyWith(primary: primaryColor),
           primarySwatch: Colors.blue,
           appBarTheme: AppBarTheme(
               backgroundColor: secondaryColor,
               centerTitle: true,
               titleTextStyle: GoogleFonts.firaSans(fontSize: 20))),
-      home: const OnboardingPage(),
+      home: const SplashPage(),
     );
   }
 }

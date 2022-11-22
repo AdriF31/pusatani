@@ -1,6 +1,7 @@
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pusatani/reusable/back_button.dart';
 import 'package:pusatani/reusable/custom_store_card.dart';
 import 'package:pusatani/ui/petani/tanishop/detail_shop.dart/detail_pabrik_page.dart';
 import 'package:pusatani/ui/petani/tanishop/list/tani_shop_controller.dart';
@@ -31,7 +32,10 @@ class _InfoTaniPageState extends State<TaniShopPage>
         init: TaniShopController(),
         builder: (c) {
           return Scaffold(
-            appBar: AppBar(title: const Text('Tani Shop')),
+            appBar: AppBar(
+              title: const Text('Tani Shop'),
+              leading: CustomBackButton(),
+            ),
             body: c.isLoading == false
                 ? Column(
                     children: [

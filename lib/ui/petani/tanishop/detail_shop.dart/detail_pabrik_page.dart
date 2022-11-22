@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
+import 'package:pusatani/reusable/back_button.dart';
 import 'package:pusatani/ui/petani/tanishop/detail_shop.dart/detail_pabrik_controller.dart';
 
 class DetailPabrikPage extends StatelessWidget {
@@ -17,6 +18,7 @@ class DetailPabrikPage extends StatelessWidget {
                   ? CustomScrollView(
                       slivers: [
                         SliverAppBar(
+                          leading: CustomBackButton(),
                           title: const Text('Data Pabrik'),
                           pinned: true,
                           actions: [
@@ -50,14 +52,17 @@ class DetailPabrikPage extends StatelessWidget {
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10)),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          child: Image.network(
-                                            c.detailPabrikModel?.data?.data
-                                                    ?.image ??
-                                                'https://',
-                                            fit: BoxFit.cover,
+                                        child: SizedBox(
+                                          height: 300,
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            child: Image.network(
+                                              c.detailPabrikModel?.data?.data
+                                                      ?.image ??
+                                                  'https://',
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -141,9 +146,9 @@ class DetailPabrikPage extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Flexible(
-                                            flex: 2,
+                                            flex: 5,
                                             child: SizedBox(
-                                              height: 100,
+                                              height: 200,
                                               width: double.infinity,
                                               child: ClipRRect(
                                                 borderRadius: const BorderRadius
@@ -207,6 +212,7 @@ class DetailPabrikPage extends StatelessWidget {
                                     crossAxisCount: 2,
                                     childAspectRatio: 1,
                                     mainAxisSpacing: 5,
+                                    mainAxisExtent: 250,
                                     crossAxisSpacing: 5),
                           ),
                         ),

@@ -31,7 +31,7 @@ class PabrikCard extends StatelessWidget {
                     const BorderRadius.vertical(top: Radius.circular(10)),
                 child: Image.network(image,
                     height: 140,
-                    fit: BoxFit.fitHeight,
+                    fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) {
                         return child;

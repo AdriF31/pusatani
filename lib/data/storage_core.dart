@@ -8,6 +8,7 @@ import 'model/login_model.dart';
 
 class StorageCore {
   final storage = LocalStorage('local_data.json');
+  final isFirst = LocalStorage('is_first.json');
 
   Future<bool> ensureStorageReady() async {
     return await storage.ready;
@@ -52,6 +53,26 @@ class StorageCore {
       debugPrint('error save user state: $e');
     }
   }
+
+  // Future<String?> saveIsFirstOpen(String first) async {
+  //   bool isStorageReady = await isFirst.ready;
+  //   try {
+  //     if (isStorageReady) {
+  //       await isFirst.setItem('isFirst', {'first':});
+  //     }
+  //   } catch (e) {
+  //     return 'false';
+  //   }
+  // }
+
+  // bool? getIsFirstOpen() {
+  //   try {
+  //     bool data = isFirst.getItem('isFirst');
+  //     return data;
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 
   Future deleteAuthResponse() async {
     try {

@@ -20,8 +20,9 @@ class HomeController extends BaseController {
   @override
   void onInit() {
     getData();
+    storage.getCurrentPabrikIdFromUser();
+    storage.getCurrentStoreIdFromUser();
     update();
-    print('id pabrik: ${storage.getCurrentStoreIdFromUser()}');
     super.onInit();
   }
 
@@ -32,9 +33,7 @@ class HomeController extends BaseController {
         var response = await repository
             .getDetailPabrik(storage.getCurrentPabrikIdFromUser()!);
         detailPabrikModel = response;
-        print(detailPabrikModel);
         isLoading = false;
-
         update();
       } else if (storage.getCurrentRole() == 3) {
         var response = await repository
@@ -52,11 +51,13 @@ class HomeController extends BaseController {
     try {
       if (storage.getCurrentRole() == 3) {
         var response = await repository.deleteProduct(id);
+        getData();
         if (response!.meta!.code == 202) {
           Fluttertoast.showToast(msg: 'data berhasil dihapus');
         }
       } else if (storage.getCurrentRole() == 2) {
         var response = await repository.deleteGabah(id);
+        getData();
         if (response!.meta!.code == 202) {
           Fluttertoast.showToast(msg: 'data berhasil dihapus');
         }

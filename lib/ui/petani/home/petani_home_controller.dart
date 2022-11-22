@@ -9,7 +9,7 @@ class PetaniHomeController extends BaseController {
   TokoModel? tokoModel = TokoModel();
   PabrikModel? pabrikModel = PabrikModel();
   ListArticleModel? listArticleModel = ListArticleModel();
-  var currentIndex = 0.obs;
+  var currentIndex = 0;
   CarouselController carouselController = CarouselController();
   var isLoading = false;
   @override

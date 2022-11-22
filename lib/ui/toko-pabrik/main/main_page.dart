@@ -43,6 +43,10 @@ class MainPage extends StatelessWidget {
               },
               enableLineIndicator: true,
               lineIndicatorWidth: 3,
+              selectedFontSize: 14,
+              unselectedFontSize: 14,
+              selectedIconSize: 24,
+              unselectedIconSize: 24,
               indicatorType: IndicatorType.Top,
               customBottomBarItems: [
                 CustomBottomBarItems(

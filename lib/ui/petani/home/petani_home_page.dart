@@ -11,6 +11,7 @@ import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/article_card.dart';
 import 'package:pusatani/reusable/toko_card.dart';
+import 'package:pusatani/ui/auth/login/login_page.dart';
 import 'package:pusatani/ui/detail-artikel/detail_artikel_page.dart';
 import 'package:pusatani/ui/petani/home/petani_home_controller.dart';
 import 'package:pusatani/ui/petani/infotani/info_tani_page.dart';
@@ -32,7 +33,7 @@ class PetaniHomePage extends StatelessWidget {
         builder: (c) {
           return Scaffold(
               extendBodyBehindAppBar: true,
-              backgroundColor: Colors.white.withOpacity(0.7),
+              backgroundColor: Colors.white,
               body: c.isLoading == false
                   ? RefreshIndicator(
                       onRefresh: () async {
@@ -41,20 +42,24 @@ class PetaniHomePage extends StatelessWidget {
                       },
                       child: CustomScrollView(
                         slivers: <Widget>[
-                          // SliverLayoutBuilder(
-                          //   builder: (BuildContext context, constraints) {
-                          //     final scrolled = constraints.scrollOffset > 0;
-                          //     return
-                          //   },
-                          // ),
                           SliverAppBar(
                             actions: [
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.more_vert_rounded,
-                                    color: blackColor,
-                                  ))
+                              PopupMenuButton<int>(
+                                  offset: const Offset(0, 0),
+                                  itemBuilder: (context) => [
+                                        PopupMenuItem<int>(
+                                            value: 0,
+                                            textStyle: blackTextStyle.copyWith(
+                                                fontSize: 16),
+                                            child: GestureDetector(
+                                                onTap: () {
+                                                  Get.offAll(() => LoginPage());
+                                                },
+                                                child: Container(
+                                                  child: Text(
+                                                      'Daftar Sebagai Pemilik Toko/Pabrik'),
+                                                )))
+                                      ])
                             ],
                             backgroundColor: secondaryColor,
                             pinned: true,
@@ -67,38 +72,86 @@ class PetaniHomePage extends StatelessWidget {
                             expandedHeight: 300,
                             flexibleSpace: FlexibleSpaceBar(
                               collapseMode: CollapseMode.pin,
-                              background: CarouselSlider(
-                                items: [
-                                  Image.asset(
-                                    'assets/images/img_slider1.jpg',
-                                    fit: BoxFit.cover,
+                              background: Stack(
+                                children: [
+                                  CarouselSlider(
+                                    items: [
+                                      Image.asset(
+                                        'assets/images/img_slider1.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Image.asset(
+                                        'assets/images/img_slider2.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                      Image.asset(
+                                        'assets/images/img_slider3.jpg',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ],
+                                    options: CarouselOptions(
+                                        viewportFraction: 1,
+                                        autoPlay: true,
+                                        padEnds: true,
+                                        autoPlayInterval:
+                                            const Duration(seconds: 4),
+                                        height: double.infinity,
+                                        autoPlayCurve: Curves.easeInOut,
+                                        pauseAutoPlayOnTouch: true,
+                                        onPageChanged: ((index, reason) {
+                                          c.currentIndex = index;
+                                          c.update();
+                                        })),
+                                    carouselController: c.carouselController,
                                   ),
-                                  Image.asset(
-                                    'assets/images/img_slider2.jpg',
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Image.asset(
-                                    'assets/images/img_slider3.jpg',
-                                    fit: BoxFit.cover,
+                                  Positioned(
+                                    bottom: 10,
+                                    right: 0,
+                                    left: 0,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Container(
+                                          width: 24,
+                                          height: 12,
+                                          decoration: BoxDecoration(
+                                              color: c.currentIndex == 0
+                                                  ? primaryColor
+                                                  : Colors.grey,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Container(
+                                          width: 24,
+                                          height: 12,
+                                          decoration: BoxDecoration(
+                                              color: c.currentIndex == 2
+                                                  ? primaryColor
+                                                  : Colors.grey,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+                                        Container(
+                                          width: 24,
+                                          height: 12,
+                                          decoration: BoxDecoration(
+                                              color: c.currentIndex == 1
+                                                  ? primaryColor
+                                                  : Colors.grey,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
-                                options: CarouselOptions(
-                                    viewportFraction: 1,
-                                    autoPlay: true,
-                                    padEnds: true,
-                                    autoPlayInterval:
-                                        const Duration(seconds: 4),
-                                    height: double.infinity,
-                                    autoPlayCurve: Curves.easeInOut,
-                                    pauseAutoPlayOnTouch: true,
-                                    onPageChanged: ((index, reason) {
-                                      c.currentIndex.value = index;
-                                    })),
-                                carouselController: c.carouselController,
                               ),
                             ),
                           ),
-
                           SliverFillRemaining(
                             hasScrollBody: false,
                             child: Container(
@@ -350,9 +403,7 @@ class PetaniHomePage extends StatelessWidget {
                                                           'image': e.image,
                                                           'author': e.author,
                                                           'content': e.body,
-                                                          'date': e.createdAt!
-                                                              .split('T')
-                                                              .first,
+                                                          'date': e.createdAt,
                                                           'category':
                                                               e.idCategory
                                                         });
