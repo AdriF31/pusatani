@@ -336,8 +336,9 @@ class HomePage extends StatelessWidget {
                                                                                       width: Get.width * 0.5,
                                                                                       child: Text(
                                                                                         element['name'] ?? '-',
-                                                                                        style: blackTextStyle.copyWith(fontSize: 16, fontWeight: medium),
+                                                                                        style: blackTextStyle.copyWith(fontSize: 20, fontWeight: medium),
                                                                                         overflow: TextOverflow.ellipsis,
+                                                                                        maxLines: 2,
                                                                                       ),
                                                                                     ),
                                                                                     SizedBox(
@@ -379,6 +380,7 @@ class HomePage extends StatelessWidget {
                                                                                         onTap: () {
                                                                                           Get.back(closeOverlays: true);
                                                                                           Get.to(() => const EditProductPage(), arguments: {
+                                                                                            'id': element['id'],
                                                                                             'image': element['image'],
                                                                                             'title': element['name'],
                                                                                             'price': element['price'],
@@ -527,6 +529,7 @@ class HomePage extends StatelessWidget {
                                                                                         onTap: () {
                                                                                           Get.back(closeOverlays: true);
                                                                                           Get.to(() => const EditProductPage(), arguments: {
+                                                                                            'id': element.id,
                                                                                             'image': element.image,
                                                                                             'title': element.name,
                                                                                             'price': element.price,

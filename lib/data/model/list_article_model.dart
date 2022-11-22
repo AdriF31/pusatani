@@ -1,6 +1,3 @@
-
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 class ListArticleModel {
   Meta? meta;
   Data? data;
@@ -14,10 +11,10 @@ class ListArticleModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
-    if(meta != null) {
+    if (meta != null) {
       _data["meta"] = meta?.toJson();
     }
-    if(data != null) {
+    if (data != null) {
       _data["data"] = data?.toJson();
     }
     return _data;
@@ -38,11 +35,25 @@ class Data {
   int? to;
   int? total;
 
-  Data({this.currentPage, this.data, this.firstPageUrl, this.from, this.lastPage, this.lastPageUrl, this.nextPageUrl, this.path, this.perPage, this.prevPageUrl, this.to, this.total});
+  Data(
+      {this.currentPage,
+      this.data,
+      this.firstPageUrl,
+      this.from,
+      this.lastPage,
+      this.lastPageUrl,
+      this.nextPageUrl,
+      this.path,
+      this.perPage,
+      this.prevPageUrl,
+      this.to,
+      this.total});
 
   Data.fromJson(Map<String, dynamic> json) {
     currentPage = json["current_page"];
-    data = json["data"] == null ? null : (json["data"] as List).map((e) => Data1.fromJson(e)).toList();
+    data = json["data"] == null
+        ? null
+        : (json["data"] as List).map((e) => Data1.fromJson(e)).toList();
     firstPageUrl = json["first_page_url"];
     from = json["from"];
     lastPage = json["last_page"];
@@ -58,7 +69,7 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
     _data["current_page"] = currentPage;
-    if(data != null) {
+    if (data != null) {
       _data["data"] = data?.map((e) => e.toJson()).toList();
     }
     _data["first_page_url"] = firstPageUrl;
@@ -86,7 +97,16 @@ class Data1 {
   String? createdAt;
   String? updatedAt;
 
-  Data1({this.id, this.idCategory, this.title, this.slug, this.body, this.image, this.author, this.createdAt, this.updatedAt});
+  Data1(
+      {this.id,
+      this.idCategory,
+      this.title,
+      this.slug,
+      this.body,
+      this.image,
+      this.author,
+      this.createdAt,
+      this.updatedAt});
 
   Data1.fromJson(Map<String, dynamic> json) {
     id = json["id"];

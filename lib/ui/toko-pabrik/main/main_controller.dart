@@ -10,6 +10,7 @@ class MainController extends BaseController {
   @override
   void onInit() {
     super.onInit();
+    currentIndex = 0;
     widgetOptions;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:localstorage/localstorage.dart';
 import 'package:pusatani/data/model/detail_toko_model.dart';
@@ -8,7 +9,6 @@ import 'model/login_model.dart';
 
 class StorageCore {
   final storage = LocalStorage('local_data.json');
-  final isFirst = LocalStorage('is_first.json');
 
   Future<bool> ensureStorageReady() async {
     return await storage.ready;
@@ -54,6 +54,37 @@ class StorageCore {
     }
   }
 
+  // Future saveHelper(HelperModel? helperModel) async {
+  //   bool isStorageReady = await storage.ready;
+  //   try {
+  //     if (isStorageReady) {
+  //       await storage.setItem('helper', helperModel?.toJson());
+  //     }
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
+
+// String? getPassword(){
+//       try {
+//       Map<String, dynamic> data = storage.getItem('helper');
+//       HelperModel auth = HelperModel.fromJson(data);
+//       return auth.password;
+//     } catch (e) {
+//       debugPrint("Error while load access token: $e");
+//       return 'token_not_loaded';
+//     }
+// }
+// String? getIsFirst(){
+//       try {
+//       Map<String, dynamic> data = storage.getItem('helper');
+//       HelperModel auth = HelperModel.fromJson(data);
+//       return auth.isFirst;
+//     } catch (e) {
+//       debugPrint("Error while load access token: $e");
+//       return 'token_not_loaded';
+//     }
+// }
   // Future<String?> saveIsFirstOpen(String first) async {
   //   bool isStorageReady = await isFirst.ready;
   //   try {

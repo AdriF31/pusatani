@@ -25,8 +25,8 @@ class PetaniHomeController extends BaseController {
     try {
       var response = await repository.getToko();
       var response2 = await repository.getPabrik();
-      var article = await repository.getListArticle();
-      listArticleModel = article;
+      // var article = await repository.getListArticle();
+      // listArticleModel = article;
       pabrikModel = response2;
       tokoModel = response;
       isLoading = false;

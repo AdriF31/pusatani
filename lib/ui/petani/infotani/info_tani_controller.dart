@@ -9,19 +9,19 @@ class InfoTaniController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    getArticle();
+    // getArticle();
     update();
   }
 
-  void getArticle() async {
-    isLoading = false;
-    try {
-      var response = await repository.getListArticle();
-      listArticleModel = response;
-      isLoading = true;
-      update();
-    } catch (e) {
-      return null;
-    }
-  }
+  // void getArticle() async {
+  //   isLoading = false;
+  //   try {
+  //     var response = await repository.getListArticle();
+  //     listArticleModel = response;
+  //     isLoading = true;
+  //     update();
+  //   } catch (e) {
+  //     return null;
+  //   }
+  // }
 }

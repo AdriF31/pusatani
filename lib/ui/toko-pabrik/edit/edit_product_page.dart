@@ -241,9 +241,9 @@ class EditProductPage extends StatelessWidget {
                       onTap: () async {
                         if (c.formKey.currentState?.validate() == true) {
                           if (c.storage.getCurrentRole() == 2) {
-                            c.updateProduct(Get.arguments);
+                            c.updateProduct(Get.arguments['id']);
                           } else if (c.storage.getCurrentRole() == 3) {
-                            c.updateProduct(Get.arguments);
+                            c.updateProduct(Get.arguments['id']);
                           }
                         }
                       }),

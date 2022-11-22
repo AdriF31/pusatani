@@ -9,6 +9,7 @@ import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
 
 import '../../../data/storage_core.dart';
+import '../home/home_page.dart';
 
 class EditProductController extends BaseController {
   var formKey = GlobalKey<FormState>();
@@ -48,7 +49,7 @@ class EditProductController extends BaseController {
             id);
         if (response?.meta?.code == 202) {
           Fluttertoast.showToast(msg: 'Data produk berhasil diubah');
-          Get.offAll(() => const MainPage());
+          Get.offAll(() => const HomePage());
         }
       } else if (storage.getCurrentRole() == 2) {
         var response = await repository.postEditGabah(

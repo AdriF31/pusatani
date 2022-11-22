@@ -25,7 +25,7 @@ abstract class Repository {
   FutureOr<PabrikModel> getPabrik();
   FutureOr<RegisterModel> postRegister(File? profilePicture, String email,
       String name, int role, File? idPicture, String phone, String password);
-  FutureOr<ListArticleModel?> getListArticle();
+  FutureOr<ListArticleModel?> getListArticle(int currentPage);
   FutureOr<DetailPabrikModel> getDetailPabrik(int id);
   FutureOr<AddTokoModel?> postToko(
       String name, String address, String deskripsi, File? image);
@@ -40,7 +40,7 @@ abstract class Repository {
   FutureOr<DeleteProductModel?> deleteGabah(int id);
   FutureOr<AddGabahModel?> postGabah(
       String name, String detail, int price, File? image);
-        FutureOr<EditGabahModel?> postEditGabah(
-      String name, String detail, int price, File? image,int id);
+  FutureOr<EditGabahModel?> postEditGabah(
+      String name, String detail, int price, File? image, int id);
   FutureOr<UserModel?> getUser(int id);
 }

@@ -22,6 +22,7 @@ class HomeController extends BaseController {
     getData();
     storage.getCurrentPabrikIdFromUser();
     storage.getCurrentStoreIdFromUser();
+
     update();
     super.onInit();
   }
