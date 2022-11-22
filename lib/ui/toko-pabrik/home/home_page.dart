@@ -9,15 +9,26 @@ import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_page.dart';
 
 import '../../../const/font_weight.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     super.key,
   });
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
+
+  @override
+  void initState() {
+    Get.put<HomeController>(HomeController());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-        init: HomeController(),
         builder:
             (c) =>
                 c.storage.getCurrentPabrikIdFromUser() != null ||
@@ -623,5 +634,18 @@ class HomePage extends StatelessWidget {
                           ],
                         ),
                       ));
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state == AppLifecycleState.resumed)  {
+      Get.find<HomeController>().getData();
+    }
+  }
+
+  @override
+  void dispose() {
+    Get.find<HomeController>().dispose();
+    super.dispose();
   }
 }
