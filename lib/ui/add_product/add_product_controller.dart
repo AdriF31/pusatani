@@ -9,8 +9,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/add_product_model.dart';
 import 'package:pusatani/data/storage_core.dart';
-import 'package:pusatani/ui/toko-pabrik/home/home_page.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
+import 'package:pusatani/ui/toko_pabrik/home/home_page.dart';
+import 'package:pusatani/ui/toko_pabrik/main/main_page.dart';
 
 import '../../data/model/add_gabah_model.dart';
 

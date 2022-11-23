@@ -5,9 +5,9 @@ import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/profile_button.dart';
 import 'package:pusatani/ui/petani/home/petani_home_page.dart';
-import 'package:pusatani/ui/toko-pabrik/edit-profil/edit_profile_page.dart';
-import 'package:pusatani/ui/toko-pabrik/profile/profile_controller.dart';
-import 'package:pusatani/ui/toko-pabrik/ubah-password/edit_password_page.dart';
+import 'package:pusatani/ui/toko_pabrik/edit-profil/edit_profile_page.dart';
+import 'package:pusatani/ui/toko_pabrik/profile/profile_controller.dart';
+import 'package:pusatani/ui/toko_pabrik/ubah-password/edit_password_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -40,17 +40,17 @@ class ProfilePage extends StatelessWidget {
                               color: Colors.white, shape: BoxShape.circle),
                           child: CircleAvatar(
                             backgroundImage: NetworkImage(
-                                "http://pusatani.masuk.web.id/images/profile/${c.storage.getCurrentProfilePicture()!}"),
+                                "http://pusatani.masuk.web.id/images/profile/${c.storage.getCurrentProfilePicture() ?? ''}"),
                           ),
                         ),
                       ),
                       Text(
-                        c.storage.getCurrentUsername()!,
+                        c.storage.getCurrentUsername() ?? '',
                         style: blackTextStyle.copyWith(
                             fontSize: 24, fontWeight: semiBold),
                       ),
                       Text(
-                        c.storage.getCurrentEmail()!,
+                        c.storage.getCurrentEmail() ?? '',
                         style: blackTextStyle.copyWith(
                           fontSize: 18,
                         ),

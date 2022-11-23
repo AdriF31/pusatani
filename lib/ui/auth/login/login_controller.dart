@@ -8,7 +8,7 @@ import 'package:pusatani/data/model/login_model.dart';
 import 'package:pusatani/data/model/user_model.dart';
 import 'package:pusatani/data/storage_core.dart';
 import 'package:pusatani/ui/petani/home/petani_home_page.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
+import 'package:pusatani/ui/toko_pabrik/main/main_page.dart';
 
 class LoginController extends BaseController {
   var emailController = TextEditingController();
@@ -34,7 +34,6 @@ class LoginController extends BaseController {
       loginModel = res;
       if (loginModel?.meta?.code == 200) {
         storage.saveAuthResponse(res);
-
 
         isLoading = false;
         Fluttertoast.showToast(msg: res!.meta!.message!);

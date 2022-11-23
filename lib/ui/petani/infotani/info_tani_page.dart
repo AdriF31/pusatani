@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/reusable/article_card.dart';
 import 'package:pusatani/reusable/back_button.dart';
-import 'package:pusatani/ui/detail-artikel/detail_artikel_page.dart';
+import 'package:pusatani/ui/detail_artikel/detail_artikel_page.dart';
 import 'package:pusatani/ui/petani/infotani/info_tani_controller.dart';
 
 import '../../../const/colors.dart';
@@ -99,7 +99,8 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                                         child: ArticleCard(
                                             image: e.image ?? '',
                                             title: e.title ?? '',
-                                            date: e.createdAt!.split('T').first,
+                                            date: DateTime.parse(
+                                                e.createdAt ?? ''),
                                             description: e.body ?? ''),
                                       ),
                                     )
@@ -131,7 +132,8 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                                         child: ArticleCard(
                                             image: e.image ?? '',
                                             title: e.title ?? '',
-                                            date: e.createdAt!.split('T').first,
+                                            date: DateTime.parse(
+                                                e.createdAt ?? ''),
                                             description: e.body ?? ''),
                                       ),
                                     )
@@ -163,7 +165,8 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                                         child: ArticleCard(
                                             image: e.image ?? '',
                                             title: e.title ?? '',
-                                            date: e.createdAt!.split('T').first,
+                                            date: DateTime.parse(
+                                                e.createdAt ?? ''),
                                             description: e.body ?? ''),
                                       ),
                                     )
@@ -184,7 +187,8 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                                       (e) => ArticleCard(
                                           image: e.image ?? '',
                                           title: e.title ?? '',
-                                          date: e.createdAt!.split('T').first,
+                                          date:
+                                              DateTime.parse(e.createdAt ?? ''),
                                           description: e.body ?? ''),
                                     )
                                     .toList(),
@@ -215,7 +219,8 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                                         child: ArticleCard(
                                             image: e.image ?? '',
                                             title: e.title ?? '',
-                                            date: e.createdAt!.split('T').first,
+                                            date: DateTime.parse(
+                                                e.createdAt ?? ''),
                                             description: e.body ?? ''),
                                       ),
                                     )
@@ -231,224 +236,5 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                   body: Center(child: CircularProgressIndicator()),
                 );
         });
-  }
-
-  Widget teknologi() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        children: [
-          GestureDetector(
-            onTap: () => Get.to(() => const DetailArtikelPage()),
-            child: Card(
-              elevation: 3,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              child: Column(
-                children: [
-                  Card(
-                    elevation: 3,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset('assets/images/img_slider1.jpg'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: 300,
-                          child: Text(
-                            '31 Februari 2022',
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.catamaran(
-                                fontSize: 14,
-                                fontWeight: regular,
-                                color: Colors.black54),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 300,
-                          child: Text(
-                            'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.catamaran(
-                              fontSize: 20,
-                              fontWeight: semiBold,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          child: Text(
-                            'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.catamaran(
-                              fontSize: 16,
-                              fontWeight: regular,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget pertanian() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        children: [
-          Card(
-            elevation: 3,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Column(
-              children: [
-                Card(
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset('assets/images/img_slider1.jpg'),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          '31 Februari 2022',
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                              fontSize: 14,
-                              fontWeight: regular,
-                              color: Colors.black54),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                            fontSize: 20,
-                            fontWeight: semiBold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                            fontSize: 16,
-                            fontWeight: regular,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget hama() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Column(
-        children: [
-          Card(
-            elevation: 3,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-            child: Column(
-              children: [
-                Card(
-                  elevation: 3,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.asset('assets/images/img_slider1.jpg'),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          '31 Februari 2022',
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                              fontSize: 14,
-                              fontWeight: regular,
-                              color: Colors.black54),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 300,
-                        child: Text(
-                          'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                            fontSize: 20,
-                            fontWeight: semiBold,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          'Aku suka membajak membajak membajak. ini konten beritana nya bingung diisi naon',
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: GoogleFonts.catamaran(
-                            fontSize: 16,
-                            fontWeight: regular,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
   }
 }

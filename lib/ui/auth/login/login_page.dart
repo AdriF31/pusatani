@@ -6,7 +6,7 @@ import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/ui/auth/login/login_controller.dart';
 import 'package:pusatani/ui/auth/register/register_page.dart';
 import 'package:pusatani/ui/petani/home/petani_home_page.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
+import 'package:pusatani/ui/toko_pabrik/main/main_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

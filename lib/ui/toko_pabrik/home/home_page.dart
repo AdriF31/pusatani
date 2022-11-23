@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/custom_elevated_button.dart';
-import 'package:pusatani/ui/toko-pabrik/edit/edit_product_page.dart';
-import 'package:pusatani/ui/toko-pabrik/home/home_controller.dart';
-import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_page.dart';
+import 'package:pusatani/ui/toko_pabrik/edit/edit_product_page.dart';
+import 'package:pusatani/ui/toko_pabrik/home/home_controller.dart';
+import 'package:pusatani/ui/toko_pabrik/pendaftaran/add_toko_page.dart';
 
 import '../../../const/font_weight.dart';
 

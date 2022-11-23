@@ -50,8 +50,8 @@ class EditProfileController extends BaseController {
         phoneController.text,
         profilePicture,
       );
-      storage.saveObject('profile_pict', profilePicture?.path ?? '');
-      print('PP: ${storage.getObject('profile_pict')}');
+      
+      print('PP: ${emailController.text}');
       isLoading = false;
       Fluttertoast.showToast(msg: response?.meta?.message ?? '');
       if (response?.meta?.code == 202) {

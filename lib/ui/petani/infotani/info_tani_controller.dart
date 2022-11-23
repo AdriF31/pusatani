@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/list_article_model.dart';
 
@@ -9,19 +10,19 @@ class InfoTaniController extends BaseController {
   @override
   void onInit() {
     super.onInit();
-    // getArticle();
+    getArticle();
     update();
   }
 
-  // void getArticle() async {
-  //   isLoading = false;
-  //   try {
-  //     var response = await repository.getListArticle();
-  //     listArticleModel = response;
-  //     isLoading = true;
-  //     update();
-  //   } catch (e) {
-  //     return null;
-  //   }
-  // }
+  void getArticle() async {
+    isLoading = false;
+    try {
+      var response = await repository.getListArticle();
+      listArticleModel = response;
+      isLoading = true;
+      update();
+    } catch (e) {
+      return null;
+    }
+  }
 }

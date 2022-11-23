@@ -2,8 +2,8 @@ import 'package:custom_line_indicator_bottom_navbar/custom_line_indicator_bottom
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
-import 'package:pusatani/ui/add-product/add_product_page.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_controller.dart';
+import 'package:pusatani/ui/add_product/add_product_page.dart';
+import 'package:pusatani/ui/toko_pabrik/main/main_controller.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({Key? key}) : super(key: key);

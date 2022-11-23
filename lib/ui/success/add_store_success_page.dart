@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/ui/success/add_store_success_controlller.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
+import 'package:pusatani/ui/toko_pabrik/main/main_page.dart';
 
 class AddStoreSuccessPage extends StatelessWidget {
   const AddStoreSuccessPage({super.key});

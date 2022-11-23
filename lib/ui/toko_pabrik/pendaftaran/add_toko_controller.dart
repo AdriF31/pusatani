@@ -7,7 +7,7 @@ import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/user_model.dart';
 import 'package:pusatani/data/storage_core.dart';
 import 'package:pusatani/ui/success/add_store_success_page.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
+import 'package:pusatani/ui/toko_pabrik/main/main_page.dart';
 
 class AddTokoController extends BaseController {
   var storeController = TextEditingController();

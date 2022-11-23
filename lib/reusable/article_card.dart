@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
@@ -15,7 +16,7 @@ class ArticleCard extends StatelessWidget {
       required this.description});
   String? image;
   String? title;
-  String? date;
+  DateTime date;
   String? description;
 
   @override
@@ -63,7 +64,7 @@ class ArticleCard extends StatelessWidget {
                   SizedBox(
                     width: 300,
                     child: Text(
-                      date!,
+                      DateFormat.yMMMMd().format(date),
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.catamaran(
                           fontSize: 16,

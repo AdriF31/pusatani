@@ -6,7 +6,7 @@ import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/custom_text_form_field.dart';
-import 'package:pusatani/ui/toko-pabrik/pendaftaran/add_toko_controller.dart';
+import 'package:pusatani/ui/toko_pabrik/pendaftaran/add_toko_controller.dart';
 
 class AddTokoPage extends StatelessWidget {
   const AddTokoPage({

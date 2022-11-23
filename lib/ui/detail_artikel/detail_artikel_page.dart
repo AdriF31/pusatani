@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pusatani/const/app_constant.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/reusable/back_button.dart';
-import 'package:pusatani/ui/detail-artikel/detail_artikel_controller.dart';
+import 'package:pusatani/ui/detail_artikel/detail_artikel_controller.dart';
 import 'package:basic_utils/basic_utils.dart';
 import '../../const/text_style.dart';
 

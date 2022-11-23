@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/reusable/back_button.dart';
 import 'package:pusatani/reusable/custom_text_form_field.dart';
-import 'package:pusatani/ui/toko-pabrik/edit/edit_product_controller.dart';
+import 'package:pusatani/ui/toko_pabrik/edit/edit_product_controller.dart';
 
 import '../../../reusable/custom_elevated_button.dart';
 

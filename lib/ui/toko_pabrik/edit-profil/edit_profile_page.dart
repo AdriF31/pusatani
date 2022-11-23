@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
-import 'package:pusatani/ui/toko-pabrik/edit-profil/edit_profile_controller.dart';
+import 'package:pusatani/ui/toko_pabrik/edit-profil/edit_profile_controller.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({super.key});

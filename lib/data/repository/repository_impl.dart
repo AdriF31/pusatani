@@ -184,11 +184,23 @@ class RepositoryImpl implements Repository {
   }
 
   @override
-  FutureOr<ListArticleModel?> getListArticle(int currentPage) async {
+  FutureOr<ListArticleModel?> getListArticle() async {
     try {
-      var response = await network.dio.get('/article', queryParameters: {
-        'page': currentPage,
-      });
+      var response = await network.dio.get('/article'
+          // , queryParameters: {
+          //   'page': currentPage,
+          // }
+          );
+      return ListArticleModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return ListArticleModel.fromJson(e.response!.data);
+    }
+  }
+
+  @override
+  FutureOr<ListArticleModel?> getPagedListArticle(int page) async {
+    try {
+      var response = await network.dio.get('/article/?page=$page');
       return ListArticleModel.fromJson(response.data);
     } on DioError catch (e) {
       return ListArticleModel.fromJson(e.response!.data);

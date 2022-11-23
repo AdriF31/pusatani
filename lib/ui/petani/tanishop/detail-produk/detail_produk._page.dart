@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
-import 'package:pusatani/ui/detail-artikel/detail_artikel_controller.dart';
+import 'package:pusatani/ui/detail_artikel/detail_artikel_controller.dart';
 import 'package:pusatani/ui/petani/tanishop/detail-produk/detail_produk_controller.dart';
 
 class DetailProdukPage extends StatelessWidget {
@@ -15,7 +15,7 @@ class DetailProdukPage extends StatelessWidget {
         init: DetailProdukController(),
         builder: (c) => Scaffold(
               appBar: AppBar(
-                title: Text(Get.arguments['title'] ?? ''),
+                title: Text('Detail Produk'),
               ),
               body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +24,9 @@ class DetailProdukPage extends StatelessWidget {
                     height: 250,
                     width: double.infinity,
                     child: Image.network(
-                      'http://pusatani.masuk.web.id/images/produk/${Get.arguments['image']}',
+                      Get.arguments['role'] != 1
+                          ? 'http://pusatani.masuk.web.id/images/produk/${Get.arguments['image']}'
+                          : 'http://pusatani.masuk.web.id/images/gabah/${Get.arguments['image']}',
                       fit: BoxFit.cover,
                     ),
                   ),

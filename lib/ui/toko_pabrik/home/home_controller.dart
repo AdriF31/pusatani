@@ -19,10 +19,9 @@ class HomeController extends BaseController {
 
   @override
   void onInit() {
-    getData();
     storage.getCurrentPabrikIdFromUser();
     storage.getCurrentStoreIdFromUser();
-
+    getData();
     update();
     super.onInit();
   }

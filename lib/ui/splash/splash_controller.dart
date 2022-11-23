@@ -6,7 +6,7 @@ import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/storage_core.dart';
 import 'package:pusatani/ui/auth/login/login_page.dart';
 import 'package:pusatani/ui/onboarding/onboarding_page.dart';
-import 'package:pusatani/ui/toko-pabrik/main/main_page.dart';
+import 'package:pusatani/ui/toko_pabrik/main/main_page.dart';
 
 class SplashController extends BaseController {
   var storage = StorageCore();

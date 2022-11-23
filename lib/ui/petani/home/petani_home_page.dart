@@ -6,13 +6,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
+import 'package:pusatani/data/model/list_article_model.dart';
 import 'package:pusatani/reusable/article_card.dart';
 import 'package:pusatani/reusable/toko_card.dart';
 import 'package:pusatani/ui/auth/login/login_page.dart';
-import 'package:pusatani/ui/detail-artikel/detail_artikel_page.dart';
+import 'package:pusatani/ui/detail_artikel/detail_artikel_page.dart';
 import 'package:pusatani/ui/petani/home/petani_home_controller.dart';
 import 'package:pusatani/ui/petani/infotani/info_tani_page.dart';
 import 'package:pusatani/ui/petani/tanishop/detail-toko/detail_toko_page.dart';
@@ -53,10 +55,11 @@ class PetaniHomePage extends StatelessWidget {
                                                 fontSize: 16),
                                             child: GestureDetector(
                                                 onTap: () {
-                                                  Get.offAll(() => LoginPage());
+                                                  Get.offAll(
+                                                      () => const LoginPage());
                                                 },
                                                 child: Container(
-                                                  child: Text(
+                                                  child: const Text(
                                                       'Daftar Sebagai Pemilik Toko/Pabrik'),
                                                 )))
                                       ])
@@ -299,13 +302,14 @@ class PetaniHomePage extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                         children: c.pabrikModel!.data!.data!
-                                            .map((e) => GestureDetector(
+                                            .map((item) => GestureDetector(
                                                   onTap: () => Get.to(
-                                                      () => DetailPabrikPage(),
-                                                      arguments: e.id),
+                                                      () =>
+                                                          const DetailPabrikPage(),
+                                                      arguments: item.id),
                                                   child: PabrikCard(
-                                                    image: e.image!,
-                                                    title: e.name!,
+                                                    image: item.image!,
+                                                    title: item.name!,
                                                   ),
                                                 ))
                                             .toList()),
@@ -343,13 +347,14 @@ class PetaniHomePage extends StatelessWidget {
                                     scrollDirection: Axis.horizontal,
                                     child: Row(
                                         children: c.tokoModel!.data!.data!
-                                            .map((e) => GestureDetector(
+                                            .map((item) => GestureDetector(
                                                 onTap: () => Get.to(
-                                                    () => DetailTokoPage(),
-                                                    arguments: e.id),
+                                                    () =>
+                                                        const DetailTokoPage(),
+                                                    arguments: item.id),
                                                 child: TokoCard(
-                                                  image: e.image ?? ' ',
-                                                  title: e.name ?? ' ',
+                                                  image: item.image ?? ' ',
+                                                  title: item.name ?? ' ',
                                                 )))
                                             .toList()),
                                   ),
@@ -370,8 +375,8 @@ class PetaniHomePage extends StatelessWidget {
                                               fontWeight: semiBold),
                                         ),
                                         GestureDetector(
-                                          onTap: () =>
-                                              Get.to(() => InfoTaniPage()),
+                                          onTap: () => Get.to(
+                                              () => const InfoTaniPage()),
                                           child: Text(
                                             'Lihat Semua',
                                             style: GoogleFonts.catamaran(
@@ -384,51 +389,45 @@ class PetaniHomePage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(
-                                    height: 8,
-                                  ),
-                                  SingleChildScrollView(
-                                      child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Column(
-                                        children: c
-                                            .listArticleModel!.data!.data!
-                                            .map((e) => GestureDetector(
-                                                  onTap: () {
-                                                    Get.to(
-                                                        () =>
-                                                            DetailArtikelPage(),
-                                                        arguments: {
-                                                          'title': e.title,
-                                                          'image': e.image,
-                                                          'author': e.author,
-                                                          'content': e.body,
-                                                          'date': e.createdAt,
-                                                          'category':
-                                                              e.idCategory
-                                                        });
-                                                  },
-                                                  child: ArticleCard(
-                                                      image: e.image,
-                                                      title: e.title,
-                                                      date: e.createdAt!
-                                                          .split('T')
-                                                          .first,
-                                                      description: e.body),
-                                                ))
-                                            .toList()),
-                                  )),
-                                  const SizedBox(
                                     height: 12,
                                   ),
                                 ],
                               ),
                             ),
                           ),
+                          SliverPadding(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            sliver: PagedSliverList(
+                              pagingController: c.pagingController,
+                              builderDelegate: PagedChildBuilderDelegate<Data2>(
+                                itemBuilder: (context, item, index) {
+                                  return GestureDetector(
+                                    onTap: () => Get.to(
+                                        () => DetailArtikelPage(),
+                                        arguments: {
+                                          'title': item.title,
+                                          'image': item.image,
+                                          'author': item.author,
+                                          'content': item.body,
+                                          'date': item.createdAt,
+                                          'category': item.idCategory
+                                        }),
+                                    child: ArticleCard(
+                                      image: item.image,
+                                      date:
+                                          DateTime.parse(item.createdAt ?? ''),
+                                      description: item.body,
+                                      title: item.title,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     )
-                  : Center(
+                  : const Center(
                       child: CircularProgressIndicator(),
                     ));
         });

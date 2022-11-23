@@ -26,7 +26,8 @@ abstract class Repository {
   FutureOr<PabrikModel> getPabrik();
   FutureOr<RegisterModel> postRegister(File? profilePicture, String email,
       String name, int role, File? idPicture, String phone, String password);
-  FutureOr<ListArticleModel?> getListArticle(int currentPage);
+  FutureOr<ListArticleModel?> getListArticle();
+    FutureOr<ListArticleModel?> getPagedListArticle(int page);
   FutureOr<DetailPabrikModel> getDetailPabrik(int id);
   FutureOr<AddTokoModel?> postToko(
       String name, String address, String deskripsi, File? image);

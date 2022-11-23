@@ -6,7 +6,7 @@ import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/reusable/back_button.dart';
 import 'package:pusatani/reusable/custom_elevated_button.dart';
 import 'package:pusatani/reusable/custom_text_form_field.dart';
-import 'package:pusatani/ui/add-product/add_product_controller.dart';
+import 'package:pusatani/ui/add_product/add_product_controller.dart';
 
 class AddProductPage extends StatelessWidget {
   const AddProductPage({super.key});

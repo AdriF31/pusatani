@@ -51,6 +51,7 @@ class _InfoTaniPageState extends State<TaniShopPage>
                         labelStyle: const TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                         borderWidth: 1,
+                        borderColor: primaryColor,
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: Get.width * 0.18),
                         unselectedBorderColor: blackColor,
