@@ -6,17 +6,18 @@ import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/custom_text_form_field.dart';
+import 'package:pusatani/ui/toko_pabrik/edittoko/edit_toko_controller.dart';
 import 'package:pusatani/ui/toko_pabrik/pendaftaran/add_toko_controller.dart';
 
-class AddTokoPage extends StatelessWidget {
-  const AddTokoPage({
+class EditTokoPage extends StatelessWidget {
+  const EditTokoPage({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<AddTokoController>(
-        init: AddTokoController(),
+    return GetBuilder<EditTokoController>(
+        init: EditTokoController(),
         builder: (c) => Scaffold(
               appBar: AppBar(
                   title: Text(
@@ -168,7 +169,7 @@ class AddTokoPage extends StatelessWidget {
                                   onPressed: () {
                                     if (c.formKey.currentState?.validate() ==
                                         true) {
-                                      c.addToko();
+                                      c.updateToko();
                                     }
                                   },
                                   child: Text(

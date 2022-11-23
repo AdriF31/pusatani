@@ -80,15 +80,15 @@ class PetaniHomePage extends StatelessWidget {
                                   CarouselSlider(
                                     items: [
                                       Image.asset(
-                                        'assets/images/img_slider1.jpg',
+                                        'assets/images/slider1.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                       Image.asset(
-                                        'assets/images/img_slider2.jpg',
+                                        'assets/images/slider2.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                       Image.asset(
-                                        'assets/images/img_slider3.jpg',
+                                        'assets/images/slider3.jpg',
                                         fit: BoxFit.cover,
                                       ),
                                     ],
@@ -121,7 +121,20 @@ class PetaniHomePage extends StatelessWidget {
                                           decoration: BoxDecoration(
                                               color: c.currentIndex == 0
                                                   ? primaryColor
-                                                  : Colors.grey,
+                                                  : Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10)),
+                                        ),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Container(
+                                          width: 24,
+                                          height: 12,
+                                          decoration: BoxDecoration(
+                                              color: c.currentIndex == 1
+                                                  ? primaryColor
+                                                  : Colors.white,
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                         ),
@@ -134,17 +147,7 @@ class PetaniHomePage extends StatelessWidget {
                                           decoration: BoxDecoration(
                                               color: c.currentIndex == 2
                                                   ? primaryColor
-                                                  : Colors.grey,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                        ),
-                                        Container(
-                                          width: 24,
-                                          height: 12,
-                                          decoration: BoxDecoration(
-                                              color: c.currentIndex == 1
-                                                  ? primaryColor
-                                                  : Colors.grey,
+                                                  : Colors.white,
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                         ),
@@ -181,8 +184,8 @@ class PetaniHomePage extends StatelessWidget {
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           child: Container(
-                                            width: 150,
-                                            height: 170,
+                                            width: 180,
+                                            height: 200,
                                             padding: const EdgeInsets.all(5),
                                             decoration: const BoxDecoration(
                                                 color: Color.fromRGBO(
@@ -223,12 +226,13 @@ class PetaniHomePage extends StatelessWidget {
                                         },
                                         child: Card(
                                           elevation: 2,
+                                          shadowColor: primaryColor,
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                           child: Container(
-                                            width: 150,
-                                            height: 170,
+                                            width: 180,
+                                            height: 200,
                                             padding: const EdgeInsets.all(5),
                                             decoration: const BoxDecoration(
                                                 color: Color.fromRGBO(
@@ -265,99 +269,103 @@ class PetaniHomePage extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Daftar Pabrik',
-                                          style: GoogleFonts.catamaran(
-                                              fontSize: 20,
-                                              fontWeight: semiBold),
-                                        ),
-                                        GestureDetector(
-                                          onTap: () => Get.to(
-                                              () => const TaniShopPage()),
-                                          child: Text(
-                                            'Lihat Semua',
-                                            style: GoogleFonts.catamaran(
-                                                fontSize: 20,
-                                                fontWeight: semiBold,
-                                                color: primaryColor),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                        children: c.pabrikModel!.data!.data!
-                                            .map((item) => GestureDetector(
-                                                  onTap: () => Get.to(
-                                                      () =>
-                                                          const DetailPabrikPage(),
-                                                      arguments: item.id),
-                                                  child: PabrikCard(
-                                                    image: item.image!,
-                                                    title: item.name!,
-                                                  ),
-                                                ))
-                                            .toList()),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          'Daftar Toko',
-                                          style: GoogleFonts.catamaran(
-                                              fontSize: 20,
-                                              fontWeight: semiBold),
-                                        ),
-                                        Text(
-                                          'Lihat Semua',
-                                          style: GoogleFonts.catamaran(
-                                              fontSize: 20,
-                                              fontWeight: semiBold,
-                                              color: primaryColor),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 8,
-                                  ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                        children: c.tokoModel!.data!.data!
-                                            .map((item) => GestureDetector(
-                                                onTap: () => Get.to(
-                                                    () =>
-                                                        const DetailTokoPage(),
-                                                    arguments: item.id),
-                                                child: TokoCard(
-                                                  image: item.image ?? ' ',
-                                                  title: item.name ?? ' ',
-                                                )))
-                                            .toList()),
-                                  ),
+                                  // const SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.symmetric(
+                                  //       horizontal: 16),
+                                  //   child: Row(
+                                  //     mainAxisAlignment:
+                                  //         MainAxisAlignment.spaceBetween,
+                                  //     children: [
+                                  //       Text(
+                                  //         'Daftar Pabrik',
+                                  //         style: GoogleFonts.catamaran(
+                                  //             fontSize: 20,
+                                  //             fontWeight: semiBold),
+                                  //       ),
+                                  //       GestureDetector(
+                                  //         onTap: () => Get.to(
+                                  //             () => const TaniShopPage()),
+                                  //         child: Text(
+                                  //           'Lihat Semua',
+                                  //           style: GoogleFonts.catamaran(
+                                  //               fontSize: 20,
+                                  //               fontWeight: semiBold,
+                                  //               color: primaryColor),
+                                  //         ),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(
+                                  //   height: 8,
+                                  // ),
+                                  // SingleChildScrollView(
+                                  //   scrollDirection: Axis.horizontal,
+                                  //   child: Row(
+                                  //       children: c.pabrikModel!.data!.data!
+                                  //           .map((e) => GestureDetector(
+                                  //                 onTap: () => Get.to(
+                                  //                     () =>
+                                  //                         const DetailPabrikPage(),
+                                  //                     arguments: e.id),
+                                  //                 child: PabrikCard(
+                                  //                   image: e.image!,
+                                  //                   title: e.name!,
+                                  //                 ),
+                                  //               ))
+                                  //           .toList()),
+                                  // ),
+                                  // const SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.symmetric(
+                                  //       horizontal: 16),
+                                  //   child: Row(
+                                  //     mainAxisAlignment:
+                                  //         MainAxisAlignment.spaceBetween,
+                                  //     children: [
+                                  //       Text(
+                                  //         'Daftar Toko',
+                                  //         style: GoogleFonts.catamaran(
+                                  //             fontSize: 20,
+                                  //             fontWeight: semiBold),
+                                  //       ),
+                                  //       GestureDetector(
+                                  //         onTap: () =>
+                                  //             Get.to(() => TaniShopPage()),
+                                  //         child: Text(
+                                  //           'Lihat Semua',
+                                  //           style: GoogleFonts.catamaran(
+                                  //               fontSize: 20,
+                                  //               fontWeight: semiBold,
+                                  //               color: primaryColor),
+                                  //         ),
+                                  //       ),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  // const SizedBox(
+                                  //   height: 8,
+                                  // ),
+                                  // SingleChildScrollView(
+                                  //   scrollDirection: Axis.horizontal,
+                                  //   child: Row(
+                                  //       children: c.tokoModel!.data!.data!
+                                  //           .map((e) => GestureDetector(
+                                  //               onTap: () => Get.to(
+                                  //                   () =>
+                                  //                       const DetailTokoPage(),
+                                  //                   arguments: e.id),
+                                  //               child: TokoCard(
+                                  //                 image: e.image ?? ' ',
+                                  //                 title: e.name ?? ' ',
+                                  //               )))
+                                  //           .toList()),
+                                  // ),
                                   const SizedBox(
                                     height: 20,
                                   ),
@@ -391,39 +399,68 @@ class PetaniHomePage extends StatelessWidget {
                                   const SizedBox(
                                     height: 12,
                                   ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Column(
+                                        children: c.listArticleModel!.data!
+                                            .map(
+                                              (e) => GestureDetector(
+                                                onTap: () => Get.to(
+                                                    () => DetailArtikelPage(),
+                                                    arguments: {
+                                                      'title': e.title,
+                                                      'image': e.image,
+                                                      'author': e.author,
+                                                      'content': e.body,
+                                                      'date': e.createdAt,
+                                                      'category': e.idCategory
+                                                    }),
+                                                child: ArticleCard(
+                                                  image: e.image,
+                                                  date: DateTime.parse(
+                                                      e.createdAt ?? ''),
+                                                  description: e.body,
+                                                  title: e.title,
+                                                ),
+                                              ),
+                                            )
+                                            .toList()),
+                                  )
                                 ],
                               ),
                             ),
                           ),
-                          SliverPadding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            sliver: PagedSliverList(
-                              pagingController: c.pagingController,
-                              builderDelegate: PagedChildBuilderDelegate<Data2>(
-                                itemBuilder: (context, item, index) {
-                                  return GestureDetector(
-                                    onTap: () => Get.to(
-                                        () => DetailArtikelPage(),
-                                        arguments: {
-                                          'title': item.title,
-                                          'image': item.image,
-                                          'author': item.author,
-                                          'content': item.body,
-                                          'date': item.createdAt,
-                                          'category': item.idCategory
-                                        }),
-                                    child: ArticleCard(
-                                      image: item.image,
-                                      date:
-                                          DateTime.parse(item.createdAt ?? ''),
-                                      description: item.body,
-                                      title: item.title,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          )
+
+                          // SliverPadding(
+                          //   padding: const EdgeInsets.symmetric(horizontal: 16),
+                          //   sliver: PagedSliverList(
+                          //     pagingController: c.pagingController,
+                          //     builderDelegate: PagedChildBuilderDelegate<Data2>(
+                          //       itemBuilder: (context, e, index) {
+                          //         return GestureDetector(
+                          //           onTap: () => Get.to(
+                          //               () => DetailArtikelPage(),
+                          //               arguments: {
+                          //                 'title': e.title,
+                          //                 'image': e.image,
+                          //                 'author': e.author,
+                          //                 'content': e.body,
+                          //                 'date': e.createdAt,
+                          //                 'category': e.idCategory
+                          //               }),
+                          //           child: ArticleCard(
+                          //             image: e.image,
+                          //             date:
+                          //                 DateTime.parse(e.createdAt ?? ''),
+                          //             description: e.body,
+                          //             title: e.title,
+                          //           ),
+                          //         );
+                          //       },
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                     )

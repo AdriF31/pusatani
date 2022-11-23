@@ -1,13 +1,13 @@
 
-class ListArticleModel {
+class EditTokoModel {
   Meta? meta;
-  List<Data>? data;
+  Data? data;
 
-  ListArticleModel({this.meta, this.data});
+  EditTokoModel({this.meta, this.data});
 
-  ListArticleModel.fromJson(Map<String, dynamic> json) {
+  EditTokoModel.fromJson(Map<String, dynamic> json) {
     meta = json["meta"] == null ? null : Meta.fromJson(json["meta"]);
-    data = json["data"] == null ? null : (json["data"] as List).map((e) => Data.fromJson(e)).toList();
+    data = json["data"] == null ? null : Data.fromJson(json["data"]);
   }
 
   Map<String, dynamic> toJson() {
@@ -16,7 +16,7 @@ class ListArticleModel {
       _data["meta"] = meta?.toJson();
     }
     if(data != null) {
-      _data["data"] = data?.map((e) => e.toJson()).toList();
+      _data["data"] = data?.toJson();
     }
     return _data;
   }
@@ -24,40 +24,43 @@ class ListArticleModel {
 
 class Data {
   int? id;
-  int? idCategory;
-  String? title;
-  String? slug;
-  String? body;
-  String? image;
-  String? author;
   String? createdAt;
   String? updatedAt;
+  int? idUser;
+  String? name;
+  String? address;
+  String? image;
+  String? status;
+  String? deskripsi;
+  String? userName;
 
-  Data({this.id, this.idCategory, this.title, this.slug, this.body, this.image, this.author, this.createdAt, this.updatedAt});
+  Data({this.id, this.createdAt, this.updatedAt, this.idUser, this.name, this.address, this.image, this.status, this.deskripsi, this.userName});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json["id"];
-    idCategory = json["id_category"];
-    title = json["title"];
-    slug = json["slug"];
-    body = json["body"];
-    image = json["image"];
-    author = json["author"];
     createdAt = json["created_at"];
     updatedAt = json["updated_at"];
+    idUser = json["id_user"];
+    name = json["name"];
+    address = json["address"];
+    image = json["image"];
+    status = json["status"];
+    deskripsi = json["deskripsi"];
+    userName = json["user_name"];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
     _data["id"] = id;
-    _data["id_category"] = idCategory;
-    _data["title"] = title;
-    _data["slug"] = slug;
-    _data["body"] = body;
-    _data["image"] = image;
-    _data["author"] = author;
     _data["created_at"] = createdAt;
     _data["updated_at"] = updatedAt;
+    _data["id_user"] = idUser;
+    _data["name"] = name;
+    _data["address"] = address;
+    _data["image"] = image;
+    _data["status"] = status;
+    _data["deskripsi"] = deskripsi;
+    _data["user_name"] = userName;
     return _data;
   }
 }

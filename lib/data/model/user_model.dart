@@ -24,13 +24,15 @@ class UserModel {
 
 class Data {
   User? user;
+  Userdetails? userdetails;
   dynamic idPabrik;
-  dynamic idToko;
+  int? idToko;
 
-  Data({this.user, this.idPabrik, this.idToko});
+  Data({this.user, this.userdetails, this.idPabrik, this.idToko});
 
   Data.fromJson(Map<String, dynamic> json) {
     user = json["user"] == null ? null : User.fromJson(json["user"]);
+    userdetails = json["userdetails"] == null ? null : Userdetails.fromJson(json["userdetails"]);
     idPabrik = json["id_pabrik"];
     idToko = json["id_toko"];
   }
@@ -40,8 +42,45 @@ class Data {
     if(user != null) {
       _data["user"] = user?.toJson();
     }
+    if(userdetails != null) {
+      _data["userdetails"] = userdetails?.toJson();
+    }
     _data["id_pabrik"] = idPabrik;
     _data["id_toko"] = idToko;
+    return _data;
+  }
+}
+
+class Userdetails {
+  int? id;
+  int? idUser;
+  String? phone;
+  String? photoProfile;
+  String? photoId;
+  String? createdAt;
+  String? updatedAt;
+
+  Userdetails({this.id, this.idUser, this.phone, this.photoProfile, this.photoId, this.createdAt, this.updatedAt});
+
+  Userdetails.fromJson(Map<String, dynamic> json) {
+    id = json["id"];
+    idUser = json["id_user"];
+    phone = json["phone"];
+    photoProfile = json["photo_profile"];
+    photoId = json["photo_id"];
+    createdAt = json["created_at"];
+    updatedAt = json["updated_at"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["id"] = id;
+    _data["id_user"] = idUser;
+    _data["phone"] = phone;
+    _data["photo_profile"] = photoProfile;
+    _data["photo_id"] = photoId;
+    _data["created_at"] = createdAt;
+    _data["updated_at"] = updatedAt;
     return _data;
   }
 }

@@ -6,6 +6,7 @@ import 'package:pusatani/const/text_style.dart';
 import 'package:pusatani/reusable/profile_button.dart';
 import 'package:pusatani/ui/petani/home/petani_home_page.dart';
 import 'package:pusatani/ui/toko_pabrik/edit-profil/edit_profile_page.dart';
+import 'package:pusatani/ui/toko_pabrik/edittoko/edit_toko_page.dart';
 import 'package:pusatani/ui/toko_pabrik/profile/profile_controller.dart';
 import 'package:pusatani/ui/toko_pabrik/ubah-password/edit_password_page.dart';
 
@@ -45,12 +46,12 @@ class ProfilePage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        c.storage.getCurrentUsername() ?? '',
+                        c.storage.getUserResponse()?.data?.user?.name ?? '',
                         style: blackTextStyle.copyWith(
                             fontSize: 24, fontWeight: semiBold),
                       ),
                       Text(
-                        c.storage.getCurrentEmail() ?? '',
+                        c.storage.getUserResponse()?.data?.user?.email ?? '',
                         style: blackTextStyle.copyWith(
                           fontSize: 18,
                         ),
@@ -72,15 +73,16 @@ class ProfilePage extends StatelessWidget {
                   onTap: () => Get.to(() => const EditProfilePage()),
                 ),
                 Visibility(
-                  visible: c.storage.getCurrentPabrikIdFromUser() != null ||
-                      c.storage.getCurrentStoreIdFromUser() != null,
+                  visible:
+                      c.storage.getUserResponse()?.data?.idPabrik != null ||
+                          c.storage.getUserResponse()?.data?.idToko != null,
                   child: ProfileButton(
                     icon: Icons.store,
                     title: c.storage.getCurrentRole() == 3
                         ? 'Ubah Toko'
                         : 'Ubah Pabrik',
                     onTap: () {
-                      Get.to(() => const PetaniHomePage());
+                      Get.to(() => const EditTokoPage());
                     },
                   ),
                 ),

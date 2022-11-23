@@ -19,6 +19,8 @@ import 'package:pusatani/data/model/register_model.dart';
 import 'package:pusatani/data/model/toko_model.dart';
 import 'package:pusatani/data/model/user_model.dart';
 
+import '../model/edit_toko_model.dart';
+
 abstract class Repository {
   FutureOr<LoginModel?> postLogin(String email, String password);
   FutureOr<TokoModel?> getToko();
@@ -27,7 +29,7 @@ abstract class Repository {
   FutureOr<RegisterModel> postRegister(File? profilePicture, String email,
       String name, int role, File? idPicture, String phone, String password);
   FutureOr<ListArticleModel?> getListArticle();
-    FutureOr<ListArticleModel?> getPagedListArticle(int page);
+  FutureOr<ListArticleModel?> getPagedListArticle(int page);
   FutureOr<DetailPabrikModel> getDetailPabrik(int id);
   FutureOr<AddTokoModel?> postToko(
       String name, String address, String deskripsi, File? image);
@@ -47,4 +49,6 @@ abstract class Repository {
   FutureOr<UserModel?> getUser(int id);
   FutureOr<EditProfileModel?> postUpdateProfile(
       String name, String email, String phone, File? image);
+  FutureOr<EditTokoModel?> postEditToko(
+      String name, String address, String deskripsi, File? image, int id);
 }

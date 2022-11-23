@@ -7,6 +7,7 @@ import 'package:pusatani/ui/auth/login/login_page.dart';
 class ProfileController extends BaseController {
   LogoutModel? logoutModel = LogoutModel();
   StorageCore storage = StorageCore();
+  
 
   logout() async {
     var response = await repository.getLogout();

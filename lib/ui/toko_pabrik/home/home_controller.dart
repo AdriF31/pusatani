@@ -1,6 +1,7 @@
 import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pusatani/base/base_controller.dart';
 import 'package:pusatani/data/model/detail_pabrik_model.dart';
 import 'package:pusatani/data/model/user_model.dart';
@@ -17,10 +18,9 @@ class HomeController extends BaseController {
       CurrencyTextInputFormatter(decimalDigits: 0, locale: 'id', symbol: 'Rp ');
   var isLoading = false;
 
+
   @override
   void onInit() {
-    storage.getCurrentPabrikIdFromUser();
-    storage.getCurrentStoreIdFromUser();
     getData();
     update();
     super.onInit();
@@ -33,6 +33,7 @@ class HomeController extends BaseController {
         var response = await repository
             .getDetailPabrik(storage.getCurrentPabrikIdFromUser()!);
         detailPabrikModel = response;
+        getUser();
         isLoading = false;
         update();
       } else if (storage.getCurrentRole() == 3) {
@@ -42,6 +43,19 @@ class HomeController extends BaseController {
         isLoading = false;
         update();
       }
+    } catch (e) {
+      return null;
+    }
+  }
+
+  Future getUser() async {
+    try {
+      var response = await repository.getUser(storage.getCurrentUserId()!);
+      userModel = response;
+
+      storage.saveUserResponse(userModel);
+
+      update();
     } catch (e) {
       return null;
     }

@@ -18,11 +18,11 @@ class AddTokoController extends BaseController {
   var storage = StorageCore();
   File? tokoImage;
 
-  // @override
-  // void onInit() {
-  //   super.onInit();
-  //   getUser();
-  // }
+  @override
+  void onInit() {
+    super.onInit();
+    getUser();
+  }
 
   getIdPicture() async {
     final ImagePicker picker = ImagePicker();
@@ -42,9 +42,7 @@ class AddTokoController extends BaseController {
     try {
       var response = await repository.getUser(storage.getCurrentUserId()!);
       userModel = response;
-
-      storage.saveUserResponse(userModel);
-
+      storage.saveUserResponse(response);
       update();
     } catch (e) {
       return null;
@@ -57,17 +55,23 @@ class AddTokoController extends BaseController {
         var response = await repository.postToko(storeController.text,
             addressController.text, descController.text, tokoImage);
         getUser();
+
+        storage.saveUserResponse(userModel);
         if (response!.meta!.code == 201) {
-          Get.offAll(() => const MainPage());
+          Get.offAll(() => const MainPage(), arguments: true);
         }
       } else if (storage.getCurrentRole() == 2) {
         var response = await repository.postPabrik(storeController.text,
             addressController.text, descController.text, tokoImage);
         getUser();
+
+        storage.saveUserResponse(userModel);
         if (response!.meta!.code == 201) {
-          Get.offAll(() => const MainPage());
+          Get.offAll(() => const MainPage(), arguments: true);
         }
       }
-    } catch (e) {}
+    } catch (e) {
+      return null;
+    }
   }
 }

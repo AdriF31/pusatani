@@ -23,6 +23,7 @@ import 'package:pusatani/data/model/user_model.dart';
 import 'package:pusatani/data/repository/repository.dart';
 import 'package:pusatani/data/storage_core.dart';
 
+import '../model/edit_toko_model.dart';
 import '../network_core.dart';
 
 class RepositoryImpl implements Repository {
@@ -394,6 +395,34 @@ class RepositoryImpl implements Repository {
       return EditProfileModel.fromJson(response.data);
     } on DioError catch (e) {
       return EditProfileModel.fromJson(e.response!.data);
+    }
+  }
+  
+  @override
+  FutureOr<EditTokoModel?> postEditToko(String name, String address, String deskripsi, File? image, int id)async {
+        try {
+      var formData = FormData.fromMap({
+        'name': name,
+        'id_user': storage.getCurrentUserId(),
+        'address': address,
+        'status': 'belum verifikasi',
+        'deskripsi': deskripsi,
+      });
+
+      if (image != null) {
+        formData.files.addAll([
+          MapEntry("image", await MultipartFile.fromFile(image.path)),
+        ]);
+      }
+
+      var response = await network.dio.post('/toko/$id',
+          data: formData,
+          options: Options(headers: {
+            'Authorization': 'Bearer ${storage.getAccessToken()}'
+          }));
+      return EditTokoModel.fromJson(response.data);
+    } on DioError catch (e) {
+      return EditTokoModel.fromJson(e.response!.data);
     }
   }
 }

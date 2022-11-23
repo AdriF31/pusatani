@@ -54,7 +54,16 @@ class StorageCore {
     }
   }
 
-
+  UserModel? getUserResponse() {
+    try {
+      Map<String, dynamic> data = storage.getItem('user');
+      UserModel auth = UserModel.fromJson(data);
+      return auth;
+    } catch (e) {
+      debugPrint("Error while load access token: $e");
+      return null;
+    }
+  }
 
   Future deleteAuthResponse() async {
     try {
@@ -142,7 +151,7 @@ class StorageCore {
       return auth.data?.user?.email;
     } catch (e) {
       debugPrint("Error while load user_name: $e");
-      return 'user_name_not_loaded';
+      return null;
     }
   }
 
@@ -155,7 +164,7 @@ class StorageCore {
       return auth.data?.user?.name;
     } catch (e) {
       debugPrint("Error while load user_name: $e");
-      return 'user_name_not_loaded';
+      return null;
     }
   }
 
@@ -168,7 +177,7 @@ class StorageCore {
       return auth.data?.user?.userDetails?.photoProfile;
     } catch (e) {
       debugPrint("Error while load user_name: $e");
-      return 'user_name_not_loaded';
+      return null;
     }
   }
 
@@ -181,7 +190,7 @@ class StorageCore {
       return auth.data?.user?.userDetails?.phone;
     } catch (e) {
       debugPrint("Error while load user_name: $e");
-      return 'user_name_not_loaded';
+      return null;
     }
   }
 
@@ -195,7 +204,7 @@ class StorageCore {
     }
   }
 
-    dynamic getObject(String key) {
+  dynamic getObject(String key) {
     try {
       Map<String, dynamic> data = storage.getItem(key);
       return data;

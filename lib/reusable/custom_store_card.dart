@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/text_style.dart';
 
 import '../const/font_weight.dart';
@@ -20,6 +21,7 @@ class CustomStoreCard extends StatelessWidget {
       height: 120,
       child: Card(
         elevation: 3,
+        shadowColor: primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Row(
           children: [
@@ -34,7 +36,7 @@ class CustomStoreCard extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
                     image!,
-                    fit: BoxFit.fitHeight,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),

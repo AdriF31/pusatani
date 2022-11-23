@@ -37,7 +37,7 @@ class _InfoTaniPageState extends State<InfoTaniPage>
               ? Scaffold(
                   appBar: AppBar(
                       leading: const CustomBackButton(),
-                      title: const Text('info Tani')),
+                      title: const Text('Info Tani')),
                   body: Column(
                     children: [
                       SafeArea(
@@ -47,6 +47,7 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                       ButtonsTabBar(
                         controller: tabController,
                         backgroundColor: primaryColor,
+                        borderColor: secondaryColor,
                         height: 60,
                         unselectedBackgroundColor: Colors.transparent,
                         labelStyle: const TextStyle(
@@ -54,7 +55,7 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                         borderWidth: 1,
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 20),
-                        unselectedBorderColor: blackColor,
+                        unselectedBorderColor: primaryColor,
                         tabs: const [
                           Tab(
                             text: 'Semua',
@@ -83,7 +84,7 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                             ),
                             child: SingleChildScrollView(
                               child: Column(
-                                children: c.listArticleModel!.data!.data!
+                                children: c.listArticleModel!.data!
                                     .map(
                                       (e) => GestureDetector(
                                         onTap: () => Get.to(
@@ -114,40 +115,7 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                             ),
                             child: SingleChildScrollView(
                               child: Column(
-                                children: c.listArticleModel!.data!.data!
-                                    .where(
-                                        (element) => element.idCategory == 11)
-                                    .map(
-                                      (e) => GestureDetector(
-                                        onTap: () => Get.to(
-                                            () => DetailArtikelPage(),
-                                            arguments: {
-                                              'title': e.title,
-                                              'image': e.image,
-                                              'author': e.author,
-                                              'content': e.body,
-                                              'date': e.createdAt,
-                                              'category': e.idCategory
-                                            }),
-                                        child: ArticleCard(
-                                            image: e.image ?? '',
-                                            title: e.title ?? '',
-                                            date: DateTime.parse(
-                                                e.createdAt ?? ''),
-                                            description: e.body ?? ''),
-                                      ),
-                                    )
-                                    .toList(),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: c.listArticleModel!.data!.data!
+                                children: c.listArticleModel!.data!
                                     .where(
                                         (element) => element.idCategory == 12)
                                     .map(
@@ -180,9 +148,42 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                             ),
                             child: SingleChildScrollView(
                               child: Column(
-                                children: c.listArticleModel!.data!.data!
+                                children: c.listArticleModel!.data!
                                     .where(
                                         (element) => element.idCategory == 13)
+                                    .map(
+                                      (e) => GestureDetector(
+                                        onTap: () => Get.to(
+                                            () => DetailArtikelPage(),
+                                            arguments: {
+                                              'title': e.title,
+                                              'image': e.image,
+                                              'author': e.author,
+                                              'content': e.body,
+                                              'date': e.createdAt,
+                                              'category': e.idCategory
+                                            }),
+                                        child: ArticleCard(
+                                            image: e.image ?? '',
+                                            title: e.title ?? '',
+                                            date: DateTime.parse(
+                                                e.createdAt ?? ''),
+                                            description: e.body ?? ''),
+                                      ),
+                                    )
+                                    .toList(),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: c.listArticleModel!.data!
+                                    .where(
+                                        (element) => element.idCategory == 14)
                                     .map(
                                       (e) => ArticleCard(
                                           image: e.image ?? '',
@@ -201,9 +202,9 @@ class _InfoTaniPageState extends State<InfoTaniPage>
                             ),
                             child: SingleChildScrollView(
                               child: Column(
-                                children: c.listArticleModel!.data!.data!
+                                children: c.listArticleModel!.data!
                                     .where(
-                                        (element) => element.idCategory == 14)
+                                        (element) => element.idCategory == 15)
                                     .map(
                                       (e) => GestureDetector(
                                         onTap: () => Get.to(

@@ -1,4 +1,3 @@
-
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 class LoginModel {
@@ -14,10 +13,10 @@ class LoginModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
-    if(meta != null) {
+    if (meta != null) {
       _data["meta"] = meta?.toJson();
     }
-    if(data != null) {
+    if (data != null) {
       _data["data"] = data?.toJson();
     }
     return _data;
@@ -32,7 +31,13 @@ class Data {
   dynamic idToko;
   String? role;
 
-  Data({this.token, this.user, this.phone, this.idPabrik, this.idToko, this.role});
+  Data(
+      {this.token,
+      this.user,
+      this.phone,
+      this.idPabrik,
+      this.idToko,
+      this.role});
 
   Data.fromJson(Map<String, dynamic> json) {
     token = json["token"];
@@ -46,7 +51,7 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> _data = <String, dynamic>{};
     _data["token"] = token;
-    if(user != null) {
+    if (user != null) {
       _data["user"] = user?.toJson();
     }
     _data["phone"] = phone;
@@ -67,7 +72,15 @@ class User {
   UserDetails? userDetails;
   List<Roles>? roles;
 
-  User({this.id, this.name, this.email, this.emailVerifiedAt, this.createdAt, this.updatedAt, this.userDetails, this.roles});
+  User(
+      {this.id,
+      this.name,
+      this.email,
+      this.emailVerifiedAt,
+      this.createdAt,
+      this.updatedAt,
+      this.userDetails,
+      this.roles});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -76,8 +89,12 @@ class User {
     emailVerifiedAt = json["email_verified_at"];
     createdAt = json["created_at"];
     updatedAt = json["updated_at"];
-    userDetails = json["user_details"] == null ? null : UserDetails.fromJson(json["user_details"]);
-    roles = json["roles"] == null ? null : (json["roles"] as List).map((e) => Roles.fromJson(e)).toList();
+    userDetails = json["user_details"] == null
+        ? null
+        : UserDetails.fromJson(json["user_details"]);
+    roles = json["roles"] == null
+        ? null
+        : (json["roles"] as List).map((e) => Roles.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -88,10 +105,10 @@ class User {
     _data["email_verified_at"] = emailVerifiedAt;
     _data["created_at"] = createdAt;
     _data["updated_at"] = updatedAt;
-    if(userDetails != null) {
+    if (userDetails != null) {
       _data["user_details"] = userDetails?.toJson();
     }
-    if(roles != null) {
+    if (roles != null) {
       _data["roles"] = roles?.map((e) => e.toJson()).toList();
     }
     return _data;
@@ -106,7 +123,13 @@ class Roles {
   String? updatedAt;
   Pivot? pivot;
 
-  Roles({this.id, this.name, this.guardName, this.createdAt, this.updatedAt, this.pivot});
+  Roles(
+      {this.id,
+      this.name,
+      this.guardName,
+      this.createdAt,
+      this.updatedAt,
+      this.pivot});
 
   Roles.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -124,7 +147,7 @@ class Roles {
     _data["guard_name"] = guardName;
     _data["created_at"] = createdAt;
     _data["updated_at"] = updatedAt;
-    if(pivot != null) {
+    if (pivot != null) {
       _data["pivot"] = pivot?.toJson();
     }
     return _data;
@@ -162,7 +185,14 @@ class UserDetails {
   String? createdAt;
   String? updatedAt;
 
-  UserDetails({this.id, this.idUser, this.phone, this.photoProfile, this.photoId, this.createdAt, this.updatedAt});
+  UserDetails(
+      {this.id,
+      this.idUser,
+      this.phone,
+      this.photoProfile,
+      this.photoId,
+      this.createdAt,
+      this.updatedAt});
 
   UserDetails.fromJson(Map<String, dynamic> json) {
     id = json["id"];

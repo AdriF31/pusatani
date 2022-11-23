@@ -54,7 +54,7 @@ class _InfoTaniPageState extends State<TaniShopPage>
                         borderColor: primaryColor,
                         contentPadding:
                             EdgeInsets.symmetric(horizontal: Get.width * 0.18),
-                        unselectedBorderColor: blackColor,
+                        unselectedBorderColor: primaryColor,
                         tabs: const [
                           Tab(
                             text: 'Toko',

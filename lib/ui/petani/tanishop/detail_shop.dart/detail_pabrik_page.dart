@@ -42,77 +42,105 @@ class DetailPabrikPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 12,
                                 ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    SizedBox(
-                                      width: 150,
-                                      height: 150,
-                                      child: Card(
-                                        elevation: 3,
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10)),
-                                        child: SizedBox(
-                                          height: 300,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            child: Image.network(
-                                              c.detailPabrikModel?.data?.data
-                                                      ?.image ??
-                                                  'https://',
-                                              fit: BoxFit.cover,
+                                Container(
+                                  padding: EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                      color: secondaryColor,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            width: 150,
+                                            height: 150,
+                                            child: Card(
+                                              elevation: 3,
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10)),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                child: Image.network(
+                                                  c.detailPabrikModel?.data
+                                                          ?.data?.image ??
+                                                      'https://',
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 12,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: Get.width * 0.5,
-                                          child: Text(
-                                            c.detailPabrikModel?.data!.data
-                                                    ?.name ??
-                                                '-',
-                                            maxLines: 2,
-                                            style: blackTextStyle.copyWith(
-                                                fontSize: 20,
-                                                fontWeight: semiBold),
+                                          const SizedBox(
+                                            width: 12,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 4,
-                                        ),
-                                        Text(
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              SizedBox(
+                                                width: Get.width * 0.48,
+                                                child: Text(
+                                                  c.detailPabrikModel?.data!
+                                                          .data?.name ??
+                                                      '-',
+                                                  maxLines: 2,
+                                                  style:
+                                                      whiteTextStyle.copyWith(
+                                                          fontSize: 20,
+                                                          fontWeight: semiBold),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 4,
+                                              ),
+                                              Text(
+                                                c.detailPabrikModel?.data?.data
+                                                        ?.address ??
+                                                    '-',
+                                                style: whiteTextStyle.copyWith(
+                                                    fontSize: 16,
+                                                    fontWeight: medium),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 8,
+                                      ),
+                                      Container(
+                                        width: Get.width,
+                                        padding: EdgeInsets.all(8),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Text(
                                           c.detailPabrikModel?.data?.data
-                                                  ?.address ??
-                                              '-',
+                                                  ?.deskripsi ??
+                                              '',
                                           style: blackTextStyle.copyWith(
                                               fontSize: 16, fontWeight: medium),
                                         ),
-                                      ],
-                                    ),
-                                  ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 const SizedBox(
-                                  height: 8,
-                                ),
-                                Text(
-                                  c.detailPabrikModel?.data?.data?.deskripsi ??
-                                      '',
-                                  style: blackTextStyle.copyWith(
-                                      fontSize: 16, fontWeight: medium),
+                                  height: 16,
                                 ),
                                 Container(
-                                  width: double.infinity,
-                                  color: primaryColor,
+                                  width: Get.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: primaryColor,
+                                  ),
                                   margin: const EdgeInsets.all(8),
                                   child: Center(
                                     child: Text(

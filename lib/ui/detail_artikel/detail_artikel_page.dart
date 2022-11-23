@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pusatani/const/app_constant.dart';
+import 'package:pusatani/const/colors.dart';
 import 'package:pusatani/const/font_weight.dart';
 import 'package:pusatani/reusable/back_button.dart';
 import 'package:pusatani/ui/detail_artikel/detail_artikel_controller.dart';
@@ -22,7 +23,8 @@ class DetailArtikelPage extends StatelessWidget {
               //   }
               // }),
               appBar: AppBar(
-                title: Text(Get.arguments['title']),
+                title: Text(Get.arguments['author'],
+                    maxLines: 1, overflow: TextOverflow.visible),
                 leading: CustomBackButton(),
               ),
               body: Padding(
@@ -32,38 +34,10 @@ class DetailArtikelPage extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: SafeArea(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const SizedBox(
-                          height: 12,
-                        ),
-                        Text(
-                          Get.arguments['title'],
-                          maxLines: 3,
-                          style: blackTextStyle.copyWith(
-                              fontSize: 20, fontWeight: semiBold),
-                          textAlign: TextAlign.justify,
-                        ),
-                        const SizedBox(
                           height: 4,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              Get.arguments['author'],
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 16, fontWeight: regular),
-                            ),
-                            Text(
-                              Get.arguments['date'].toString().split('T').first,
-                              style: blackTextStyle.copyWith(
-                                  fontSize: 16, fontWeight: regular),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 8,
                         ),
                         Card(
                           elevation: 3,
@@ -82,14 +56,44 @@ class DetailArtikelPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(
-                          height: 8,
+                          height: 12,
+                        ),
+                        Text(
+                          Get.arguments['title'],
+                          maxLines: 3,
+                          style: blackTextStyle.copyWith(
+                              fontSize: 20, fontWeight: semiBold),
+                          textAlign: TextAlign.center,
                         ),
                         SizedBox(
+                          height: 8,
+                        ),
+                        Container(
+                          width: 200,
+                          decoration: BoxDecoration(
+                              color: secondaryColor,
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Center(
+                            child: Text(
+                              Get.arguments['date'].toString().split('T').first,
+                              style: whiteTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: regular),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Container(
                           width: double.infinity,
+                          padding: EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                              color: secondaryColor,
+                              borderRadius: BorderRadius.circular(20)),
                           child: Text(
                             Get.arguments['content'],
                             textAlign: TextAlign.justify,
-                            style: blackTextStyle.copyWith(
+                            style: whiteTextStyle.copyWith(
                                 fontSize: c.fontSize, fontWeight: medium),
                           ),
                         ),

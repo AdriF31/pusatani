@@ -24,8 +24,9 @@ class ArticleCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       child: Card(
-        color: secondaryColor,
+        color: Colors.white,
         elevation: 3,
+        shadowColor: primaryColor,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [
@@ -65,10 +66,10 @@ class ArticleCard extends StatelessWidget {
                     width: 300,
                     child: Text(
                       DateFormat.yMMMMd().format(date),
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.visible,
                       style: GoogleFonts.catamaran(
                           fontSize: 16,
-                          fontWeight: regular,
+                          fontWeight: bold,
                           color: Colors.black54),
                     ),
                   ),
@@ -76,11 +77,12 @@ class ArticleCard extends StatelessWidget {
                     width: 300,
                     child: Text(
                       title!,
-                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      overflow: TextOverflow.visible,
                       style: GoogleFonts.catamaran(
                         fontSize: 20,
                         fontWeight: semiBold,
-                        color: Colors.white,
+                        color: blackColor,
                       ),
                     ),
                   ),
@@ -88,8 +90,8 @@ class ArticleCard extends StatelessWidget {
                     width: double.infinity,
                     child: Text(description!,
                         maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: whiteTextStyle.copyWith(
+                        overflow: TextOverflow.visible,
+                        style: blackTextStyle.copyWith(
                           fontSize: 16,
                         )),
                   ),
